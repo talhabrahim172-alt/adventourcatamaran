@@ -22,11 +22,7 @@
 <meta name="twitter:title" content="ADVENTOUR | Luxury Catamaran in Hurghada, Red Sea">
 <meta name="twitter:description" content="Luxury four-deck catamaran in Hurghada for cruises, private parties, weddings, birthdays, and full charter experiences.">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/boat.jpg">
-<link rel="preload" as="image" href="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/boat.jpg">
 <link rel="preload" as="image" href="https://i.ibb.co/5xR6w0JL/Wh.jpg">
-<link rel="preload" as="image" href="file:///C:/Users/3alamiaa/Desktop/catamaran/newcatamaran/WH.jpg">
-<link rel="preload" as="image" href="file:///C:/Users/3alamiaa/Desktop/catamaran/newcatamaran/WH.png">
-<link rel="preload" as="image" href="images/hero.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Cairo:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -314,6 +310,19 @@
     padding: 14px max(20px, 4vw);
     border-bottom: 1px solid var(--line);
   }
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .nav-left .lang-toggle {
+    padding: 9px 14px;
+    font-size: 11px;
+  }
+  @media (max-width: 560px) {
+    .nav-left { gap: 10px; }
+    .nav-left .lang-toggle { padding: 7px 11px; font-size: 10px; }
+  }
   .logo {
     cursor: pointer;
     z-index: 102;
@@ -377,29 +386,114 @@
   .nav-links a:hover::before { opacity: 1; transform: translateX(0); }
 
   .lang-toggle {
-    background: transparent;
-    border: 1px solid var(--gold);
+    background: rgba(212, 175, 55, 0.1);
+    border: 2px solid var(--gold);
     color: var(--gold);
-    padding: 8px 14px;
+    padding: 12px 18px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.15em;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     position: relative;
     overflow: hidden;
+    border-radius: 50px;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3), inset 0 0 20px rgba(212, 175, 55, 0.05);
+    text-transform: uppercase;
+    z-index: 100;
   }
   .lang-toggle::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: var(--gold);
-    transform: translateY(100%);
-    transition: transform 0.3s;
+    background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     z-index: -1;
+    border-radius: 50px;
   }
-  .lang-toggle:hover { color: var(--black); }
-  .lang-toggle:hover::before { transform: translateY(0); }
+  .lang-toggle::after {
+    content: '🌐';
+    position: absolute;
+    left: 8px;
+    font-size: 14px;
+    opacity: 0.7;
+    transition: all 0.3s;
+  }
+  .lang-toggle:hover { 
+    color: var(--black); 
+    transform: scale(1.15) translateY(-2px);
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.6), inset 0 0 20px rgba(212, 175, 55, 0.2);
+  }
+  .lang-toggle:hover::before { 
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  .lang-toggle:hover::after { opacity: 1; }
+
+  /* Floating Language Widget */
+  .lang-widget-float {
+    position: fixed;
+    bottom: 40px;
+    right: 30px;
+    z-index: 999;
+  }
+  .lang-widget-float:hover {
+    animation: none;
+  }
+  @keyframes floatBounce {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  .lang-widget-float:not(:hover) {
+    animation: floatBounce 3s ease-in-out infinite;
+  }
+  .lang-widget-float button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.05));
+    color: var(--gold);
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.4), inset 0 0 20px rgba(212, 175, 55, 0.1);
+    backdrop-filter: blur(10px);
+    font-weight: bold;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .lang-widget-float button:hover {
+    width: 70px;
+    height: 70px;
+    font-size: 28px;
+    box-shadow: 0 0 50px rgba(212, 175, 55, 0.8), inset 0 0 30px rgba(212, 175, 55, 0.3);
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.4), rgba(212, 175, 55, 0.15));
+    transform: scale(1.1);
+  }
+  .lang-widget-float button:active {
+    transform: scale(0.95);
+  }
+  @media (max-width: 768px) {
+    .lang-widget-float {
+      bottom: 20px;
+      right: 15px;
+    }
+    .lang-widget-float button {
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+    }
+    .lang-widget-float button:hover {
+      width: 58px;
+      height: 58px;
+    }
+  }
 
   .menu-toggle {
     display: none;
@@ -2791,10 +2885,32 @@
   }
 
   /* Language hiding */
-  [data-en] { display: none; }
+  [data-en], [data-ar], [data-fr], [data-es], [data-de], [data-it], [data-pt], [data-ru], [data-zh], [data-ja], [data-tr], [data-nl] { display: none; }
+  html[data-lang="ar"] [data-ar] { display: inline-block; }
+  html[data-lang="ar"] [data-ar].block { display: block; }
   html[data-lang="en"] [data-ar] { display: none; }
   html[data-lang="en"] [data-en] { display: inline-block; }
   html[data-lang="en"] [data-en].block { display: block; }
+  html[data-lang="fr"] [data-fr] { display: inline-block; }
+  html[data-lang="fr"] [data-fr].block { display: block; }
+  html[data-lang="es"] [data-es] { display: inline-block; }
+  html[data-lang="es"] [data-es].block { display: block; }
+  html[data-lang="de"] [data-de] { display: inline-block; }
+  html[data-lang="de"] [data-de].block { display: block; }
+  html[data-lang="it"] [data-it] { display: inline-block; }
+  html[data-lang="it"] [data-it].block { display: block; }
+  html[data-lang="pt"] [data-pt] { display: inline-block; }
+  html[data-lang="pt"] [data-pt].block { display: block; }
+  html[data-lang="ru"] [data-ru] { display: inline-block; }
+  html[data-lang="ru"] [data-ru].block { display: block; }
+  html[data-lang="zh"] [data-zh] { display: inline-block; }
+  html[data-lang="zh"] [data-zh].block { display: block; }
+  html[data-lang="ja"] [data-ja] { display: inline-block; }
+  html[data-lang="ja"] [data-ja].block { display: block; }
+  html[data-lang="tr"] [data-tr] { display: inline-block; }
+  html[data-lang="tr"] [data-tr].block { display: block; }
+  html[data-lang="nl"] [data-nl] { display: inline-block; }
+  html[data-lang="nl"] [data-nl].block { display: block; }
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -3354,6 +3470,11 @@
   </div>
 </div>
 
+<!-- ===== FLOATING LANGUAGE WIDGET ===== -->
+<div class="lang-widget-float" id="langWidgetFloat">
+  <button id="langToggleFloat" title="Click to change language / اضغط لتغيير اللغة"></button>
+</div>
+
 <!-- ===== CURSOR ===== -->
 <div class="cursor-dot"></div>
 <div class="cursor-ring"></div>
@@ -3362,19 +3483,19 @@
 <div class="sticky-bar" id="stickyBar">
   <div class="sticky-bar-info">
     <div class="sb-logo">ADVENTOUR</div>
-    <div class="sb-stat"><div class="n">150</div><div class="l"><span data-ar>ضيف</span><span data-en>Guests</span></div></div>
+    <div class="sb-stat"><div class="n">150</div><div class="l"><span data-ar>ضيف</span><span data-en>Guests</span><span data-fr>Invités</span><span data-es>Huéspedes</span><span data-de>Gäste</span><span data-it>Ospiti</span><span data-pt>Hóspedes</span><span data-ru>Гости</span><span data-zh>宾客</span><span data-ja>ゲスト</span><span data-tr>Konuklar</span><span data-nl>Gasten</span></div></div>
     <div class="sb-div"></div>
-    <div class="sb-stat"><div class="n">04</div><div class="l"><span data-ar>أدوار</span><span data-en>Decks</span></div></div>
+    <div class="sb-stat"><div class="n">04</div><div class="l"><span data-ar>أدوار</span><span data-en>Decks</span><span data-fr>Ponts</span><span data-es>Cubiertas</span><span data-de>Decks</span><span data-it>Ponti</span><span data-pt>Convés</span><span data-ru>Палубы</span><span data-zh>甲板</span><span data-ja>デッキ</span><span data-tr>Güverteler</span><span data-nl>Dekken</span></div></div>
     <div class="sb-div"></div>
-    <div class="sb-stat"><div class="n">40m</div><div class="l"><span data-ar>طول</span><span data-en>Length</span></div></div>
+    <div class="sb-stat"><div class="n">40m</div><div class="l"><span data-ar>طول</span><span data-en>Length</span><span data-fr>Longueur</span><span data-es>Largo</span><span data-de>Länge</span><span data-it>Lunghezza</span><span data-pt>Comprimento</span><span data-ru>Длина</span><span data-zh>长度</span><span data-ja>長さ</span><span data-tr>Uzunluk</span><span data-nl>Lengte</span></div></div>
   </div>
   <div class="sticky-bar-cta">
     <a href="https://wa.me/201018189630" class="btn btn-wa" target="_blank" style="padding:11px 18px;font-size:11px;">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-1 1.1-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1-1.1 2.5s1.1 3 1.3 3.2c.2.2 2.2 3.3 5.3 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M20.5 3.5C18.3 1.2 15.3 0 12.1 0 5.5 0 .2 5.4.2 12c0 2.1.5 4.2 1.6 6L0 24l6.2-1.6c1.7.9 3.7 1.4 5.7 1.4 6.6 0 12-5.4 12-12 0-3.2-1.2-6.2-3.4-8.3z"/></svg>
-      <span data-ar>واتساب</span><span data-en>WhatsApp</span>
+      <span data-ar>واتساب</span><span data-en>WhatsApp</span><span data-fr>WhatsApp</span><span data-es>WhatsApp</span><span data-de>WhatsApp</span><span data-it>WhatsApp</span><span data-pt>WhatsApp</span><span data-ru>WhatsApp</span><span data-zh>WhatsApp</span><span data-ja>WhatsApp</span><span data-tr>WhatsApp</span><span data-nl>WhatsApp</span>
     </a>
     <a href="#contact" class="btn btn-primary" style="padding:11px 18px;font-size:11px;">
-      <span data-ar>احجز الآن</span><span data-en>Book Now</span>
+      <span data-ar>احجز الآن</span><span data-en>Book Now</span><span data-fr>Réserver Maintenant</span><span data-es>Reservar Ahora</span><span data-de>Jetzt Buchen</span><span data-it>Prenota Ora</span><span data-pt>Reservar Agora</span><span data-ru>Забронировать</span><span data-zh>立即预订</span><span data-ja>今すぐ予約</span><span data-tr>Şimdi Rezerv Yap</span><span data-nl>Nu Boeken</span>
       <span>→</span>
     </a>
   </div>
@@ -3382,17 +3503,19 @@
 
 <!-- ===== NAV ===== -->
 <nav id="nav">
-  <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-    <div class="logo-text">ADVEN<span>TOUR</span></div>
-    <small class="logo-sub"><span data-ar>الغردقة • البحر الأحمر</span><span data-en>HURGHADA · RED SEA</span></small>
+  <div class="nav-left">
+    <button class="lang-toggle" id="langToggle">EN</button>
+    <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <div class="logo-text">ADVEN<span>TOUR</span></div>
+      <small class="logo-sub"><span data-ar>الغردقة • البحر الأحمر</span><span data-en>HURGHADA · RED SEA</span><span data-fr>HURGHADA · MER ROUGE</span><span data-es>HURGHADA · MAR ROJO</span><span data-de>HURGHADA · ROTES MEER</span><span data-it>HURGHADA · MAR ROSSO</span><span data-pt>HURGHADA · MAR VERMELHO</span><span data-ru>ХУРГАДА · КРАСНОЕ МОРЕ</span><span data-zh>赫尔格达 · 红海</span><span data-ja>ハルガダ · 紅海</span><span data-tr>HURGHADA · KIRMIZI DENİZ</span><span data-nl>HURGHADA · RODE ZEE</span></small>
+    </div>
   </div>
   <ul class="nav-links" id="navLinks">
-    <li><a href="#about"><span data-ar>عن المركب</span><span data-en>About</span></a></li>
-    <li><a href="#experiences"><span data-ar>الخدمات</span><span data-en>Services</span></a></li>
-    <li><a href="#gallery"><span data-ar>المعرض</span><span data-en>Gallery</span></a></li>
-    <li><a href="#faq"><span data-ar>أسئلة</span><span data-en>FAQ</span></a></li>
-    <li><a href="#contact"><span data-ar>احجز</span><span data-en>Book</span></a></li>
-    <li><button class="lang-toggle" id="langToggle">EN</button></li>
+    <li><a href="#about"><span data-ar>عن المركب</span><span data-en>About</span><span data-fr>À Propos</span><span data-es>Acerca de</span><span data-de>Über</span><span data-it>Su</span><span data-pt>Sobre</span><span data-ru>О нас</span><span data-zh>关于</span><span data-ja>について</span><span data-tr>Hakkında</span><span data-nl>Over</span></a></li>
+    <li><a href="#experiences"><span data-ar>الخدمات</span><span data-en>Services</span><span data-fr>Services</span><span data-es>Servicios</span><span data-de>Dienstleistungen</span><span data-it>Servizi</span><span data-pt>Serviços</span><span data-ru>Услуги</span><span data-zh>服务</span><span data-ja>サービス</span><span data-tr>Hizmetler</span><span data-nl>Diensten</span></a></li>
+    <li><a href="#gallery"><span data-ar>المعرض</span><span data-en>Gallery</span><span data-fr>Galerie</span><span data-es>Galería</span><span data-de>Galerie</span><span data-it>Galleria</span><span data-pt>Galeria</span><span data-ru>Галерея</span><span data-zh>画廊</span><span data-ja>ギャラリー</span><span data-tr>Galeri</span><span data-nl>Galerij</span></a></li>
+    <li><a href="#faq"><span data-ar>أسئلة</span><span data-en>FAQ</span><span data-fr>FAQ</span><span data-es>FAQ</span><span data-de>FAQ</span><span data-it>FAQ</span><span data-pt>FAQ</span><span data-ru>Вопросы</span><span data-zh>常见问题</span><span data-ja>よくある質問</span><span data-tr>SSS</span><span data-nl>FAQ</span></a></li>
+    <li><a href="#contact"><span data-ar>احجز</span><span data-en>Book</span><span data-fr>Réserver</span><span data-es>Reservar</span><span data-de>Buchen</span><span data-it>Prenota</span><span data-pt>Reservar</span><span data-ru>Забронировать</span><span data-zh>预订</span><span data-ja>予約</span><span data-tr>Rezerv Yap</span><span data-nl>Boeken</span></a></li>
   </ul>
   <button class="menu-toggle" id="menuToggle" aria-label="menu">
     <span></span><span></span><span></span>
@@ -3418,10 +3541,30 @@
     <h1 class="display">
       <span data-ar>الفخامة <em>لها عنوان</em> في البحر الأحمر</span>
       <span data-en class="block">Where <em>Luxury</em><br>Meets The Sea</span>
+      <span data-fr class="block">Où <em>le Luxe</em><br>Rencontre la Mer</span>
+      <span data-es class="block">Donde <em>el Lujo</em><br>Conoce el Mar</span>
+      <span data-de class="block">Wo <em>Luxus</em><br>Das Meer Trifft</span>
+      <span data-it class="block">Dove <em>il Lusso</em><br>Incontra il Mare</span>
+      <span data-pt class="block">Onde <em>o Luxo</em><br>Encontra o Mar</span>
+      <span data-ru class="block">Где <em>Роскошь</em><br>Встречает Море</span>
+      <span data-zh class="block">奢华 遇见 <em>海洋</em></span>
+      <span data-ja class="block">豪華さが <em>海</em><br>に出会う</span>
+      <span data-tr class="block">Lüks, <em>Deniz</em> ile Buluşur</span>
+      <span data-nl class="block">Waar <em>Luxe</em><br>de Zee Ontmoet</span>
     </h1>
     <p>
       <span data-ar>كاتاماران ADVENTOUR — تجربة بحرية من المستقبل في قلب الغردقة. أربعة أدوار، 150 ضيف، وخدمة تتجاوز كل توقعاتك.</span>
       <span data-en>The ADVENTOUR Catamaran — a future-forward maritime experience in the heart of Hurghada. Four decks, 150 guests, and service that transcends expectation.</span>
+      <span data-fr>Le Catamaran ADVENTOUR — une expérience maritime futuriste au cœur d'Hurghada. Quatre ponts, 150 invités, et un service inégalé.</span>
+      <span data-es>El Catamarán ADVENTOUR — una experiencia marítima de vanguardia en el corazón de Hurghada. Cuatro cubiertas, 150 huéspedes, servicio excepcional.</span>
+      <span data-de>Die ADVENTOUR Katamaran — ein zukunftsweisendes Maritimes Erlebnis im Herzen von Hurghada. Vier Decks, 150 Gäste, außergewöhnlicher Service.</span>
+      <span data-it>Il Catamarano ADVENTOUR — un'esperienza marittima futuristica nel cuore di Hurghada. Quattro ponti, 150 ospiti, servizio straordinario.</span>
+      <span data-pt>O Catamarã ADVENTOUR — uma experiência marítima futurista no coração de Hurghada. Quatro conveses, 150 hóspedes, serviço excepcional.</span>
+      <span data-ru>Катамаран ADVENTOUR — передовой морской опыт в центре Хургады. Четыре палубы, 150 гостей, исключительное обслуживание.</span>
+      <span data-zh>ADVENTOUR 双体船 — 赫尔格达中心的未来派海上体验。四层甲板，150位宾客，卓越服务。</span>
+      <span data-ja>ADVENTOUR カタマラン — ハルガダの中心にある未来的な海上体験。4層デッキ、150人のゲスト、非凡なサービス。</span>
+      <span data-tr>ADVENTOUR Katamarası — Hurghada'nın kalbinde geleceğe dönük bir deniz deneyimi. Dört güverte, 150 misafir, olağanüstü hizmet.</span>
+      <span data-nl>De ADVENTOUR Catamaran — een futuristisch maritiem ervaring in het hart van Hurghada. Vier dekken, 150 gasten, uitzonderlijke service.</span>
     </p>
     <!-- hero-cta removed per request -->
   </div>
@@ -3432,16 +3575,16 @@
 <!-- ===== TICKER ===== -->
 <div class="ticker">
   <div class="ticker-content">
-    <span data-ar>رحلات بحرية</span><span data-en>SEA EXPEDITIONS</span>
-    <span data-ar>أعياد ميلاد</span><span data-en>BIRTHDAYS</span>
-    <span data-ar>حفلات خاصة</span><span data-en>PRIVATE PARTIES</span>
-    <span data-ar>غروب الشمس</span><span data-en>SUNSET CRUISES</span>
-    <span data-ar>زفاف على البحر</span><span data-en>WEDDINGS AT SEA</span>
-    <span data-ar>فعاليات شركات</span><span data-en>CORPORATE</span>
-    <span data-ar>إيجار خاص</span><span data-en>FULL CHARTER</span>
-    <span data-ar>رحلات بحرية</span><span data-en>SEA EXPEDITIONS</span>
-    <span data-ar>أعياد ميلاد</span><span data-en>BIRTHDAYS</span>
-    <span data-ar>حفلات خاصة</span><span data-en>PRIVATE PARTIES</span>
+    <span data-ar>رحلات بحرية</span><span data-en>SEA EXPEDITIONS</span><span data-fr>EXPÉDITIONS MARITIMES</span><span data-es>EXPEDICIONES MARINAS</span><span data-de>MEERESEXPEDITIONEN</span><span data-it>SPEDIZIONI MARINE</span><span data-pt>EXPEDIÇÕES MARINHAS</span><span data-ru>МОРСКИЕ ЭКСПЕДИЦИИ</span><span data-zh>海上探险</span><span data-ja>海上遠征</span><span data-tr>DENİZ SEFERLERİ</span><span data-nl>ZEEEXPEDITIES</span>
+    <span data-ar>أعياد ميلاد</span><span data-en>BIRTHDAYS</span><span data-fr>ANNIVERSAIRES</span><span data-es>CUMPLEAÑOS</span><span data-de>GEBURTSTAGE</span><span data-it>COMPLEANNI</span><span data-pt>ANIVERSÁRIOS</span><span data-ru>ДНИ РОЖДЕНИЯ</span><span data-zh>生日聚会</span><span data-ja>誕生日</span><span data-tr>DOĞUM GÜNLERİ</span><span data-nl>VERJAARDAGEN</span>
+    <span data-ar>حفلات خاصة</span><span data-en>PRIVATE PARTIES</span><span data-fr>SOIRÉES PRIVÉES</span><span data-es>FIESTAS PRIVADAS</span><span data-de>PRIVATE FESTE</span><span data-it>FESTE PRIVATE</span><span data-pt>FESTAS PRIVADAS</span><span data-ru>ЧАСТНЫЕ ВЕЧЕРИНКИ</span><span data-zh>私人派对</span><span data-ja>プライベートパーティー</span><span data-tr>ÖZEL PARTİLER</span><span data-nl>PRIVÉFEESTEN</span>
+    <span data-ar>غروب الشمس</span><span data-en>SUNSET CRUISES</span><span data-fr>CROISIÈRES AU COUCHER</span><span data-es>CRUCEROS AL ATARDECER</span><span data-de>SONNENUNTERGANGSFAHRTEN</span><span data-it>CROCIERE AL TRAMONTO</span><span data-pt>CRUZEIROS AO PÔER DO SOL</span><span data-ru>ЗАКАТЫ НА ВОДЕ</span><span data-zh>日落巡航</span><span data-ja>夕焼けクルーズ</span><span data-tr>GÜNBATIMI KRUVAZİ</span><span data-nl>ZONSONDERGANGSCRUZIES</span>
+    <span data-ar>زفاف على البحر</span><span data-en>WEDDINGS AT SEA</span><span data-fr>MARIAGES EN MER</span><span data-es>BODAS EN EL MAR</span><span data-de>HOCHZEITEN AUF DEM MEER</span><span data-it>NOZZE IN MARE</span><span data-pt>CASAMENTOS NO MAR</span><span data-ru>СВАДЬБЫ НА ВОДЕ</span><span data-zh>海上婚礼</span><span data-ja>海での結婚式</span><span data-tr>DENİZDE DÜĞÜNLER</span><span data-nl>HUWELIJKEN OP ZEE</span>
+    <span data-ar>فعاليات شركات</span><span data-en>CORPORATE</span><span data-fr>ÉVÉNEMENTS CORPORATIFS</span><span data-es>EVENTOS EMPRESARIALES</span><span data-de>FIRMENFEIERN</span><span data-it>EVENTI AZIENDALI</span><span data-pt>EVENTOS CORPORATIVOS</span><span data-ru>КОРПОРАТИВНЫЕ СОБЫТИЯ</span><span data-zh>公司活动</span><span data-ja>企業イベント</span><span data-tr>KURUMSAL ETKINLIKLER</span><span data-nl>BEDRIJFSGEBEURTENISSEN</span>
+    <span data-ar>إيجار خاص</span><span data-en>FULL CHARTER</span><span data-fr>LOCATION COMPLÈTE</span><span data-es>ALQUILER COMPLETO</span><span data-de>VOLLSTÄNDIGE MIETE</span><span data-it>NOLEGGIO COMPLETO</span><span data-pt>ALUGUEL COMPLETO</span><span data-ru>ПОЛНАЯ АРЕНДА</span><span data-zh>完整租赁</span><span data-ja>完全チャーター</span><span data-tr>TAM KİRALAMA</span><span data-nl>VOLLEDIGE VERHUUR</span>
+    <span data-ar>رحلات بحرية</span><span data-en>SEA EXPEDITIONS</span><span data-fr>EXPÉDITIONS MARITIMES</span><span data-es>EXPEDICIONES MARINAS</span><span data-de>MEERESEXPEDITIONEN</span><span data-it>SPEDIZIONI MARINE</span><span data-pt>EXPEDIÇÕES MARINHAS</span><span data-ru>МОРСКИЕ ЭКСПЕДИЦИИ</span><span data-zh>海上探险</span><span data-ja>海上遠征</span><span data-tr>DENİZ SEFERLERİ</span><span data-nl>ZEEEXPEDITIES</span>
+    <span data-ar>أعياد ميلاد</span><span data-en>BIRTHDAYS</span><span data-fr>ANNIVERSAIRES</span><span data-es>CUMPLEAÑOS</span><span data-de>GEBURTSTAGE</span><span data-it>COMPLEANNI</span><span data-pt>ANIVERSÁRIOS</span><span data-ru>ДНИ РОЖДЕНИЯ</span><span data-zh>生日聚会</span><span data-ja>誕生日</span><span data-tr>DOĞUM GÜNLERİ</span><span data-nl>VERJAARDAGEN</span>
+    <span data-ar>حفلات خاصة</span><span data-en>PRIVATE PARTIES</span><span data-fr>SOIRÉES PRIVÉES</span><span data-es>FIESTAS PRIVADAS</span><span data-de>PRIVATE FESTE</span><span data-it>FESTE PRIVATE</span><span data-pt>FESTAS PRIVADAS</span><span data-ru>ЧАСТНЫЕ ВЕЧЕРИНКИ</span><span data-zh>私人派对</span><span data-ja>プライベートパーティー</span><span data-tr>ÖZEL PARTİLER</span><span data-nl>PRIVÉFEESTEN</span>
   </div>
 </div>
 
@@ -3453,32 +3596,52 @@
       <div class="reveal">
         <div class="section-tag">
           <span data-ar>عن المركب</span>
-          <span data-en>About / 01</span>
+          <span data-en>About / 01</span><span data-fr>À Propos / 01</span><span data-es>Acerca de / 01</span><span data-de>Über / 01</span><span data-it>Su / 01</span><span data-pt>Sobre / 01</span><span data-ru>О / 01</span><span data-zh>关于 / 01</span><span data-ja>について / 01</span><span data-tr>Hakkında / 01</span><span data-nl>Over / 01</span>
         </div>
         <h2 class="section-title display">
           <span data-ar>قطعة فنية<br><em>تطفو على الماء</em></span>
           <span data-en class="block">A Floating<br><em>Masterpiece</em></span>
+          <span data-fr class="block">Une <em>Œuvre d'Art</em><br>Flottante</span>
+          <span data-es class="block">Una <em>Obra Maestra</em><br>Flotante</span>
+          <span data-de class="block">Ein Schwebendes<br><em>Meisterwerk</em></span>
+          <span data-it class="block">Un <em>Capolavoro</em><br>Galleggiante</span>
+          <span data-pt class="block">Uma <em>Obra-Prima</em><br>Flutuante</span>
+          <span data-ru class="block">Плавучий<br><em>Шедевр</em></span>
+          <span data-zh class="block">浮动的<br><em>杰作</em></span>
+          <span data-ja class="block">浮かぶ<br><em>傑作</em></span>
+          <span data-tr class="block">Yüzen<br><em>Şaheser</em></span>
+          <span data-nl class="block">Een Drijvend<br><em>Meesterwerk</em></span>
         </h2>
         <p style="color: var(--gray); font-size: 16px; line-height: 1.85; margin-top: 24px;">
           <span data-ar>صمم ADVENTOUR ملاذ بحري متكامل بأربعة أدوار، يجمع بين الفخامة المعمارية والتكنولوجيا الحديثة. من حمام السباحة على السطح إلى الصالات الذكية، نقدم لضيوف الغردقة تجربة استثنائية على البحر الأحمر.</span>
           <span data-en>ADVENTOUR is a complete four-deck maritime sanctuary where architectural luxury meets modern technology. From the rooftop pool to the smart lounges, we offer Hurghada's guests an exceptional Red Sea experience.</span>
+          <span data-fr>ADVENTOUR est un sanctuaire maritime complet avec quatre ponts où le luxe architectural rencontre la technologie moderne. De la piscine sur le toit aux salons intelligents, nous offrons une expérience exceptionnelle de la Mer Rouge.</span>
+          <span data-es>ADVENTOUR es un santuario marítimo completo de cuatro cubiertas donde el lujo arquitectónico se encuentra con la tecnología moderna. Desde la piscina en la azotea hasta los salones inteligentes, ofrecemos una experiencia excepcional del Mar Rojo.</span>
+          <span data-de>ADVENTOUR ist ein umfassendes Heiligtum mit vier Decks, wo architektonischer Luxus auf moderne Technologie trifft. Vom Dachpool bis zu intelligenten Lounges bieten wir unseren Gästen in Hurghada ein außergewöhnliches Erlebnis.</span>
+          <span data-it>ADVENTOUR è un santuario marittimo completo a quattro ponti dove il lusso architettonico incontra la tecnologia moderna. Dalla piscina sul tetto alle sale intelligenti, offriamo ai nostri ospiti un'esperienza straordinaria nel Mar Rosso.</span>
+          <span data-pt>ADVENTOUR é um santuário marítimo completo de quatro conveses onde o luxo arquitetônico encontra a tecnologia moderna. Da piscina na cobertura aos salões inteligentes, oferecemos aos hóspedes uma experiência excepcional do Mar Vermelho.</span>
+          <span data-ru>ADVENTOUR — полный морской святилище с четырьмя палубами, где архитектурный люкс встречается с современными технологиями. От бассейна на крыше до умных лаунжей, мы предлагаем гостям Хургады исключительный опыт Красного моря.</span>
+          <span data-zh>ADVENTOUR 是一个完整的四层海上圣殿，建筑奢华与现代技术相结合。从屋顶游泳池到智能休息室，我们为赫尔格达的客人提供卓越的红海体验。</span>
+          <span data-ja>ADVENTOUR は、建築的なぜいたくさと最新技術が融合した完全な4層海上聖域です。屋上プールからスマートラウンジまで、ハルガダのゲストに紅海での並外れた体験を提供します。</span>
+          <span data-tr>ADVENTOUR, mimari lüksün modern teknoloji ile buluştuğu tam dört güverteli deniz halifesidir. Çatı havuzu akıllı salonlar, Hurghada konuklarına istisnai bir Kızıl Deniz deneyimi sunuyoruz.</span>
+          <span data-nl>ADVENTOUR is een volledig vier-deks maritiem heiligdom waar architecturaal luxe moderne technologie ontmoet. Van het dak zwembad tot intelligente lounges, bieden we de gasten een uitzonderlijke Rode Zee ervaring.</span>
         </p>
         <ul class="about-features">
           <li>
-            <span class="label"><span data-ar>الطول الإجمالي</span><span data-en>Overall Length</span></span>
+            <span class="label"><span data-ar>الطول الإجمالي</span><span data-en>Overall Length</span><span data-fr>Longueur Totale</span><span data-es>Largo Total</span><span data-de>Gesamtlänge</span><span data-it>Lunghezza Complessiva</span><span data-pt>Comprimento Total</span><span data-ru>Общая Длина</span><span data-zh>总长</span><span data-ja>全長</span><span data-tr>Toplam Uzunluk</span><span data-nl>Totale Lengte</span></span>
             <span class="num">40m+</span>
           </li>
           <li>
-            <span class="label"><span data-ar>السعة القصوى</span><span data-en>Max Capacity</span></span>
+            <span class="label"><span data-ar>السعة القصوى</span><span data-en>Max Capacity</span><span data-fr>Capacité Maximale</span><span data-es>Capacidad Máxima</span><span data-de>Maximale Kapazität</span><span data-it>Capacità Massima</span><span data-pt>Capacidade Máxima</span><span data-ru>Максимальная Вместимость</span><span data-zh>最大容量</span><span data-ja>最大容量</span><span data-tr>Maksimum Kapasite</span><span data-nl>Maximale Capaciteit</span></span>
             <span class="num">150</span>
           </li>
           <li>
-            <span class="label"><span data-ar>عدد الأدوار</span><span data-en>Decks</span></span>
+            <span class="label"><span data-ar>عدد الأدوار</span><span data-en>Decks</span><span data-fr>Ponts</span><span data-es>Cubiertas</span><span data-de>Decks</span><span data-it>Ponti</span><span data-pt>Conveses</span><span data-ru>Палубы</span><span data-zh>甲板</span><span data-ja>デッキ</span><span data-tr>Güverteler</span><span data-nl>Dekken</span></span>
             <span class="num">04</span>
           </li>
           <li>
-            <span class="label"><span data-ar>الموقع</span><span data-en>Location</span></span>
-            <span class="num"><span data-ar>الغردقة</span><span data-en>Hurghada</span></span>
+            <span class="label"><span data-ar>الموقع</span><span data-en>Location</span><span data-fr>Localisation</span><span data-es>Ubicación</span><span data-de>Standort</span><span data-it>Posizione</span><span data-pt>Localização</span><span data-ru>Местоположение</span><span data-zh>地点</span><span data-ja>場所</span><span data-tr>Konum</span><span data-nl>Locatie</span></span>
+            <span class="num"><span data-ar>الغردقة</span><span data-en>Hurghada</span><span data-fr>Hurghada</span><span data-es>Hurghada</span><span data-de>Hurghada</span><span data-it>Hurghada</span><span data-pt>Hurghada</span><span data-ru>Хургада</span><span data-zh>赫尔格达</span><span data-ja>ハルガダ</span><span data-tr>Hurghada</span><span data-nl>Hurghada</span></span>
           </li>
         </ul>
       </div>
@@ -3503,11 +3666,21 @@
     <div class="reveal">
       <div class="section-tag">
         <span data-ar>المرافق على متن المركب</span>
-        <span data-en>Amenities / 05</span>
+        <span data-en>Amenities / 05</span><span data-fr>Équipements / 05</span><span data-es>Comodidades / 05</span><span data-de>Ausstattung / 05</span><span data-it>Servizi / 05</span><span data-pt>Amenidades / 05</span><span data-ru>Удобства / 05</span><span data-zh>设施 / 05</span><span data-ja>アメニティ / 05</span><span data-tr>Olanaklar / 05</span><span data-nl>Faciliteiten / 05</span>
       </div>
       <h2 class="section-title display">
         <span data-ar>كل ما تحتاجه<br><em>وأكثر</em></span>
         <span data-en class="block">Everything You Need<br><em>And More</em></span>
+        <span data-fr class="block">Tout Ce Que Vous<br><em>Désirez</em></span>
+        <span data-es class="block">Todo Lo Que<br><em>Necesitas</em></span>
+        <span data-de class="block">Alles Was Sie<br><em>Brauchen</em></span>
+        <span data-it class="block">Tutto Quello Che<br><em>Desideri</em></span>
+        <span data-pt class="block">Tudo O Que Você<br><em>Precisa</em></span>
+        <span data-ru class="block">Все, Что Вам<br><em>Нужно</em></span>
+        <span data-zh class="block">您所需的<br><em>一切及更多</em></span>
+        <span data-ja class="block">必要なすべて<br><em>とそれ以上</em></span>
+        <span data-tr class="block">İhtiyacınız Olan<br><em>Her Şey</em></span>
+        <span data-nl class="block">Alles Wat U<br><em>Nodig Heeft</em></span>
       </h2>
     </div>
 
@@ -3548,57 +3721,57 @@
         </div>
       </div>
       <div class="amenities-feature-copy">
-        <div class="amenities-feature-badge"><span data-ar>صورة من المركب</span><span data-en>Onboard View</span></div>
-        <h3><span data-ar>المرافق على متن المركب</span><span data-en>Onboard Amenities</span></h3>
-        <p><span data-ar>صورة مباشرة من ADVENTOUR تبرز أجواء المركب والمرافق الفاخرة التي يستمتع بها الضيوف.</span><span data-en>A direct shot from ADVENTOUR showing the vessel atmosphere and the premium amenities guests enjoy.</span></p>
+        <div class="amenities-feature-badge"><span data-ar>صورة من المركب</span><span data-en>Onboard View</span><span data-fr>Vue À Bord</span><span data-es>Vista a Bordo</span><span data-de>Blick an Bord</span><span data-it>Vista a Bordo</span><span data-pt>Vista a Bordo</span><span data-ru>Вид на Борту</span><span data-zh>船上景观</span><span data-ja>船上のビュー</span><span data-tr>Gemi Üzerinde Görünüm</span><span data-nl>Uitzicht aan Boord</span></div>
+        <h3><span data-ar>المرافق على متن المركب</span><span data-en>Onboard Amenities</span><span data-fr>Équipements À Bord</span><span data-es>Comodidades a Bordo</span><span data-de>Ausstattung an Bord</span><span data-it>Servizi a Bordo</span><span data-pt>Amenidades a Bordo</span><span data-ru>Удобства на Борту</span><span data-zh>船上设施</span><span data-ja>船上のアメニティ</span><span data-tr>Gemi Üzerinde Olanaklar</span><span data-nl>Voorzieningen aan Boord</span></h3>
+        <p><span data-ar>صورة مباشرة من ADVENTOUR تبرز أجواء المركب والمرافق الفاخرة التي يستمتع بها الضيوف.</span><span data-en>A direct shot from ADVENTOUR showing the vessel atmosphere and the premium amenities guests enjoy.</span><span data-fr>Une photo directe d'ADVENTOUR montrant l'atmosphère du navire et les équipements premium dont jouissent les invités.</span><span data-es>Una foto directa de ADVENTOUR mostrando la atmósfera del barco y las comodidades premium que disfrutan los huéspedes.</span><span data-de>Ein direkter Blick auf ADVENTOUR zeigt die Schiffatmosphäre und die Premium-Ausstattung, die Gäste genießen.</span><span data-it>Una foto diretta da ADVENTOUR che mostra l'atmosfera della nave e i servizi premium di cui godono gli ospiti.</span><span data-pt>Uma foto direta de ADVENTOUR mostrando a atmosfera do navio e as amenidades premium que os hóspedes usufruem.</span><span data-ru>Прямой снимок ADVENTOUR, показывающий атмосферу судна и премиум-удобства, которыми наслаждаются гости.</span><span data-zh>ADVENTOUR 的直接照片，展示船舶氛围和客人享受的高级设施。</span><span data-ja>ADVENTOUR の直接撮影で、船の雰囲気とゲストが楽しむプレミアムアメニティを示します。</span><span data-tr>ADVENTOUR'dan doğrudan çekilmiş bir fotoğraf, gemi atmosferini ve misafirlerin tadını çıkardığı premium olanakları gösteriyor.</span><span data-nl>Een directe foto van ADVENTOUR die de scheepssfeer en de premium-voorzieningen laat zien waarvan gasten genieten.</span></p>
       </div>
     </div>
 
     <div class="amenities-list">
       <div class="amenity reveal">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 18c1.5-1 3-1 4.5 0s3 1 4.5 0 3-1 4.5 0 3 1 4.5 0M4 14a8 8 0 0116 0"/></svg>
-        <h4><span data-ar>حمام سباحة</span><span data-en>Large Pool</span></h4>
-        <p><span data-ar>على السطح بإطلالة بانورامية</span><span data-en>Rooftop, panoramic views</span></p>
+        <h4><span data-ar>حمام سباحة</span><span data-en>Large Pool</span><span data-fr>Grande Piscine</span><span data-es>Piscina Grande</span><span data-de>Großes Schwimmbad</span><span data-it>Grande Piscina</span><span data-pt>Piscina Grande</span><span data-ru>Большой Бассейн</span><span data-zh>大型游泳池</span><span data-ja>大型プール</span><span data-tr>Büyük Havuz</span><span data-nl>Groot Zwembad</span></h4>
+        <p><span data-ar>على السطح بإطلالة بانورامية</span><span data-en>Rooftop, panoramic views</span><span data-fr>Sur le toit, vues panoramiques</span><span data-es>En la azotea, vistas panorámicas</span><span data-de>Auf dem Dach, Panoramablick</span><span data-it>Sul tetto, viste panoramiche</span><span data-pt>No telhado, vistas panorâmicas</span><span data-ru>На крыше, панорамные виды</span><span data-zh>屋顶上，全景视图</span><span data-ja>屋上、パノラマビュー</span><span data-tr>Çatıda, panoramik manzaralar</span><span data-nl>Op het dak, panoramische uitzichten</span></p>
       </div>
       <div class="amenity reveal">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h18M3 8l2-4h14l2 4M5 8v12h14V8M9 12h6"/></svg>
-        <h4><span data-ar>بار فاخر</span><span data-en>Premium Bar</span></h4>
-        <p><span data-ar>مشروبات عالمية ومحلية</span><span data-en>Local & global beverages</span></p>
+        <h4><span data-ar>بار فاخر</span><span data-en>Premium Bar</span><span data-fr>Bar Premium</span><span data-es>Barra Premium</span><span data-de>Premium-Bar</span><span data-it>Bar Premium</span><span data-pt>Barra Premium</span><span data-ru>Премиум-Бар</span><span data-zh>优质酒吧</span><span data-ja>プレミアムバー</span><span data-tr>Premium Bar</span><span data-nl>Premium Bar</span></h4>
+        <p><span data-ar>مشروبات عالمية ومحلية</span><span data-en>Local & global beverages</span><span data-fr>Boissons locales et internationales</span><span data-es>Bebidas locales e internacionales</span><span data-de>Lokale und internationale Getränke</span><span data-it>Bevande locali e internazionali</span><span data-pt>Bebidas locais e internacionais</span><span data-ru>Местные и международные напитки</span><span data-zh>本地及国际饮料</span><span data-ja>地元および国際的な飲料</span><span data-tr>Yerel ve uluslararası içecekler</span><span data-nl>Lokale en internationale dranken</span></p>
       </div>
       <div class="amenity reveal">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2v6M18 2v6M3 10h18M5 6h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/></svg>
-        <h4><span data-ar>مطبخ كامل</span><span data-en>Full Kitchen</span></h4>
-        <p><span data-ar>أكل طازج من شيف محترف</span><span data-en>Fresh cuisine, pro chef</span></p>
+        <h4><span data-ar>مطبخ كامل</span><span data-en>Full Kitchen</span><span data-fr>Cuisine Complète</span><span data-es>Cocina Completa</span><span data-de>Vollständige Küche</span><span data-it>Cucina Completa</span><span data-pt>Cozinha Completa</span><span data-ru>Полная Кухня</span><span data-zh>完整厨房</span><span data-ja>完全なキッチン</span><span data-tr>Tam Mutfak</span><span data-nl>Volledige Keuken</span></h4>
+        <p><span data-ar>أكل طازج من شيف محترف</span><span data-en>Fresh cuisine, pro chef</span><span data-fr>Cuisine fraîche, chef professionnel</span><span data-es>Cocina fresca, chef profesional</span><span data-de>Frische Küche, professioneller Chef</span><span data-it>Cucina fresca, chef professionista</span><span data-pt>Culinária fresca, chef profissional</span><span data-ru>Свежая кухня, профессиональный шеф-повар</span><span data-zh>新鲜美食，专业厨师</span><span data-ja>新鮮な料理、プロのシェフ</span><span data-tr>Taze mutfak, profesyonel şef</span><span data-nl>Verse keuken, professionele chef</span></p>
       </div>
       <div class="amenity reveal">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-        <h4><span data-ar>DJ ونظام صوت</span><span data-en>DJ & Sound</span></h4>
-        <p><span data-ar>صوت احترافي + DJ مدرب</span><span data-en>Pro audio + trained DJ</span></p>
+        <h4><span data-ar>DJ ونظام صوت</span><span data-en>DJ & Sound</span><span data-fr>DJ & Son</span><span data-es>DJ y Sonido</span><span data-de>DJ & Sound</span><span data-it>DJ e Audio</span><span data-pt>DJ e Som</span><span data-ru>DJ и Звук</span><span data-zh>DJ 及音响</span><span data-ja>DJ とサウンド</span><span data-tr>DJ ve Ses</span><span data-nl>DJ en Geluid</span></h4>
+        <p><span data-ar>صوت احترافي + DJ مدرب</span><span data-en>Pro audio + trained DJ</span><span data-fr>Audio professionnel + DJ formé</span><span data-es>Audio profesional + DJ entrenado</span><span data-de>Professionelles Audio + trainierter DJ</span><span data-it>Audio professionale + DJ addestrato</span><span data-pt>Áudio profissional + DJ treinado</span><span data-ru>Профессиональный звук + подготовленный DJ</span><span data-zh>专业音频 + 培训 DJ</span><span data-ja>プロオーディオ + 訓練されたDJ</span><span data-tr>Profesyonel ses + eğitimli DJ</span><span data-nl>Professionele audio + getrainde DJ</span></p>
       </div>
       <div class="amenity reveal">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/></svg>
-        <h4><span data-ar>سنوركلينغ</span><span data-en>Snorkeling</span></h4>
-        <p><span data-ar>معدات كاملة للجميع</span><span data-en>Complete gear for all</span></p>
+        <h4><span data-ar>سنوركلينغ</span><span data-en>Snorkeling</span><span data-fr>Snorkeling</span><span data-es>Buceo con Tubo</span><span data-de>Schnorcheln</span><span data-it>Snorkel</span><span data-pt>Mergulho com Snorkel</span><span data-ru>Снорклинг</span><span data-zh>浮潜</span><span data-ja>シュノーケリング</span><span data-tr>Şnorkel</span><span data-nl>Snorkelen</span></h4>
+        <p><span data-ar>معدات كاملة للجميع</span><span data-en>Complete gear for all</span><span data-fr>Équipement complet pour tous</span><span data-es>Equipo completo para todos</span><span data-de>Komplette Ausrüstung für alle</span><span data-it>Attrezzatura completa per tutti</span><span data-pt>Equipamento completo para todos</span><span data-ru>Полное снаряжение для всех</span><span data-zh>所有人的完整装备</span><span data-ja>すべての人のための完全な装備</span><span data-tr>Herkes için tam donanım</span><span data-nl>Volledige uitrusting voor iedereen</span></p>
       </div>
       <div class="amenity reveal">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="18" height="12" rx="1"/><path d="M3 12h18"/></svg>
-        <h4><span data-ar>حمامات فاخرة</span><span data-en>Luxury Restrooms</span></h4>
-        <p><span data-ar>مفروشة ومجهزة بالكامل</span><span data-en>Fully equipped, premium</span></p>
+        <h4><span data-ar>حمامات فاخرة</span><span data-en>Luxury Restrooms</span><span data-fr>Toilettes de Luxe</span><span data-es>Baños de Lujo</span><span data-de>Luxus-Toiletten</span><span data-it>Bagni di Lusso</span><span data-pt>Banheiros de Luxo</span><span data-ru>Роскошные Ванные Комнаты</span><span data-zh>豪华洗手间</span><span data-ja>ラグジュアリートイレ</span><span data-tr>Lüks Tuvalet</span><span data-nl>Luxe Toiletten</span></h4>
+        <p><span data-ar>مفروشة ومجهزة بالكامل</span><span data-en>Fully equipped, premium</span><span data-fr>Entièrement équipés, premium</span><span data-es>Completamente equipados, premium</span><span data-de>Vollständig ausgestattet, Premium</span><span data-it>Completamente attrezzato, premium</span><span data-pt>Completamente equipados, premium</span><span data-ru>Полностью оборудованы, премиум</span><span data-zh>完全配备，高级</span><span data-ja>完全装備、プレミアム</span><span data-tr>Tam donanımlı, premium</span><span data-nl>Volledig uitgerust, premium</span></p>
       </div>
       <div class="amenity reveal">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M5 12v6a2 2 0 002 2h10a2 2 0 002-2v-6M5 12a2 2 0 01-2-2V8a2 2 0 012-2h14a2 2 0 012 2v2a2 2 0 01-2 2"/></svg>
-        <h4><span data-ar>أريكات Sunbed</span><span data-en>Sunbed Lounges</span></h4>
-        <p><span data-ar>على السطح للاسترخاء</span><span data-en>Rooftop relaxation</span></p>
+        <h4><span data-ar>أريكات Sunbed</span><span data-en>Sunbed Lounges</span><span data-fr>Chaises Longues</span><span data-es>Tumbonas</span><span data-de>Sonnenliegen</span><span data-it>Sedie a Sdraio</span><span data-pt>Espreguiçadeiras</span><span data-ru>Лежаки</span><span data-zh>日光浴床</span><span data-ja>サンベッド</span><span data-tr>Güneş Yatakları</span><span data-nl>Ligbedden</span></h4>
+        <p><span data-ar>على السطح للاسترخاء</span><span data-en>Rooftop relaxation</span><span data-fr>Détente sur le toit</span><span data-es>Relajación en la azotea</span><span data-de>Entspannung auf dem Dach</span><span data-it>Relax sul tetto</span><span data-pt>Relaxamento no telhado</span><span data-ru>Отдых на крыше</span><span data-zh>屋顶放松</span><span data-ja>屋上でリラックス</span><span data-tr>Çatıda rahatlama</span><span data-nl>Ontspanning op het dak</span></p>
       </div>
       <div class="amenity reveal">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12.55a11 11 0 0114 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h0"/></svg>
-        <h4><span data-ar>WiFi مجاني</span><span data-en>Free WiFi</span></h4>
-        <p><span data-ar>إنترنت سريع على المركب</span><span data-en>High-speed at sea</span></p>
+        <h4><span data-ar>WiFi مجاني</span><span data-en>Free WiFi</span><span data-fr>WiFi Gratuit</span><span data-es>WiFi Gratis</span><span data-de>Kostenloses WiFi</span><span data-it>WiFi Gratuito</span><span data-pt>WiFi Gratuito</span><span data-ru>Бесплатный WiFi</span><span data-zh>免费 WiFi</span><span data-ja>無料 WiFi</span><span data-tr>Ücretsiz WiFi</span><span data-nl>Gratis WiFi</span></h4>
+        <p><span data-ar>إنترنت سريع على المركب</span><span data-en>High-speed at sea</span><span data-fr>Haut débit en mer</span><span data-es>Conexión rápida en el mar</span><span data-de>Hochgeschwindigkeit auf dem Meer</span><span data-it>Alta velocità in mare</span><span data-pt>Alta velocidade no mar</span><span data-ru>Высокоскоростной интернет на море</span><span data-zh>海上高速互联网</span><span data-ja>海上高速インターネット</span><span data-tr>Denizde yüksek hızlı internet</span><span data-nl>Snel internet op zee</span></p>
       </div>
       <div class="amenity reveal">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-        <h4><span data-ar>طاقم خدمة</span><span data-en>Trained Crew</span></h4>
-        <p><span data-ar>محترفون مدربون</span><span data-en>Fully trained professionals</span></p>
+        <h4><span data-ar>طاقم خدمة</span><span data-en>Trained Crew</span><span data-fr>Équipage Formé</span><span data-es>Tripulación Capacitada</span><span data-de>Ausgebildete Besatzung</span><span data-it>Equipaggio Addestrato</span><span data-pt>Tripulação Treinada</span><span data-ru>Подготовленный Экипаж</span><span data-zh>训练有素的船员</span><span data-ja>訓練された乗組員</span><span data-tr>Eğitimli Mürettebat</span><span data-nl>Getraind Bemanning</span></h4>
+        <p><span data-ar>محترفون مدربون</span><span data-en>Fully trained professionals</span><span data-fr>Professionnels entièrement formés</span><span data-es>Profesionales completamente capacitados</span><span data-de>Vollständig ausgebildete Profis</span><span data-it>Professionisti completamente addestrati</span><span data-pt>Profissionais totalmente treinados</span><span data-ru>Полностью подготовленные профессионалы</span><span data-zh>完全训练的专业人员</span><span data-ja>完全に訓練されたプロフェッショナル</span><span data-tr>Tam eğitimli profesyoneller</span><span data-nl>Volledig getrainde professionals</span></p>
       </div>
     </div>
   </div>
@@ -3611,15 +3784,35 @@
     <div class="reveal" style="text-align: center;">
       <div class="section-tag" style="margin-left: auto; margin-right: auto;">
         <span data-ar>خدماتنا</span>
-        <span data-en>Services / 02</span>
+        <span data-en>Services / 02</span><span data-fr>Services / 02</span><span data-es>Servicios / 02</span><span data-de>Dienstleistungen / 02</span><span data-it>Servizi / 02</span><span data-pt>Serviços / 02</span><span data-ru>Услуги / 02</span><span data-zh>服务 / 02</span><span data-ja>サービス / 02</span><span data-tr>Hizmetler / 02</span><span data-nl>Diensten / 02</span>
       </div>
       <h2 class="section-title display">
         <span data-ar>سبع تجارب <em>فاخرة</em></span>
         <span data-en class="block">Seven <em>Luxury</em> Experiences</span>
+        <span data-fr class="block">Sept <em>Expériences</em> de Luxe</span>
+        <span data-es class="block">Siete <em>Experiencias</em> de Lujo</span>
+        <span data-de class="block">Sieben <em>Luxus</em>erlebnisse</span>
+        <span data-it class="block">Sette <em>Esperienze</em> di Lusso</span>
+        <span data-pt class="block">Sete <em>Experiências</em> de Luxo</span>
+        <span data-ru class="block">Семь <em>Люксовых</em> Впечатлений</span>
+        <span data-zh class="block">七种<em>豪华</em>体验</span>
+        <span data-ja class="block">7つの<em>豪華</em>体験</span>
+        <span data-tr class="block">Yedi <em>Lüks</em> Deneyim</span>
+        <span data-nl class="block">Zeven <em>Luxe</em> Ervaringen</span>
       </h2>
       <p class="section-intro" style="margin: 0 auto;">
         <span data-ar>من رحلات السنوركلينغ الصباحية إلى الحفلات الراقية وحفلات الزفاف على البحر — كل تجربة مصممة بعناية.</span>
         <span data-en>From morning snorkeling voyages to elegant evening parties and weddings at sea — every experience meticulously curated.</span>
+        <span data-fr>Des voyages de snorkel matinaux aux soirées élégantes et mariages en mer — chaque expérience méticuleusement élaborée.</span>
+        <span data-es>Desde viajes de buceo matutino hasta elegantes fiestas nocturnas y bodas en el mar — cada experiencia cuidadosamente diseñada.</span>
+        <span data-de>Von morgendlichen Schnorkelfahrten bis zu eleganten Abendveranstaltungen und Hochzeiten auf dem Meer — jedes Erlebnis sorgfältig kuriert.</span>
+        <span data-it>Dai viaggi di snorkel mattutini alle eleganti feste serali e matrimoni in mare — ogni esperienza attentamente curata.</span>
+        <span data-pt>De viagens de snorkel matinais a festas noturnas elegantes e casamentos no mar — cada experiência cuidadosamente elaborada.</span>
+        <span data-ru>От утренних прогулок для снорклинга до элегантных вечерних вечеринок и свадеб на море — каждый опыт тщательно подобран.</span>
+        <span data-zh>从早晨浮潜之旅到优雅的晚间派对和海上婚礼 — 每种体验都精心策划。</span>
+        <span data-ja>早朝のシュノーケリング旅行から優雅な夜間パーティーと海上での結婚式まで — 各経験が細心に策划されています。</span>
+        <span data-tr>Sabah sorkelleme yolculuklarından şık akşam partileri ve deniz düğünlerine kadar — her deneyim titizlikle seçilmiştir.</span>
+        <span data-nl>Van ochtendlijke snorkelvaarten tot elegante avondfeesten en bruiloften op zee — elke ervaring nauwgezet samengesteld.</span>
       </p>
     </div>
 
@@ -3627,10 +3820,10 @@
       <div class="exp-card reveal">
         <span class="exp-num">// 01</span>
         <div class="exp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 18c1.5-1 3-1 4.5 0s3 1 4.5 0 3-1 4.5 0 3 1 4.5 0"/><path d="M2 14c1.5-1 3-1 4.5 0s3 1 4.5 0 3-1 4.5 0 3 1 4.5 0"/><path d="M12 2v8M8 6h8"/></svg></div>
-        <h3><span data-ar>رحلات بحرية</span><span data-en>Sea Expeditions</span></h3>
-        <p><span data-ar>رحلات يومية إلى أجمل البقع البحرية في الغردقة — سنوركلينغ، سباحة، ووجبات طازجة.</span><span data-en>Day trips to Hurghada's pristine spots — snorkeling, swimming, fresh cuisine.</span></p>
+        <h3><span data-ar>رحلات بحرية</span><span data-en>Sea Expeditions</span><span data-fr>Expéditions Maritimes</span><span data-es>Expediciones Marinas</span><span data-de>Meeresexpeditionen</span><span data-it>Spedizioni Marine</span><span data-pt>Expedições Marinhas</span><span data-ru>Морские Экспедиции</span><span data-zh>海上探险</span><span data-ja>海上遠征</span><span data-tr>Deniz Sefer</span><span data-nl>Zeeexpedities</span></h3>
+        <p><span data-ar>رحلات يومية إلى أجمل البقع البحرية في الغردقة — سنوركلينغ، سباحة، ووجبات طازجة.</span><span data-en>Day trips to Hurghada's pristine spots — snorkeling, swimming, fresh cuisine.</span><span data-fr>Excursions d'une journée aux plus beaux sites de Hurghada — snorkel, natation, cuisine fraîche.</span><span data-es>Excursiones de un día a los mejores lugares de Hurghada — buceo, natación, cocina fresca.</span><span data-de>Tagesausflüge zu Hurghadás schönsten Orten — Schnorcheln, Schwimmen, frische Küche.</span><span data-it>Escursioni giornaliere ai più bei posti di Hurghada — snorkel, nuoto, cucina fresca.</span><span data-pt>Excursões de um dia aos melhores lugares de Hurghada — snorkel, natação, culinária fresca.</span><span data-ru>Однодневные экскурсии к самым красивым местам Хургады — снорклинг, плавание, свежая кухня.</span><span data-zh>前往赫尔格达最美景点的一日游 — 浮潜、游泳、新鲜美食。</span><span data-ja>ハルガダの最美しいスポットへの日帰り旅行 — シュノーケリング、水泳、新鮮な料理。</span><span data-tr>Hurghada'nın en güzel yerlerine günübirlik geziler — snorkel, yüzme, taze yemek.</span><span data-nl>Dagtochten naar de mooiste plekken van Hurghada — snorkelen, zwemmen, vers eten.</span></p>
         <a href="#contact" class="exp-link">
-          <span><span data-ar>اطلب عرض</span><span data-en>Get Quote</span></span>
+          <span><span data-ar>اطلب عرض</span><span data-en>Get Quote</span><span data-fr>Demander un Devis</span><span data-es>Solicitar Presupuesto</span><span data-de>Angebot Anfragen</span><span data-it>Richiedi Preventivo</span><span data-pt>Solicitar Orçamento</span><span data-ru>Запросить Цену</span><span data-zh>获取报价</span><span data-ja>見積もりを取得</span><span data-tr>Teklif Al</span><span data-nl>Offerte Aanvragen</span></span>
           <span class="arrow">→</span>
         </a>
       </div>
@@ -3638,10 +3831,10 @@
       <div class="exp-card reveal">
         <span class="exp-num">// 02</span>
         <div class="exp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v3M9 4l3-2 3 2M5 11h14v9a2 2 0 01-2 2H7a2 2 0 01-2-2v-9z"/><path d="M5 11l1-4h12l1 4"/><circle cx="9" cy="16" r="1"/><circle cx="15" cy="16" r="1"/></svg></div>
-        <h3><span data-ar>أعياد ميلاد</span><span data-en>Birthdays</span></h3>
-        <p><span data-ar>احتفل بعيد ميلادك بطريقة لا تُنسى — ديكور، كيك، DJ، وأجواء استثنائية.</span><span data-en>Celebrate in style — custom décor, premium cake, live DJ, and an extraordinary ambience.</span></p>
+        <h3><span data-ar>أعياد ميلاد</span><span data-en>Birthdays</span><span data-fr>Anniversaires</span><span data-es>Cumpleaños</span><span data-de>Geburtstage</span><span data-it>Compleanni</span><span data-pt>Aniversários</span><span data-ru>Дни Рождения</span><span data-zh>生日聚会</span><span data-ja>誕生日</span><span data-tr>Doğum Günleri</span><span data-nl>Verjaardagen</span></h3>
+        <p><span data-ar>احتفل بعيد ميلادك بطريقة لا تُنسى — ديكور، كيك، DJ، وأجواء استثنائية.</span><span data-en>Celebrate in style — custom décor, premium cake, live DJ, and an extraordinary ambience.</span><span data-fr>Célébrez avec style — décor personnalisé, gâteau premium, DJ en direct et ambiance extraordinaire.</span><span data-es>Celebre con estilo — decoración personalizada, pastel premium, DJ en vivo y ambiente extraordinario.</span><span data-de>Feiern Sie in Stil — benutzerdefinierte Dekoration, Premium-Kuchen, Live-DJ und außergewöhnliche Atmosphäre.</span><span data-it>Celebra con stile — decorazioni personalizzate, torta premium, DJ dal vivo e atmosfera straordinaria.</span><span data-pt>Celebre com estilo — decoração personalizada, bolo premium, DJ ao vivo e atmosfera extraordinária.</span><span data-ru>Праздник с стилем — индивидуальный декор, премиум-торт, живой DJ и необычная атмосфера.</span><span data-zh>以风格庆祝 — 定制装饰、高级蛋糕、现场 DJ 和非凡的氛围。</span><span data-ja>スタイルでお祝い — カスタムデコレーション、プレミアムケーキ、ライブ DJ、並外れた雰囲気。</span><span data-tr>Tarzla kutlayın — özel dekorasyon, premium pasta, canlı DJ ve olağanüstü atmosfer.</span><span data-nl>Vier met stijl — op maat gemaakte decoratie, premium taart, live DJ en buitengewone sfeer.</span></p>
         <a href="#contact" class="exp-link">
-          <span><span data-ar>اطلب عرض</span><span data-en>Get Quote</span></span>
+          <span><span data-ar>اطلب عرض</span><span data-en>Get Quote</span><span data-fr>Demander un Devis</span><span data-es>Solicitar Presupuesto</span><span data-de>Angebot Anfragen</span><span data-it>Richiedi Preventivo</span><span data-pt>Solicitar Orçamento</span><span data-ru>Запросить Цену</span><span data-zh>获取报价</span><span data-ja>見積もりを取得</span><span data-tr>Teklif Al</span><span data-nl>Offerte Aanvragen</span></span>
           <span class="arrow">→</span>
         </a>
       </div>
@@ -3649,10 +3842,10 @@
       <div class="exp-card reveal">
         <span class="exp-num">// 03</span>
         <div class="exp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
-        <h3><span data-ar>حفلات خاصة</span><span data-en>Private Parties</span></h3>
-        <p><span data-ar>حفلات على السطح مع حمام السباحة، DJ عالمي، وكل تفاصيل ليلة أسطورية.</span><span data-en>Rooftop parties with pool, world-class DJ — every detail for a legendary night.</span></p>
+        <h3><span data-ar>حفلات خاصة</span><span data-en>Private Parties</span><span data-fr>Soirées Privées</span><span data-es>Fiestas Privadas</span><span data-de>Private Feste</span><span data-it>Feste Private</span><span data-pt>Festas Privadas</span><span data-ru>Частные Вечеринки</span><span data-zh>私人派对</span><span data-ja>プライベートパーティー</span><span data-tr>Özel Partiler</span><span data-nl>Privéfeesten</span></h3>
+        <p><span data-ar>حفلات على السطح مع حمام السباحة، DJ عالمي، وكل تفاصيل ليلة أسطورية.</span><span data-en>Rooftop parties with pool, world-class DJ — every detail for a legendary night.</span><span data-fr>Fêtes sur le toit avec piscine, DJ de classe mondiale — chaque détail pour une soirée légendaire.</span><span data-es>Fiestas en la azotea con piscina, DJ de clase mundial — cada detalle para una noche legendaria.</span><span data-de>Dachpartys mit Pool, DJ auf Weltklasse-Niveau — jedes Detail für eine legendäre Nacht.</span><span data-it>Feste sul tetto con piscina, DJ di classe mondiale — ogni dettaglio per una notte leggendaria.</span><span data-pt>Festas na cobertura com piscina, DJ de classe mundial — cada detalhe para uma noite lendária.</span><span data-ru>Вечеринки на крыше с бассейном, DJ мирового класса — каждая деталь для легендарной ночи.</span><span data-zh>屋顶派对，配有游泳池、世界级 DJ — 传奇之夜的每一个细节。</span><span data-ja>プールを備えた屋上パーティー、ワールドクラスの DJ — 伝説的な夜のすべての詳細。</span><span data-tr>Havuzlu çatı partileri, dünya standartlarında DJ — efsanevi bir gece için her ayrıntı.</span><span data-nl>Dakterrasse feesten met zwembad, wereldklasse DJ — elk detail voor een legendarische nacht.</span></p>
         <a href="#contact" class="exp-link">
-          <span><span data-ar>اطلب عرض</span><span data-en>Get Quote</span></span>
+          <span><span data-ar>اطلب عرض</span><span data-en>Get Quote</span><span data-fr>Demander un Devis</span><span data-es>Solicitar Presupuesto</span><span data-de>Angebot Anfragen</span><span data-it>Richiedi Preventivo</span><span data-pt>Solicitar Orçamento</span><span data-ru>Запросить Цену</span><span data-zh>获取报价</span><span data-ja>見積もりを取得</span><span data-tr>Teklif Al</span><span data-nl>Offerte Aanvragen</span></span>
           <span class="arrow">→</span>
         </a>
       </div>
@@ -3660,10 +3853,10 @@
       <div class="exp-card reveal">
         <span class="exp-num">// 04</span>
         <div class="exp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="14" r="4"/><path d="M12 4v2M5 8l1.5 1.5M19 8l-1.5 1.5M3 18h18M5.5 18a6.5 6.5 0 0113 0"/></svg></div>
-        <h3><span data-ar>غروب الشمس</span><span data-en>Sunset Cruises</span></h3>
-        <p><span data-ar>3 ساعات من السحر — شمس الذهبية، إطلالة بانورامية، وأجواء رومانسية.</span><span data-en>3 hours of magic — golden sunset, panoramic views, romantic atmosphere.</span></p>
+        <h3><span data-ar>غروب الشمس</span><span data-en>Sunset Cruises</span><span data-fr>Croisières au Coucher</span><span data-es>Cruceros al Atardecer</span><span data-de>Sonnenuntergangsfahrten</span><span data-it>Crociere al Tramonto</span><span data-pt>Cruzeiros ao Pôer do Sol</span><span data-ru>Закаты на Воде</span><span data-zh>日落巡航</span><span data-ja>夕焼けクルーズ</span><span data-tr>Günbatımı Kruvaziları</span><span data-nl>Zonsondergangscruzies</span></h3>
+        <p><span data-ar>3 ساعات من السحر — شمس الذهبية، إطلالة بانورامية، وأجواء رومانسية.</span><span data-en>3 hours of magic — golden sunset, panoramic views, romantic atmosphere.</span><span data-fr>3 heures de magie — coucher de soleil doré, vues panoramiques, atmosphère romantique.</span><span data-es>3 horas de magia — atardecer dorado, vistas panorámicas, atmósfera romántica.</span><span data-de>3 Stunden Magie — goldener Sonnenuntergang, Panoramablick, romantische Atmosphäre.</span><span data-it>3 ore di magia — tramonto dorato, viste panoramiche, atmosfera romantica.</span><span data-pt>3 horas de magia — pôr do sol dourado, vistas panorâmicas, atmosfera romântica.</span><span data-ru>3 часа волшебства — золотой закат, панорамные виды, романтическая атмосфера.</span><span data-zh>3 小时的魔法 — 金色日落、全景视图、浪漫氛围。</span><span data-ja>3時間の魔法 — 黄金の夕焼け、パノラマビュー、ロマンチックな雰囲気。</span><span data-tr>3 saatlik büyü — altın günbatımı, panoramik manzaralar, romantik atmosfer.</span><span data-nl>3 uur magie — gouden zonsondergang, panoramische uitzichten, romantische sfeer.</span></p>
         <a href="#contact" class="exp-link">
-          <span><span data-ar>اطلب عرض</span><span data-en>Get Quote</span></span>
+          <span><span data-ar>اطلب عرض</span><span data-en>Get Quote</span><span data-fr>Demander un Devis</span><span data-es>Solicitar Presupuesto</span><span data-de>Angebot Anfragen</span><span data-it>Richiedi Preventivo</span><span data-pt>Solicitar Orçamento</span><span data-ru>Запросить Цену</span><span data-zh>获取报价</span><span data-ja>見積もりを取得</span><span data-tr>Teklif Al</span><span data-nl>Offerte Aanvragen</span></span>
           <span class="arrow">→</span>
         </a>
       </div>
@@ -3671,10 +3864,10 @@
       <div class="exp-card reveal">
         <span class="exp-num">// 05</span>
         <div class="exp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2M3 13h18"/></svg></div>
-        <h3><span data-ar>فعاليات شركات</span><span data-en>Corporate Events</span></h3>
-        <p><span data-ar>مكان مميز لاجتماعات الشركات أو إطلاق منتجات — أجواء حصرية واحترافية كاملة.</span><span data-en>A distinctive venue for corporate meetings or launches — exclusive and professional.</span></p>
+        <h3><span data-ar>فعاليات شركات</span><span data-en>Corporate Events</span><span data-fr>Événements Corporatifs</span><span data-es>Eventos Empresariales</span><span data-de>Firmenfeiern</span><span data-it>Eventi Aziendali</span><span data-pt>Eventos Corporativos</span><span data-ru>Корпоративные События</span><span data-zh>公司活动</span><span data-ja>企業イベント</span><span data-tr>Kurumsal Etkinlikler</span><span data-nl>Bedrijfsgebeurtenissen</span></h3>
+        <p><span data-ar>مكان مميز لاجتماعات الشركات أو إطلاق منتجات — أجواء حصرية واحترافية كاملة.</span><span data-en>A distinctive venue for corporate meetings or launches — exclusive and professional.</span><span data-fr>Un lieu unique pour les réunions ou lancements d'entreprise — atmosfera exclusive et professionnel.</span><span data-es>Un lugar único para reuniones o lanzamientos empresariales — ambiente exclusivo y profesional.</span><span data-de>Ein einzigartiger Ort für Geschäftstreffen oder Produkteinführungen — exklusiv und professionell.</span><span data-it>Un luogo unico per riunioni aziendali o lanci di prodotti — esclusivo e professionale.</span><span data-pt>Um local único para reuniões ou lançamentos corporativos — exclusivo e profissional.</span><span data-ru>Уникальное место для деловых встреч или запуска продуктов — исключительно и профессионально.</span><span data-zh>用于公司会议或产品发布的独特场所 — 独家且专业的环境。</span><span data-ja>企業ミーティングまたは製品ローンチのためのユニークな会場 — 独占的かつプロフェッショナル。</span><span data-tr>Kurumsal toplantılar veya ürün lansmanları için benzersiz bir mekan — özel ve profesyonel.</span><span data-nl>Een unieke plek voor bedrijfsbijeenkomsten of productlanceringen — exclusief en professioneel.</span></p>
         <a href="#contact" class="exp-link">
-          <span><span data-ar>اطلب عرض</span><span data-en>Get Quote</span></span>
+          <span><span data-ar>اطلب عرض</span><span data-en>Get Quote</span><span data-fr>Demander un Devis</span><span data-es>Solicitar Presupuesto</span><span data-de>Angebot Anfragen</span><span data-it>Richiedi Preventivo</span><span data-pt>Solicitar Orçamento</span><span data-ru>Запросить Цену</span><span data-zh>获取报价</span><span data-ja>見積もりを取得</span><span data-tr>Teklif Al</span><span data-nl>Offerte Aanvragen</span></span>
           <span class="arrow">→</span>
         </a>
       </div>
@@ -3682,10 +3875,10 @@
       <div class="exp-card reveal">
         <span class="exp-num">// 06</span>
         <div class="exp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-5-7-11a5 5 0 0110-1 5 5 0 0110 1c0 6-7 11-7 11h-6z"/></svg></div>
-        <h3><span data-ar>زفاف وخطوبة</span><span data-en>Weddings</span></h3>
-        <p><span data-ar>اجعل يوم العمر مختلفاً — احتفل بخطوبتك أو زفافك وسط البحر الأحمر.</span><span data-en>Make your day unforgettable — celebrate on the Red Sea like nowhere else.</span></p>
+        <h3><span data-ar>زفاف وخطوبة</span><span data-en>Weddings</span><span data-fr>Mariages</span><span data-es>Bodas</span><span data-de>Hochzeiten</span><span data-it>Nozze</span><span data-pt>Casamentos</span><span data-ru>Свадьбы</span><span data-zh>婚礼</span><span data-ja>結婚式</span><span data-tr>Düğünler</span><span data-nl>Huwelijken</span></h3>
+        <p><span data-ar>اجعل يوم العمر مختلفاً — احتفل بخطوبتك أو زفافك وسط البحر الأحمر.</span><span data-en>Make your day unforgettable — celebrate on the Red Sea like nowhere else.</span><span data-fr>Rendez votre jour inoubliable — célébrez sur la Mer Rouge comme nulle part ailleurs.</span><span data-es>Haz tu día inolvidable — celebra en el Mar Rojo como en ningún otro lugar.</span><span data-de>Machen Sie Ihren Tag unvergesslich — feiern Sie auf dem Roten Meer wie nirgendwo sonst.</span><span data-it>Rendi la tua giornata indimenticabile — celebra nel Mar Rosso come da nessun'altra parte.</span><span data-pt>Torne seu dia inesquecível — celebre no Mar Vermelho como em nenhum outro lugar.</span><span data-ru>Сделайте свой день незабываемым — праздничный Красное море, как больше нигде.</span><span data-zh>让你的日子难忘 — 在红海庆祝，与众不同。</span><span data-ja>あなたの日を忘れられないものにしてください — 紅海で他のどこでもない方法で祝う。</span><span data-tr>Günü unutulmaz kılın — Kızıl Deniz'de başka hiçbir yerde olabileceğiniz gibi kutlayın.</span><span data-nl>Maak je dag onvergetelijk — vier op de Rode Zee zoals nergens anders.</span></p>
         <a href="#contact" class="exp-link">
-          <span><span data-ar>اطلب عرض</span><span data-en>Get Quote</span></span>
+          <span><span data-ar>اطلب عرض</span><span data-en>Get Quote</span><span data-fr>Demander un Devis</span><span data-es>Solicitar Presupuesto</span><span data-de>Angebot Anfragen</span><span data-it>Richiedi Preventivo</span><span data-pt>Solicitar Orçamento</span><span data-ru>Запросить Цену</span><span data-zh>获取报价</span><span data-ja>見積もりを取得</span><span data-tr>Teklif Al</span><span data-nl>Offerte Aanvragen</span></span>
           <span class="arrow">→</span>
         </a>
       </div>
@@ -3693,10 +3886,10 @@
       <div class="exp-card reveal" style="grid-column: 1 / -1;">
         <span class="exp-num">// 07</span>
         <div class="exp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-        <h3><span data-ar>إيجار كامل للمركب</span><span data-en>Full Vessel Charter</span></h3>
-        <p style="max-width: 700px;"><span data-ar>المركب بالكامل لك ولضيوفك. أربعة أدوار، حمام سباحة، بار، DJ، وطاقم خدمة كامل — حدد المنهج، نحن ننفذ الباقي.</span><span data-en>The entire vessel — yours and your guests'. Four decks, pool, bar, DJ, full service crew — you set the vision, we deliver.</span></p>
+        <h3><span data-ar>إيجار كامل للمركب</span><span data-en>Full Vessel Charter</span><span data-fr>Location Complète du Navire</span><span data-es>Alquiler Completo del Barco</span><span data-de>Vollständige Bootscharter</span><span data-it>Noleggio Completo della Nave</span><span data-pt>Aluguel Completo do Navio</span><span data-ru>Полная Аренда Судна</span><span data-zh>完整的船舶租赁</span><span data-ja>完全な船舶チャーター</span><span data-tr>Tam Gemi Kiralama</span><span data-nl>Volledige Boothuur</span></h3>
+        <p style="max-width: 700px;"><span data-ar>المركب بالكامل لك ولضيوفك. أربعة أدوار، حمام سباحة، بار، DJ، وطاقم خدمة كامل — حدد المنهج، نحن ننفذ الباقي.</span><span data-en>The entire vessel — yours and your guests'. Four decks, pool, bar, DJ, full service crew — you set the vision, we deliver.</span><span data-fr>L'ensemble du navire — le vôtre et celui de vos invités. Quatre ponts, piscine, bar, DJ, équipage complet — définissez la vision, nous livrons.</span><span data-es>El barco completo — suyo y el de sus invitados. Cuatro cubiertas, piscina, bar, DJ, tripulación completa — usted establece la visión, nosotros entregamos.</span><span data-de>Das gesamte Schiff — Ihres und Ihrer Gäste. Vier Decks, Pool, Bar, DJ, vollständiges Servicebegleiter — Sie definieren die Vision, wir liefern.</span><span data-it>L'intera nave — tua e dei tuoi ospiti. Quattro ponti, piscina, bar, DJ, equipaggio completo — tu definisci la visione, noi consegniamo.</span><span data-pt>O navio inteiro — seu e de seus convidados. Quatro conveses, piscina, bar, DJ, tripulação completa — você estabelece a visão, nós entregamos.</span><span data-ru>Все судно — ваше и ваших гостей. Четыре палубы, бассейн, бар, DJ, полная служба экипажа — вы устанавливаете видение, мы доставляем.</span><span data-zh>整艘船 — 您和您的客人的。四层甲板、游泳池、酒吧、DJ、全套服务人员 — 您设定愿景，我们交付。</span><span data-ja>船全体 — あなたとあなたのゲストの。4層デッキ、プール、バー、DJ、フルサービスの乗組員 — ビジョンを設定、私たちが提供します。</span><span data-tr>Tüm gemi — sizin ve misafirlerinizin. Dört güverte, havuz, bar, DJ, tam hizmet mürettebatı — vizyonu siz belirleyin, biz sunuz.</span><span data-nl>Het hele schip — van u en uw gasten. Vier dekken, zwembad, bar, DJ, volledige servicepersoneel — u bepaalt de visie, wij leveren.</span></p>
         <a href="#contact" class="exp-link" style="max-width: 300px;">
-          <span><span data-ar>تواصل للترتيب</span><span data-en>Contact to Arrange</span></span>
+          <span><span data-ar>تواصل للترتيب</span><span data-en>Contact to Arrange</span><span data-fr>Nous Contacter</span><span data-es>Contáctenos</span><span data-de>Kontakt Aufnehmen</span><span data-it>Contattaci</span><span data-pt>Contate-nos</span><span data-ru>Связаться с Нами</span><span data-zh>联系我们</span><span data-ja>お問い合わせ</span><span data-tr>İletişime Geçin</span><span data-nl>Neem Contact Op</span></span>
           <span class="arrow">→</span>
         </a>
       </div>
@@ -3711,31 +3904,41 @@
     <div class="reveal">
       <div class="section-tag">
         <span data-ar>المعرض</span>
-        <span data-en>Gallery / 04</span>
+        <span data-en>Gallery / 04</span><span data-fr>Galerie / 04</span><span data-es>Galería / 04</span><span data-de>Galerie / 04</span><span data-it>Galleria / 04</span><span data-pt>Galeria / 04</span><span data-ru>Галерея / 04</span><span data-zh>画廊 / 04</span><span data-ja>ギャラリー / 04</span><span data-tr>Galeri / 04</span><span data-nl>Galerij / 04</span>
       </div>
       <h2 class="section-title display">
         <span data-ar>لحظات على <em>متن ADVENTOUR</em></span>
         <span data-en class="block">Moments Aboard <em>ADVENTOUR</em></span>
+        <span data-fr class="block">Moments à Bord d'<em>ADVENTOUR</em></span>
+        <span data-es class="block">Momentos a Bordo de <em>ADVENTOUR</em></span>
+        <span data-de class="block">Momente an Bord der <em>ADVENTOUR</em></span>
+        <span data-it class="block">Momenti a Bordo di <em>ADVENTOUR</em></span>
+        <span data-pt class="block">Momentos a Bordo da <em>ADVENTOUR</em></span>
+        <span data-ru class="block">Моменты на Борту <em>ADVENTOUR</em></span>
+        <span data-zh class="block"><em>ADVENTOUR</em> 船上时刻</span>
+        <span data-ja class="block"><em>ADVENTOUR</em> 船上の瞬間</span>
+        <span data-tr class="block"><em>ADVENTOUR</em> Güvertesinde Anlar</span>
+        <span data-nl class="block">Momenten aan Boord van <em>ADVENTOUR</em></span>
       </h2>
     </div>
     <div class="gallery-slider-wrap reveal">
       <div id="galleryCarousel" class="splide gallery-carousel" dir="ltr" aria-label="ADVENTOUR gallery carousel">
         <div class="splide__track">
           <ul class="splide__list">
-            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/lounge-1.jpg" alt="Lounge 1" loading="lazy" /><div class="gallery-caption"><span data-ar>الردهة</span><span data-en>LOUNGE · 01</span></div></li>
-            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/lounge-2.jpg" alt="Lounge 2" loading="lazy" /><div class="gallery-caption"><span data-ar>الردهة</span><span data-en>LOUNGE · 02</span></div></li>
-            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/pool-1.jpg" alt="Pool 1" loading="lazy" /><div class="gallery-caption"><span data-ar>حمام السباحة</span><span data-en>POOL · 01</span></div></li>
-            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/pool-2.jpg" alt="Pool 2" loading="lazy" /><div class="gallery-caption"><span data-ar>حمام السباحة</span><span data-en>POOL · 02</span></div></li>
-            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/pool-3.jpg" alt="Pool 3" loading="lazy" /><div class="gallery-caption"><span data-ar>حمام السباحة</span><span data-en>POOL · 03</span></div></li>
-            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/amenities.jpg" alt="Amenities" loading="lazy" /><div class="gallery-caption"><span data-ar>المرافق</span><span data-en>AMENITIES</span></div></li>
-            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/sunset-1.jpg" alt="Sunset 1" loading="lazy" /><div class="gallery-caption"><span data-ar>غروب الشمس</span><span data-en>SUNSET · 01</span></div></li>
-            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/sunset-2.jpg" alt="Sunset 2" loading="lazy" /><div class="gallery-caption"><span data-ar>غروب الشمس</span><span data-en>SUNSET · 02</span></div></li>
-            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/sunset-3.jpg" alt="Sunset 3" loading="lazy" /><div class="gallery-caption"><span data-ar>غروب الشمس</span><span data-en>SUNSET · 03</span></div></li>
-            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/sunset-4.jpg" alt="Sunset 4" loading="lazy" /><div class="gallery-caption"><span data-ar>غروب الشمس</span><span data-en>SUNSET · 04</span></div></li>
-            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/event-1.jpg" alt="Event 1" loading="lazy" /><div class="gallery-caption"><span data-ar>فعالية</span><span data-en>EVENT · 01</span></div></li>
-            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/event-2.jpg" alt="Event 2" loading="lazy" /><div class="gallery-caption"><span data-ar>فعالية</span><span data-en>EVENT · 02</span></div></li>
-            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/event-3.jpg" alt="Event 3" loading="lazy" /><div class="gallery-caption"><span data-ar>فعالية</span><span data-en>EVENT · 03</span></div></li>
-            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/event-4.jpg" alt="Event 4" loading="lazy" /><div class="gallery-caption"><span data-ar>فعالية</span><span data-en>EVENT · 04</span></div></li>
+            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/lounge-1.jpg" alt="Lounge 1" loading="lazy" /><div class="gallery-caption"><span data-ar>الردهة</span><span data-en>LOUNGE · 01</span><span data-fr>SALON · 01</span><span data-es>SALÓN · 01</span><span data-de>LOUNGE · 01</span><span data-it>LOUNGE · 01</span><span data-pt>LOUNGE · 01</span><span data-ru>ЛАУНЖ · 01</span><span data-zh>休息室 · 01</span><span data-ja>ラウンジ · 01</span><span data-tr>SALON · 01</span><span data-nl>LOUNGE · 01</span></div></li>
+            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/lounge-2.jpg" alt="Lounge 2" loading="lazy" /><div class="gallery-caption"><span data-ar>الردهة</span><span data-en>LOUNGE · 02</span><span data-fr>SALON · 02</span><span data-es>SALÓN · 02</span><span data-de>LOUNGE · 02</span><span data-it>LOUNGE · 02</span><span data-pt>LOUNGE · 02</span><span data-ru>ЛАУНЖ · 02</span><span data-zh>休息室 · 02</span><span data-ja>ラウンジ · 02</span><span data-tr>SALON · 02</span><span data-nl>LOUNGE · 02</span></div></li>
+            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/pool-1.jpg" alt="Pool 1" loading="lazy" /><div class="gallery-caption"><span data-ar>حمام السباحة</span><span data-en>POOL · 01</span><span data-fr>PISCINE · 01</span><span data-es>PISCINA · 01</span><span data-de>POOL · 01</span><span data-it>PISCINA · 01</span><span data-pt>PISCINA · 01</span><span data-ru>БАССЕЙН · 01</span><span data-zh>泳池 · 01</span><span data-ja>プール · 01</span><span data-tr>HAVUZ · 01</span><span data-nl>ZWEMBAD · 01</span></div></li>
+            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/pool-2.jpg" alt="Pool 2" loading="lazy" /><div class="gallery-caption"><span data-ar>حمام السباحة</span><span data-en>POOL · 02</span><span data-fr>PISCINE · 02</span><span data-es>PISCINA · 02</span><span data-de>POOL · 02</span><span data-it>PISCINA · 02</span><span data-pt>PISCINA · 02</span><span data-ru>БАССЕЙН · 02</span><span data-zh>泳池 · 02</span><span data-ja>プール · 02</span><span data-tr>HAVUZ · 02</span><span data-nl>ZWEMBAD · 02</span></div></li>
+            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/pool-3.jpg" alt="Pool 3" loading="lazy" /><div class="gallery-caption"><span data-ar>حمام السباحة</span><span data-en>POOL · 03</span><span data-fr>PISCINE · 03</span><span data-es>PISCINA · 03</span><span data-de>POOL · 03</span><span data-it>PISCINA · 03</span><span data-pt>PISCINA · 03</span><span data-ru>БАССЕЙН · 03</span><span data-zh>泳池 · 03</span><span data-ja>プール · 03</span><span data-tr>HAVUZ · 03</span><span data-nl>ZWEMBAD · 03</span></div></li>
+            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/amenities.jpg" alt="Amenities" loading="lazy" /><div class="gallery-caption"><span data-ar>المرافق</span><span data-en>AMENITIES</span><span data-fr>ÉQUIPEMENTS</span><span data-es>COMODIDADES</span><span data-de>AUSSTATTUNG</span><span data-it>SERVIZI</span><span data-pt>AMENIDADES</span><span data-ru>УДОБСТВА</span><span data-zh>设施</span><span data-ja>アメニティ</span><span data-tr>OLANAKLAR</span><span data-nl>VOORZIENINGEN</span></div></li>
+            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/sunset-1.jpg" alt="Sunset 1" loading="lazy" /><div class="gallery-caption"><span data-ar>غروب الشمس</span><span data-en>SUNSET · 01</span><span data-fr>COUCHER DE SOLEIL · 01</span><span data-es>ATARDECER · 01</span><span data-de>SONNENUNTERGANG · 01</span><span data-it>TRAMONTO · 01</span><span data-pt>PÔR DO SOL · 01</span><span data-ru>ЗАКАТ · 01</span><span data-zh>日落 · 01</span><span data-ja>夕陽 · 01</span><span data-tr>GÜNBATIMI · 01</span><span data-nl>ZONSONDERGANG · 01</span></div></li>
+            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/sunset-2.jpg" alt="Sunset 2" loading="lazy" /><div class="gallery-caption"><span data-ar>غروب الشمس</span><span data-en>SUNSET · 02</span><span data-fr>COUCHER DE SOLEIL · 02</span><span data-es>ATARDECER · 02</span><span data-de>SONNENUNTERGANG · 02</span><span data-it>TRAMONTO · 02</span><span data-pt>PÔR DO SOL · 02</span><span data-ru>ЗАКАТ · 02</span><span data-zh>日落 · 02</span><span data-ja>夕陽 · 02</span><span data-tr>GÜNBATIMI · 02</span><span data-nl>ZONSONDERGANG · 02</span></div></li>
+            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/sunset-3.jpg" alt="Sunset 3" loading="lazy" /><div class="gallery-caption"><span data-ar>غروب الشمس</span><span data-en>SUNSET · 03</span><span data-fr>COUCHER DE SOLEIL · 03</span><span data-es>ATARDECER · 03</span><span data-de>SONNENUNTERGANG · 03</span><span data-it>TRAMONTO · 03</span><span data-pt>PÔR DO SOL · 03</span><span data-ru>ЗАКАТ · 03</span><span data-zh>日落 · 03</span><span data-ja>夕陽 · 03</span><span data-tr>GÜNBATIMI · 03</span><span data-nl>ZONSONDERGANG · 03</span></div></li>
+            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/sunset-4.jpg" alt="Sunset 4" loading="lazy" /><div class="gallery-caption"><span data-ar>غروب الشمس</span><span data-en>SUNSET · 04</span><span data-fr>COUCHER DE SOLEIL · 04</span><span data-es>ATARDECER · 04</span><span data-de>SONNENUNTERGANG · 04</span><span data-it>TRAMONTO · 04</span><span data-pt>PÔR DO SOL · 04</span><span data-ru>ЗАКАТ · 04</span><span data-zh>日落 · 04</span><span data-ja>夕陽 · 04</span><span data-tr>GÜNBATIMI · 04</span><span data-nl>ZONSONDERGANG · 04</span></div></li>
+            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/event-1.jpg" alt="Event 1" loading="lazy" /><div class="gallery-caption"><span data-ar>فعالية</span><span data-en>EVENT · 01</span><span data-fr>ÉVÉNEMENT · 01</span><span data-es>EVENTO · 01</span><span data-de>EVENT · 01</span><span data-it>EVENTO · 01</span><span data-pt>EVENTO · 01</span><span data-ru>СОБЫТИЕ · 01</span><span data-zh>活动 · 01</span><span data-ja>イベント · 01</span><span data-tr>ETKİNLİK · 01</span><span data-nl>EVENEMENT · 01</span></div></li>
+            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/event-2.jpg" alt="Event 2" loading="lazy" /><div class="gallery-caption"><span data-ar>فعالية</span><span data-en>EVENT · 02</span><span data-fr>ÉVÉNEMENT · 02</span><span data-es>EVENTO · 02</span><span data-de>EVENT · 02</span><span data-it>EVENTO · 02</span><span data-pt>EVENTO · 02</span><span data-ru>СОБЫТИЕ · 02</span><span data-zh>活动 · 02</span><span data-ja>イベント · 02</span><span data-tr>ETKİNLİK · 02</span><span data-nl>EVENEMENT · 02</span></div></li>
+            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/event-3.jpg" alt="Event 3" loading="lazy" /><div class="gallery-caption"><span data-ar>فعالية</span><span data-en>EVENT · 03</span><span data-fr>ÉVÉNEMENT · 03</span><span data-es>EVENTO · 03</span><span data-de>EVENT · 03</span><span data-it>EVENTO · 03</span><span data-pt>EVENTO · 03</span><span data-ru>СОБЫТИЕ · 03</span><span data-zh>活动 · 03</span><span data-ja>イベント · 03</span><span data-tr>ETKİNLİK · 03</span><span data-nl>EVENEMENT · 03</span></div></li>
+            <li class="splide__slide"><img src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/event-4.jpg" alt="Event 4" loading="lazy" /><div class="gallery-caption"><span data-ar>فعالية</span><span data-en>EVENT · 04</span><span data-fr>ÉVÉNEMENT · 04</span><span data-es>EVENTO · 04</span><span data-de>EVENT · 04</span><span data-it>EVENTO · 04</span><span data-pt>EVENTO · 04</span><span data-ru>СОБЫТИЕ · 04</span><span data-zh>活动 · 04</span><span data-ja>イベント · 04</span><span data-tr>ETKİNLİK · 04</span><span data-nl>EVENEMENT · 04</span></div></li>
           </ul>
         </div>
         <div class="splide__arrows" aria-label="Carousel navigation">
@@ -3755,13 +3958,33 @@
       <div class="quote-mark">"</div>
       <div class="stars" id="stars">★★★★★</div>
       <p class="testimonial-text" id="testimonialText">
-        <span data-ar>كانت تجربة لا تُوصف! احتفلت بعيد ميلادي على ADVENTOUR Ùˆكل التفاصيل كانت مثالية — المركب، الطاقم، والأجواء. ليلة لن أنساها أبداً.</span>
+        <span data-ar>كانت تجربة لا تُوصف! احتفلت بعيد ميلادي على ADVENTOUR وكل التفاصيل كانت مثالية — المركب، الطاقم، والأجواء. ليلة لن أنساها أبداً.</span>
         <span data-en>An experience beyond words! I celebrated my birthday aboard ADVENTOUR and every detail was flawless — the vessel, the crew, the atmosphere.</span>
+        <span data-fr>Une expérience indescriptible ! J'ai célébré mon anniversaire à bord d'ADVENTOUR et chaque détail était parfait — le bateau, l'équipage, l'ambiance.</span>
+        <span data-es>¡Una experiencia indescriptible! Celebré mi cumpleaños a bordo de ADVENTOUR y cada detalle fue impecable — el barco, la tripulación, el ambiente.</span>
+        <span data-de>Ein unbeschreibliches Erlebnis! Ich feierte meinen Geburtstag an Bord der ADVENTOUR, und jedes Detail war makellos — das Schiff, die Crew, die Atmosphäre.</span>
+        <span data-it>Un'esperienza indescrivibile! Ho festeggiato il mio compleanno a bordo di ADVENTOUR e ogni dettaglio era impeccabile — l'imbarcazione, l'equipaggio, l'atmosfera.</span>
+        <span data-pt>Uma experiência indescritível! Celebrei meu aniversário a bordo do ADVENTOUR e cada detalhe foi impecável — o barco, a tripulação, a atmosfera.</span>
+        <span data-ru>Непередаваемые впечатления! Я отметила свой день рождения на борту ADVENTOUR, и каждая деталь была безупречной — судно, экипаж, атмосфера.</span>
+        <span data-zh>难以言喻的体验!我在ADVENTOUR上庆祝了生日,每一个细节都完美无缺——游艇、船员、氛围皆是如此。</span>
+        <span data-ja>言葉にできない体験でした!ADVENTOURで誕生日を祝いましたが、すべてが完璧でした——船、クルー、雰囲気のすべてが。</span>
+        <span data-tr>Tarifsiz bir deneyim! Doğum günümü ADVENTOUR'da kutladım ve her detay kusursuzdu — tekne, mürettebat, atmosfer.</span>
+        <span data-nl>Een onbeschrijfelijke ervaring! Ik vierde mijn verjaardag aan boord van ADVENTOUR en elk detail was perfect — het schip, de bemanning, de sfeer.</span>
       </p>
       <div class="testimonial-author" id="testimonialAuthor">
         <span data-ar>سارة م.</span>
         <span data-en>SARAH M.</span>
-        <small><span data-ar>عيد ميلاد على المركب • مارس 2025</span><span data-en>Birthday · March 2025</span></small>
+        <span data-fr>SARAH M.</span>
+        <span data-es>SARAH M.</span>
+        <span data-de>SARAH M.</span>
+        <span data-it>SARAH M.</span>
+        <span data-pt>SARAH M.</span>
+        <span data-ru>SARAH M.</span>
+        <span data-zh>SARAH M.</span>
+        <span data-ja>SARAH M.</span>
+        <span data-tr>SARAH M.</span>
+        <span data-nl>SARAH M.</span>
+        <small><span data-ar>عيد ميلاد على المركب • مارس 2025</span><span data-en>Birthday · March 2025</span><span data-fr>Anniversaire · Mars 2025</span><span data-es>Cumpleaños · Marzo 2025</span><span data-de>Geburtstag · März 2025</span><span data-it>Compleanno · Marzo 2025</span><span data-pt>Aniversário · Março 2025</span><span data-ru>День рождения · Март 2025</span><span data-zh>生日 · 2025年3月</span><span data-ja>誕生日 · 2025年3月</span><span data-tr>Doğum Günü · Mart 2025</span><span data-nl>Verjaardag · Maart 2025</span></small>
       </div>
       <div class="dots">
         <div class="dot active" data-idx="0"></div>
@@ -3778,29 +4001,39 @@
   <div class="container">
     <div class="reveal" style="text-align:center;">
       <div class="section-tag" style="margin:0 auto 24px;">
-        <span data-ar>ثقة وتميز</span><span data-en>Trust & Recognition</span>
+        <span data-ar>ثقة وتميز</span><span data-en>Trust & Recognition</span><span data-fr>Confiance et Reconnaissance</span><span data-es>Confianza y Reconocimiento</span><span data-de>Vertrauen & Anerkennung</span><span data-it>Fiducia e Riconoscimento</span><span data-pt>Confiança e Reconhecimento</span><span data-ru>Доверие и Признание</span><span data-zh>信赖与认可</span><span data-ja>信頼と評価</span><span data-tr>Güven ve Tanınırlık</span><span data-nl>Vertrouwen & Erkenning</span>
       </div>
       <h2 class="section-title display">
         <span data-ar>معترف به <em>عالمياً</em></span>
         <span data-en class="block">Numbers That <em>Speak</em></span>
+        <span data-fr class="block">Des Chiffres Qui <em>Parlent</em></span>
+        <span data-es class="block">Cifras Que <em>Hablan</em></span>
+        <span data-de class="block">Zahlen, Die <em>Sprechen</em></span>
+        <span data-it class="block">Numeri Che <em>Parlano</em></span>
+        <span data-pt class="block">Números Que <em>Falam</em></span>
+        <span data-ru class="block">Цифры, Которые <em>Говорят</em></span>
+        <span data-zh class="block">数字<em>说话</em></span>
+        <span data-ja class="block">数字が<em>物語る</em></span>
+        <span data-tr class="block">Konuşan <em>Rakamlar</em></span>
+        <span data-nl class="block">Cijfers Die <em>Spreken</em></span>
       </h2>
     </div>
     <div class="trust-stats reveal">
       <div class="trust-stat">
         <div class="trust-stat-num" id="ts1">2000+</div>
-        <div class="trust-stat-label"><span data-ar>ضيف سعيد</span><span data-en>HAPPY GUESTS</span></div>
+        <div class="trust-stat-label"><span data-ar>ضيف سعيد</span><span data-en>HAPPY GUESTS</span><span data-fr>CLIENTS RAVIS</span><span data-es>HUÉSPEDES FELICES</span><span data-de>ZUFRIEDENE GÄSTE</span><span data-it>OSPITI FELICI</span><span data-pt>HÓSPEDES SATISFEITOS</span><span data-ru>ДОВОЛЬНЫХ ГОСТЕЙ</span><span data-zh>满意宾客</span><span data-ja>満足したゲスト</span><span data-tr>MUTLU MİSAFİR</span><span data-nl>TEVREDEN GASTEN</span></div>
       </div>
       <div class="trust-stat">
         <div class="trust-stat-num">4.9★</div>
-        <div class="trust-stat-label"><span data-ar>تقييم جوجل</span><span data-en>GOOGLE RATING</span></div>
+        <div class="trust-stat-label"><span data-ar>تقييم جوجل</span><span data-en>GOOGLE RATING</span><span data-fr>NOTE GOOGLE</span><span data-es>VALORACIÓN GOOGLE</span><span data-de>GOOGLE-BEWERTUNG</span><span data-it>VALUTAZIONE GOOGLE</span><span data-pt>AVALIAÇÃO GOOGLE</span><span data-ru>РЕЙТИНГ GOOGLE</span><span data-zh>谷歌评分</span><span data-ja>Google評価</span><span data-tr>GOOGLE PUANI</span><span data-nl>GOOGLE BEOORDELING</span></div>
       </div>
       <div class="trust-stat">
         <div class="trust-stat-num">98%</div>
-        <div class="trust-stat-label"><span data-ar>معدل الرضا</span><span data-en>SATISFACTION</span></div>
+        <div class="trust-stat-label"><span data-ar>معدل الرضا</span><span data-en>SATISFACTION</span><span data-fr>SATISFACTION</span><span data-es>SATISFACCIÓN</span><span data-de>ZUFRIEDENHEIT</span><span data-it>SODDISFAZIONE</span><span data-pt>SATISFAÇÃO</span><span data-ru>УДОВЛЕТВОРЁННОСТЬ</span><span data-zh>满意度</span><span data-ja>満足度</span><span data-tr>MEMNUNİYET</span><span data-nl>TEVREDENHEID</span></div>
       </div>
       <div class="trust-stat">
         <div class="trust-stat-num">#1</div>
-        <div class="trust-stat-label"><span data-ar>في الغردقة</span><span data-en>IN HURGHADA</span></div>
+        <div class="trust-stat-label"><span data-ar>في الغردقة</span><span data-en>IN HURGHADA</span><span data-fr>À HURGHADA</span><span data-es>EN HURGHADA</span><span data-de>IN HURGHADA</span><span data-it>A HURGHADA</span><span data-pt>EM HURGHADA</span><span data-ru>В ХУРГАДЕ</span><span data-zh>赫尔格达第一</span><span data-ja>フルガダで</span><span data-tr>HURGHADA'DA</span><span data-nl>IN HURGHADA</span></div>
       </div>
     </div>
     <div class="press-logos reveal">
@@ -3822,10 +4055,30 @@
       <div class="section-tag" style="margin-left: auto; margin-right: auto;">
         <span data-ar>أسئلة شائعة</span>
         <span data-en>FAQ / 08</span>
+        <span data-fr>FAQ / 08</span>
+        <span data-es>FAQ / 08</span>
+        <span data-de>FAQ / 08</span>
+        <span data-it>FAQ / 08</span>
+        <span data-pt>FAQ / 08</span>
+        <span data-ru>FAQ / 08</span>
+        <span data-zh>FAQ / 08</span>
+        <span data-ja>FAQ / 08</span>
+        <span data-tr>FAQ / 08</span>
+        <span data-nl>FAQ / 08</span>
       </div>
       <h2 class="section-title display">
         <span data-ar>كل ما <em>تريد معرفته</em></span>
         <span data-en class="block">Everything <em>You Need</em></span>
+        <span data-fr class="block">Tout Ce Dont Vous <em>Avez Besoin</em></span>
+        <span data-es class="block">Todo Lo Que <em>Necesitas</em></span>
+        <span data-de class="block">Alles, Was Sie <em>Brauchen</em></span>
+        <span data-it class="block">Tutto Ciò Di Cui Hai <em>Bisogno</em></span>
+        <span data-pt class="block">Tudo O Que Você <em>Precisa</em></span>
+        <span data-ru class="block">Всё, Что Вам <em>Нужно</em></span>
+        <span data-zh class="block">您需要<em>了解的一切</em></span>
+        <span data-ja class="block">知りたい<em>すべて</em></span>
+        <span data-tr class="block">İhtiyacınız Olan Her <em>Şey</em></span>
+        <span data-nl class="block">Alles Wat U <em>Nodig Heeft</em></span>
       </h2>
     </div>
 
@@ -3833,78 +4086,148 @@
       <div class="faq-item">
         <div class="faq-question">
           <span class="faq-q-num">01</span>
-          <span class="faq-q-text"><span data-ar>كم سعة المركب؟</span><span data-en>What is the vessel's capacity?</span></span>
+          <span class="faq-q-text"><span data-ar>كم سعة المركب؟</span><span data-en>What is the vessel's capacity?</span><span data-fr>Quelle est la capacité du bateau ?</span><span data-es>¿Cuál es la capacidad de la embarcación?</span><span data-de>Wie viele Gäste passen auf das Schiff?</span><span data-it>Qual è la capienza dell'imbarcazione?</span><span data-pt>Qual é a capacidade da embarcação?</span><span data-ru>Какова вместимость судна?</span><span data-zh>游艇的容量是多少?</span><span data-ja>船の定員は?</span><span data-tr>Teknenin kapasitesi nedir?</span><span data-nl>Wat is de capaciteit van het schip?</span></span>
           <span class="plus">+</span>
         </div>
         <div class="faq-answer">
           <span data-ar>ADVENTOUR يستوعب حتى 150 ضيف على متن أربعة أدوار، مع توزيع مريح بين الصالات الداخلية والمساحات الخارجية.</span>
           <span data-en>ADVENTOUR accommodates up to 150 guests across four decks, with comfortable distribution between indoor lounges and outdoor spaces.</span>
+          <span data-fr>ADVENTOUR accueille jusqu'à 150 invités sur quatre ponts, avec une répartition confortable entre salons intérieurs et espaces extérieurs.</span>
+          <span data-es>ADVENTOUR acoge hasta 150 invitados en cuatro cubiertas, con una distribución cómoda entre salones interiores y espacios al aire libre.</span>
+          <span data-de>Die ADVENTOUR bietet Platz für bis zu 150 Gäste auf vier Decks, komfortabel verteilt zwischen Innenlounges und Außenbereichen.</span>
+          <span data-it>ADVENTOUR ospita fino a 150 persone su quattro ponti, con una distribuzione confortevole tra saloni interni e spazi esterni.</span>
+          <span data-pt>O ADVENTOUR acomoda até 150 convidados em quatro decks, com distribuição confortável entre salões internos e espaços externos.</span>
+          <span data-ru>ADVENTOUR вмещает до 150 гостей на четырёх палубах с комфортным распределением между внутренними салонами и открытыми зонами.</span>
+          <span data-zh>ADVENTOUR可容纳多达150位宾客,分布于四层甲板,室内休息区与室外空间布局舒适合理。</span>
+          <span data-ja>ADVENTOURは4つのデッキに最大150名を収容でき、室内ラウンジと屋外スペースにゆったりと配分されています。</span>
+          <span data-tr>ADVENTOUR, dört güvertede 150 misafire kadar ağırlayabilir; iç mekan salonları ve açık alanlar arasında konforlu bir dağılım sunar.</span>
+          <span data-nl>ADVENTOUR biedt plaats aan maximaal 150 gasten verdeeld over vier dekken, met een comfortabele indeling tussen binnenlounges en buitenruimtes.</span>
         </div>
       </div>
       <div class="faq-item">
         <div class="faq-question">
           <span class="faq-q-num">02</span>
-          <span class="faq-q-text"><span data-ar>ما هي مدد الرحلات المتاحة؟</span><span data-en>What durations do you offer?</span></span>
+          <span class="faq-q-text"><span data-ar>ما هي مدد الرحلات المتاحة؟</span><span data-en>What durations do you offer?</span><span data-fr>Quelles durées proposez-vous ?</span><span data-es>¿Qué duraciones ofrecen?</span><span data-de>Welche Dauern bieten Sie an?</span><span data-it>Quali durate offrite?</span><span data-pt>Quais durações vocês oferecem?</span><span data-ru>Какие варианты продолжительности вы предлагаете?</span><span data-zh>你们提供哪些时长选择?</span><span data-ja>どのようなツアー時間がありますか?</span><span data-tr>Hangi süre seçeneklerini sunuyorsunuz?</span><span data-nl>Welke tijdsduren bieden jullie aan?</span></span>
           <span class="plus">+</span>
         </div>
         <div class="faq-answer">
           <span data-ar>نوفر ثلاث مدد رئيسية: رحلة صباحية (4-5 ساعات)، رحلة يوم كامل (8 ساعات)، ورحلة غروب (3 ساعات).</span>
           <span data-en>Three main durations: morning (4-5h), full day (8h), and sunset (3h). Custom durations also available.</span>
+          <span data-fr>Trois durées principales : matinée (4-5h), journée complète (8h) et coucher de soleil (3h). Durées personnalisées également disponibles.</span>
+          <span data-es>Tres duraciones principales: mañana (4-5h), día completo (8h) y atardecer (3h). También disponibles duraciones personalizadas.</span>
+          <span data-de>Drei Hauptoptionen: Vormittag (4-5 Std.), Ganztagestour (8 Std.) und Sonnenuntergang (3 Std.). Individuelle Dauern ebenfalls möglich.</span>
+          <span data-it>Tre durate principali: mattina (4-5h), giornata intera (8h) e tramonto (3h). Disponibili anche durate personalizzate.</span>
+          <span data-pt>Três durações principais: manhã (4-5h), dia inteiro (8h) e pôr do sol (3h). Durações personalizadas também disponíveis.</span>
+          <span data-ru>Три основных варианта: утро (4-5 ч), полный день (8 ч) и закат (3 ч). Также доступна индивидуальная продолжительность.</span>
+          <span data-zh>三种主要时长:上午航程(4-5小时)、全天航程(8小时)和日落航程(3小时)。也可定制专属时长。</span>
+          <span data-ja>主に3つの時間帯があります:午前(4~5時間)、終日(8時間)、サンセット(3時間)。カスタム時間にも対応可能です。</span>
+          <span data-tr>Üç ana süre seçeneği: sabah turu (4-5 saat), tam gün (8 saat) ve gün batımı (3 saat). Özel süreler de mevcuttur.</span>
+          <span data-nl>Drie hoofdopties: ochtend (4-5 uur), volledige dag (8 uur) en zonsondergang (3 uur). Aangepaste tijdsduren zijn ook mogelijk.</span>
         </div>
       </div>
       <div class="faq-item">
         <div class="faq-question">
           <span class="faq-q-num">03</span>
-          <span class="faq-q-text"><span data-ar>هل الأكل والمشروبات متضمنة؟</span><span data-en>Are food & drinks included?</span></span>
+          <span class="faq-q-text"><span data-ar>هل الأكل والمشروبات متضمنة؟</span><span data-en>Are food & drinks included?</span><span data-fr>Les repas et boissons sont-ils inclus ?</span><span data-es>¿La comida y las bebidas están incluidas?</span><span data-de>Sind Speisen und Getränke inbegriffen?</span><span data-it>Cibo e bevande sono inclusi?</span><span data-pt>Comida e bebidas estão incluídas?</span><span data-ru>Питание и напитки включены?</span><span data-zh>是否包含餐饮?</span><span data-ja>食事とドリンクは含まれますか?</span><span data-tr>Yiyecek ve içecekler dahil mi?</span><span data-nl>Zijn eten en drinken inbegrepen?</span></span>
           <span class="plus">+</span>
         </div>
         <div class="faq-answer">
           <span data-ar>نقدم باقات متنوعة تشمل وجبات طازجة من مطبخنا الكامل ومشروبات من البار.</span>
           <span data-en>Various packages including fresh meals from our kitchen and drinks from our bar.</span>
+          <span data-fr>Différentes formules incluant des repas frais préparés par notre cuisine et des boissons de notre bar.</span>
+          <span data-es>Diversos paquetes que incluyen comidas frescas de nuestra cocina y bebidas de nuestro bar.</span>
+          <span data-de>Verschiedene Pakete mit frischen Gerichten aus unserer Küche und Getränken von unserer Bar.</span>
+          <span data-it>Diversi pacchetti che includono pasti freschi dalla nostra cucina e bevande dal nostro bar.</span>
+          <span data-pt>Diversos pacotes incluindo refeições frescas da nossa cozinha e bebidas do nosso bar.</span>
+          <span data-ru>Различные пакеты, включающие свежие блюда из нашей кухни и напитки из нашего бара.</span>
+          <span data-zh>多种套餐可选,包含厨房现做的新鲜餐点及酒吧提供的饮品。</span>
+          <span data-ja>各種パッケージをご用意しており、キッチンで作る新鮮な食事とバーのドリンクが含まれます。</span>
+          <span data-tr>Mutfağımızdan taze yemekler ve barımızdan içecekler içeren çeşitli paketler sunulmaktadır.</span>
+          <span data-nl>Diverse pakketten met verse maaltijden uit onze keuken en drankjes van onze bar.</span>
         </div>
       </div>
       <div class="faq-item">
         <div class="faq-question">
           <span class="faq-q-num">04</span>
-          <span class="faq-q-text"><span data-ar>هل يمكنني تأجير المركب كاملاً؟</span><span data-en>Can I charter the entire vessel?</span></span>
+          <span class="faq-q-text"><span data-ar>هل يمكنني تأجير المركب كاملاً؟</span><span data-en>Can I charter the entire vessel?</span><span data-fr>Puis-je privatiser tout le bateau ?</span><span data-es>¿Puedo alquilar la embarcación completa?</span><span data-de>Kann ich das gesamte Schiff mieten?</span><span data-it>Posso noleggiare l'intera imbarcazione?</span><span data-pt>Posso alugar a embarcação inteira?</span><span data-ru>Могу ли я арендовать судно полностью?</span><span data-zh>我可以包下整艘游艇吗?</span><span data-ja>船を貸し切ることはできますか?</span><span data-tr>Tekneyi tamamen kiralayabilir miyim?</span><span data-nl>Kan ik het hele schip afhuren?</span></span>
           <span class="plus">+</span>
         </div>
         <div class="faq-answer">
           <span data-ar>نعم، يمكن تأجير المركب بالكامل للزفاف، الفعاليات، أو الحفلات الخاصة.</span>
           <span data-en>Yes, full charters available for weddings, corporate events, or private parties.</span>
+          <span data-fr>Oui, la privatisation complète est disponible pour les mariages, événements d'entreprise ou fêtes privées.</span>
+          <span data-es>Sí, disponemos de alquiler exclusivo para bodas, eventos corporativos o fiestas privadas.</span>
+          <span data-de>Ja, Komplettcharter sind für Hochzeiten, Firmenveranstaltungen oder private Feiern verfügbar.</span>
+          <span data-it>Sì, è disponibile il noleggio esclusivo per matrimoni, eventi aziendali o feste private.</span>
+          <span data-pt>Sim, fretamentos completos disponíveis para casamentos, eventos corporativos ou festas privadas.</span>
+          <span data-ru>Да, доступна аренда всего судна для свадеб, корпоративных мероприятий или частных вечеринок.</span>
+          <span data-zh>可以,我们提供整船包租服务,适用于婚礼、企业活动或私人派对。</span>
+          <span data-ja>はい、結婚式、企業イベント、プライベートパーティー向けに貸切プランをご用意しています。</span>
+          <span data-tr>Evet, düğünler, kurumsal etkinlikler veya özel partiler için tam kiralama seçenekleri mevcuttur.</span>
+          <span data-nl>Ja, volledige afhuur is mogelijk voor bruiloften, bedrijfsevenementen of privéfeesten.</span>
         </div>
       </div>
       <div class="faq-item">
         <div class="faq-question">
           <span class="faq-q-num">05</span>
-          <span class="faq-q-text"><span data-ar>من أين تنطلق الرحلات؟</span><span data-en>Where do trips depart from?</span></span>
+          <span class="faq-q-text"><span data-ar>من أين تنطلق الرحلات؟</span><span data-en>Where do trips depart from?</span><span data-fr>D'où partent les excursions ?</span><span data-es>¿Desde dónde parten los viajes?</span><span data-de>Von wo starten die Touren?</span><span data-it>Da dove partono le escursioni?</span><span data-pt>De onde partem os passeios?</span><span data-ru>Откуда отправляются рейсы?</span><span data-zh>行程从哪里出发?</span><span data-ja>出発地はどこですか?</span><span data-tr>Turlar nereden kalkıyor?</span><span data-nl>Vanaf waar vertrekken de tochten?</span></span>
           <span class="plus">+</span>
         </div>
         <div class="faq-answer">
           <span data-ar>الرحلات تنطلق من مرسى الغردقة. سنرسل العنوان الدقيق عند تأكيد الحجز.</span>
           <span data-en>Trips depart from Hurghada marina. Exact address sent upon confirmation.</span>
+          <span data-fr>Les excursions partent de la marina de Hurghada. L'adresse exacte est envoyée après confirmation.</span>
+          <span data-es>Los viajes parten desde la marina de Hurghada. La dirección exacta se envía al confirmar la reserva.</span>
+          <span data-de>Die Touren starten vom Hurghada-Yachthafen. Die genaue Adresse erhalten Sie nach der Bestätigung.</span>
+          <span data-it>Le escursioni partono dalla marina di Hurghada. L'indirizzo esatto viene inviato dopo la conferma.</span>
+          <span data-pt>Os passeios partem da marina de Hurghada. O endereço exato é enviado após a confirmação.</span>
+          <span data-ru>Рейсы отправляются из марины Хургады. Точный адрес высылается после подтверждения бронирования.</span>
+          <span data-zh>行程从赫尔格达码头出发。确认预订后将发送准确地址。</span>
+          <span data-ja>フルガダ・マリーナから出発します。正確な住所は予約確定後にお送りします。</span>
+          <span data-tr>Turlar Hurghada marinasından kalkmaktadır. Kesin adres, rezervasyon onayı sonrasında gönderilir.</span>
+          <span data-nl>De tochten vertrekken vanaf de jachthaven van Hurghada. Het exacte adres wordt na bevestiging verstuurd.</span>
         </div>
       </div>
       <div class="faq-item">
         <div class="faq-question">
           <span class="faq-q-num">06</span>
-          <span class="faq-q-text"><span data-ar>هل الأمان مضمون؟</span><span data-en>Is safety guaranteed?</span></span>
+          <span class="faq-q-text"><span data-ar>هل الأمان مضمون؟</span><span data-en>Is safety guaranteed?</span><span data-fr>La sécurité est-elle garantie ?</span><span data-es>¿Está garantizada la seguridad?</span><span data-de>Ist die Sicherheit gewährleistet?</span><span data-it>La sicurezza è garantita?</span><span data-pt>A segurança é garantida?</span><span data-ru>Гарантируется ли безопасность?</span><span data-zh>安全有保障吗?</span><span data-ja>安全性は保証されていますか?</span><span data-tr>Güvenlik garanti ediliyor mu?</span><span data-nl>Is de veiligheid gegarandeerd?</span></span>
           <span class="plus">+</span>
         </div>
         <div class="faq-answer">
-          <span data-ar>المركب مرخص بالكامل ومجهز Ø¨كل معدات الأمان المعتمدة. الطاقم مدرب على إدارة الطوارئ.</span>
+          <span data-ar>المركب مرخص بالكامل ومجهز بكل معدات الأمان المعتمدة. الطاقم مدرب على إدارة الطوارئ.</span>
           <span data-en>Fully licensed with certified safety equipment. Crew trained in emergency management.</span>
+          <span data-fr>Entièrement agréé, avec un équipement de sécurité certifié. Équipage formé à la gestion des urgences.</span>
+          <span data-es>Totalmente autorizado, con equipo de seguridad certificado. Tripulación capacitada en gestión de emergencias.</span>
+          <span data-de>Voll lizenziert mit zertifizierter Sicherheitsausrüstung. Die Crew ist im Notfallmanagement geschult.</span>
+          <span data-it>Completamente autorizzato, con dotazioni di sicurezza certificate. Equipaggio addestrato nella gestione delle emergenze.</span>
+          <span data-pt>Totalmente licenciado, com equipamentos de segurança certificados. Tripulação treinada em gestão de emergências.</span>
+          <span data-ru>Полностью лицензировано, с сертифицированным спасательным оборудованием. Экипаж обучен действиям в чрезвычайных ситуациях.</span>
+          <span data-zh>持有完整执照,配备认证安全设备,船员均接受应急管理培训。</span>
+          <span data-ja>完全な認可を受け、認証済みの安全機器を備えています。クルーは緊急対応の訓練を受けています。</span>
+          <span data-tr>Tamamen lisanslı olup sertifikalı güvenlik ekipmanlarıyla donatılmıştır. Mürettebat acil durum yönetimi konusunda eğitimlidir.</span>
+          <span data-nl>Volledig gelicentieerd met gecertificeerde veiligheidsuitrusting. De bemanning is getraind in noodbeheer.</span>
         </div>
       </div>
       <div class="faq-item">
         <div class="faq-question">
           <span class="faq-q-num">07</span>
-          <span class="faq-q-text"><span data-ar>كيف أحصل على عرض سعر؟</span><span data-en>How do I get a quote?</span></span>
+          <span class="faq-q-text"><span data-ar>كيف أحصل على عرض سعر؟</span><span data-en>How do I get a quote?</span><span data-fr>Comment obtenir un devis ?</span><span data-es>¿Cómo obtengo un presupuesto?</span><span data-de>Wie erhalte ich ein Angebot?</span><span data-it>Come posso ricevere un preventivo?</span><span data-pt>Como faço para receber um orçamento?</span><span data-ru>Как получить расчёт стоимости?</span><span data-zh>如何获取报价?</span><span data-ja>見積もりはどのように取得できますか?</span><span data-tr>Nasıl teklif alabilirim?</span><span data-nl>Hoe kan ik een offerte krijgen?</span></span>
           <span class="plus">+</span>
         </div>
         <div class="faq-answer">
           <span data-ar>املأ النموذج أدناه أو تواصل معنا عبر الواتساب. نرد خلال 24 ساعة بعرض مخصص.</span>
           <span data-en>Fill out the form below or WhatsApp us. We respond within 24 hours with a custom quote.</span>
+          <span data-fr>Remplissez le formulaire ci-dessous ou contactez-nous sur WhatsApp. Nous répondons sous 24 heures avec un devis personnalisé.</span>
+          <span data-es>Complete el formulario a continuación o escríbanos por WhatsApp. Respondemos en 24 horas con un presupuesto personalizado.</span>
+          <span data-de>Füllen Sie das untenstehende Formular aus oder schreiben Sie uns per WhatsApp. Wir antworten innerhalb von 24 Stunden mit einem individuellen Angebot.</span>
+          <span data-it>Compila il modulo qui sotto oppure scrivici su WhatsApp. Rispondiamo entro 24 ore con un preventivo personalizzato.</span>
+          <span data-pt>Preencha o formulário abaixo ou fale conosco pelo WhatsApp. Respondemos em até 24 horas com um orçamento personalizado.</span>
+          <span data-ru>Заполните форму ниже или напишите нам в WhatsApp. Мы ответим в течение 24 часов с индивидуальным предложением.</span>
+          <span data-zh>请填写下方表格,或通过WhatsApp联系我们。我们将在24小时内回复专属报价。</span>
+          <span data-ja>以下のフォームにご記入いただくか、WhatsAppでご連絡ください。24時間以内にお見積りをお送りします。</span>
+          <span data-tr>Aşağıdaki formu doldurun veya WhatsApp üzerinden bize ulaşın. 24 saat içinde size özel bir teklifle dönüş yapıyoruz.</span>
+          <span data-nl>Vul het onderstaande formulier in of neem contact op via WhatsApp. Wij reageren binnen 24 uur met een offerte op maat.</span>
         </div>
       </div>
     </div>
@@ -3920,14 +4243,44 @@
         <div class="section-tag">
           <span data-ar>احجز رحلتك</span>
           <span data-en>Reserve / 09</span>
+          <span data-fr>Réserver / 09</span>
+          <span data-es>Reservar / 09</span>
+          <span data-de>Reservieren / 09</span>
+          <span data-it>Prenota / 09</span>
+          <span data-pt>Reservar / 09</span>
+          <span data-ru>Бронирование / 09</span>
+          <span data-zh>预订 / 09</span>
+          <span data-ja>ご予約 / 09</span>
+          <span data-tr>Rezervasyon / 09</span>
+          <span data-nl>Reserveren / 09</span>
         </div>
         <h2 class="section-title display">
           <span data-ar>ابدأ <em>رحلتك</em></span>
           <span data-en class="block">Begin Your <em>Voyage</em></span>
+          <span data-fr class="block">Commencez Votre <em>Voyage</em></span>
+          <span data-es class="block">Comience Su <em>Viaje</em></span>
+          <span data-de class="block">Beginnen Sie Ihre <em>Reise</em></span>
+          <span data-it class="block">Inizia Il Tuo <em>Viaggio</em></span>
+          <span data-pt class="block">Comece Sua <em>Viagem</em></span>
+          <span data-ru class="block">Начните Своё <em>Путешествие</em></span>
+          <span data-zh class="block">开启您的<em>航程</em></span>
+          <span data-ja class="block">あなたの<em>航海</em>を始めよう</span>
+          <span data-tr class="block"><em>Yolculuğunuza</em> Başlayın</span>
+          <span data-nl class="block">Begin Uw <em>Reis</em></span>
         </h2>
         <p style="color: var(--gray); max-width: 480px; line-height: 1.8; margin-top: 24px;">
           <span data-ar>تواصل معنا لحجز تجربتك المخصصة. فريقنا متاح على مدار الساعة لتحويل أفكارك إلى واقع لا يُنسى على البحر الأحمر.</span>
           <span data-en>Contact us to reserve your tailored experience. Our team is available around the clock on the Red Sea.</span>
+          <span data-fr>Contactez-nous pour réserver votre expérience sur mesure. Notre équipe est disponible 24h/24 sur la mer Rouge.</span>
+          <span data-es>Contáctenos para reservar su experiencia a medida. Nuestro equipo está disponible las 24 horas en el Mar Rojo.</span>
+          <span data-de>Kontaktieren Sie uns, um Ihr maßgeschneidertes Erlebnis zu buchen. Unser Team ist rund um die Uhr am Roten Meer für Sie da.</span>
+          <span data-it>Contattaci per prenotare la tua esperienza su misura. Il nostro team è disponibile 24 ore su 24 sul Mar Rosso.</span>
+          <span data-pt>Entre em contato para reservar sua experiência personalizada. Nossa equipe está disponível 24 horas no Mar Vermelho.</span>
+          <span data-ru>Свяжитесь с нами, чтобы забронировать индивидуальный отдых. Наша команда доступна круглосуточно на Красном море.</span>
+          <span data-zh>联系我们,预订您的专属体验。我们的团队全天候在红海为您服务。</span>
+          <span data-ja>お客様だけの特別な体験をご予約いただくには、ぜひお問い合わせください。私たちのチームは紅海にて24時間対応しております。</span>
+          <span data-tr>Size özel deneyiminizi ayırtmak için bizimle iletişime geçin. Ekibimiz Kızıldeniz'de günün her saati hizmetinizdedir.</span>
+          <span data-nl>Neem contact met ons op om uw op maat gemaakte ervaring te boeken. Ons team staat dag en nacht voor u klaar aan de Rode Zee.</span>
         </p>
 
       </div>
@@ -3939,67 +4292,87 @@
         <span class="corner corner-br"></span>
         <div class="form-row">
           <div class="form-group">
-            <label><span data-ar>الاسم *</span><span data-en>Name *</span></label>
+            <label><span data-ar>الاسم *</span><span data-en>Name *</span><span data-fr>Nom *</span><span data-es>Nombre *</span><span data-de>Name *</span><span data-it>Nome *</span><span data-pt>Nome *</span><span data-ru>Имя *</span><span data-zh>姓名 *</span><span data-ja>お名前 *</span><span data-tr>Ad Soyad *</span><span data-nl>Naam *</span></label>
             <input type="text" name="name" required />
           </div>
           <div class="form-group">
-            <label><span data-ar>رقم الهاتف *</span><span data-en>Phone *</span></label>
+            <label><span data-ar>رقم الهاتف *</span><span data-en>Phone *</span><span data-fr>Téléphone *</span><span data-es>Teléfono *</span><span data-de>Telefon *</span><span data-it>Telefono *</span><span data-pt>Telefone *</span><span data-ru>Телефон *</span><span data-zh>电话 *</span><span data-ja>電話番号 *</span><span data-tr>Telefon *</span><span data-nl>Telefoon *</span></label>
             <input type="tel" name="phone" required />
           </div>
         </div>
         <div class="form-group">
-          <label><span data-ar>البريد الإلكتروني</span><span data-en>Email</span></label>
+          <label><span data-ar>البريد الإلكتروني</span><span data-en>Email</span><span data-fr>E-mail</span><span data-es>Correo electrónico</span><span data-de>E-Mail</span><span data-it>Email</span><span data-pt>E-mail</span><span data-ru>Эл. почта</span><span data-zh>电子邮箱</span><span data-ja>メールアドレス</span><span data-tr>E-posta</span><span data-nl>E-mail</span></label>
           <input type="email" name="email" />
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label><span data-ar>نوع الخدمة *</span><span data-en>Service *</span></label>
+            <label><span data-ar>نوع الخدمة *</span><span data-en>Service *</span><span data-fr>Service *</span><span data-es>Servicio *</span><span data-de>Leistung *</span><span data-it>Servizio *</span><span data-pt>Serviço *</span><span data-ru>Услуга *</span><span data-zh>服务类型 *</span><span data-ja>サービス *</span><span data-tr>Hizmet *</span><span data-nl>Dienst *</span></label>
             <select name="service" required>
               <option value="">—</option>
-              <option><span data-ar>رحلة بحرية</span></option>
-              <option><span data-ar>عيد ميلاد</span></option>
-              <option><span data-ar>حفلة خاصة</span></option>
-              <option><span data-ar>غروب الشمس</span></option>
-              <option><span data-ar>فعالية شركة</span></option>
-              <option><span data-ar>زفاف</span></option>
-              <option><span data-ar>إيجار كامل</span></option>
+              <option data-ar="رحلة بحرية" data-en="Sea Trip" data-fr="Excursion en Mer" data-es="Excursión Marítima" data-de="Seeausflug" data-it="Escursione in Mare" data-pt="Passeio de Barco" data-ru="Морская Прогулка" data-zh="海上游" data-ja="シートリップ" data-tr="Deniz Turu" data-nl="Zeetocht">رحلة بحرية</option>
+              <option data-ar="عيد ميلاد" data-en="Birthday" data-fr="Anniversaire" data-es="Cumpleaños" data-de="Geburtstag" data-it="Compleanno" data-pt="Aniversário" data-ru="День Рождения" data-zh="生日" data-ja="誕生日" data-tr="Doğum Günü" data-nl="Verjaardag">عيد ميلاد</option>
+              <option data-ar="حفلة خاصة" data-en="Private Party" data-fr="Soirée Privée" data-es="Fiesta Privada" data-de="Private Feier" data-it="Festa Privata" data-pt="Festa Privada" data-ru="Частная Вечеринка" data-zh="私人派对" data-ja="プライベートパーティー" data-tr="Özel Parti" data-nl="Privéfeest">حفلة خاصة</option>
+              <option data-ar="غروب الشمس" data-en="Sunset" data-fr="Coucher de Soleil" data-es="Atardecer" data-de="Sonnenuntergang" data-it="Tramonto" data-pt="Pôr do Sol" data-ru="Закат" data-zh="日落" data-ja="サンセット" data-tr="Gün Batımı" data-nl="Zonsondergang">غروب الشمس</option>
+              <option data-ar="فعالية شركة" data-en="Corporate Event" data-fr="Événement d'Entreprise" data-es="Evento Corporativo" data-de="Firmenveranstaltung" data-it="Evento Aziendale" data-pt="Evento Corporativo" data-ru="Корпоративное Мероприятие" data-zh="企业活动" data-ja="企業イベント" data-tr="Kurumsal Etkinlik" data-nl="Bedrijfsevenement">فعالية شركة</option>
+              <option data-ar="زفاف" data-en="Wedding" data-fr="Mariage" data-es="Boda" data-de="Hochzeit" data-it="Matrimonio" data-pt="Casamento" data-ru="Свадьба" data-zh="婚礼" data-ja="結婚式" data-tr="Düğün" data-nl="Bruiloft">زفاف</option>
+              <option data-ar="إيجار كامل" data-en="Full Charter" data-fr="Location Complète" data-es="Alquiler Completo" data-de="Komplettcharter" data-it="Noleggio Completo" data-pt="Fretamento Completo" data-ru="Полная Аренда" data-zh="整船包租" data-ja="完全チャーター" data-tr="Tam Kiralama" data-nl="Volledige Afhuur">إيجار كامل</option>
             </select>
           </div>
           <div class="form-group">
-            <label><span data-ar>المدة</span><span data-en>Duration</span></label>
+            <label><span data-ar>المدة</span><span data-en>Duration</span><span data-fr>Durée</span><span data-es>Duración</span><span data-de>Dauer</span><span data-it>Durata</span><span data-pt>Duração</span><span data-ru>Продолжительность</span><span data-zh>时长</span><span data-ja>所要時間</span><span data-tr>Süre</span><span data-nl>Duur</span></label>
             <select name="duration">
               <option value="">—</option>
-              <option><span data-ar>صباحية (4-5 ساعات)</span></option>
-              <option><span data-ar>يوم كامل (8 ساعات)</span></option>
-              <option><span data-ar>غروب (3 ساعات)</span></option>
-              <option><span data-ar>مخصص</span></option>
+              <option data-ar="صباحية (4-5 ساعات)" data-en="Morning (4-5h)" data-fr="Matinée (4-5h)" data-es="Mañana (4-5h)" data-de="Vormittag (4-5 Std.)" data-it="Mattina (4-5h)" data-pt="Manhã (4-5h)" data-ru="Утро (4-5 ч)" data-zh="上午 (4-5小时)" data-ja="午前 (4~5時間)" data-tr="Sabah (4-5 saat)" data-nl="Ochtend (4-5 uur)">صباحية (4-5 ساعات)</option>
+              <option data-ar="يوم كامل (8 ساعات)" data-en="Full Day (8h)" data-fr="Journée Complète (8h)" data-es="Día Completo (8h)" data-de="Ganztagestour (8 Std.)" data-it="Giornata Intera (8h)" data-pt="Dia Inteiro (8h)" data-ru="Полный День (8 ч)" data-zh="全天 (8小时)" data-ja="終日 (8時間)" data-tr="Tam Gün (8 saat)" data-nl="Volledige Dag (8 uur)">يوم كامل (8 ساعات)</option>
+              <option data-ar="غروب (3 ساعات)" data-en="Sunset (3h)" data-fr="Coucher de Soleil (3h)" data-es="Atardecer (3h)" data-de="Sonnenuntergang (3 Std.)" data-it="Tramonto (3h)" data-pt="Pôr do Sol (3h)" data-ru="Закат (3 ч)" data-zh="日落 (3小时)" data-ja="サンセット (3時間)" data-tr="Gün Batımı (3 saat)" data-nl="Zonsondergang (3 uur)">غروب (3 ساعات)</option>
+              <option data-ar="مخصص" data-en="Custom" data-fr="Personnalisé" data-es="Personalizado" data-de="Individuell" data-it="Personalizzato" data-pt="Personalizado" data-ru="Индивидуально" data-zh="定制" data-ja="カスタム" data-tr="Özel" data-nl="Aangepast">مخصص</option>
             </select>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label><span data-ar>التاريخ</span><span data-en>Date</span></label>
+            <label><span data-ar>التاريخ</span><span data-en>Date</span><span data-fr>Date</span><span data-es>Fecha</span><span data-de>Datum</span><span data-it>Data</span><span data-pt>Data</span><span data-ru>Дата</span><span data-zh>日期</span><span data-ja>日付</span><span data-tr>Tarih</span><span data-nl>Datum</span></label>
             <input type="text" name="date" id="dateInput" readonly placeholder="—" style="cursor:pointer;" />
           </div>
           <div class="form-group">
-            <label><span data-ar>عدد الضيوف</span><span data-en>Guests</span></label>
+            <label><span data-ar>عدد الضيوف</span><span data-en>Guests</span><span data-fr>Invités</span><span data-es>Invitados</span><span data-de>Gäste</span><span data-it>Ospiti</span><span data-pt>Convidados</span><span data-ru>Гостей</span><span data-zh>宾客人数</span><span data-ja>人数</span><span data-tr>Misafir Sayısı</span><span data-nl>Gasten</span></label>
             <input type="number" name="guests" min="1" max="150" />
           </div>
         </div>
         <div class="form-group">
-          <label><span data-ar>تفاصيل إضافية</span><span data-en>Notes</span></label>
+          <label><span data-ar>تفاصيل إضافية</span><span data-en>Notes</span><span data-fr>Remarques</span><span data-es>Notas</span><span data-de>Anmerkungen</span><span data-it>Note</span><span data-pt>Observações</span><span data-ru>Примечания</span><span data-zh>备注</span><span data-ja>備考</span><span data-tr>Notlar</span><span data-nl>Opmerkingen</span></label>
           <textarea name="notes" rows="3"></textarea>
         </div>
         <button type="submit" class="btn btn-primary form-submit">
           <span data-ar>إرسال الطلب</span>
           <span data-en>Submit Request</span>
+          <span data-fr>Envoyer la Demande</span>
+          <span data-es>Enviar Solicitud</span>
+          <span data-de>Anfrage Senden</span>
+          <span data-it>Invia Richiesta</span>
+          <span data-pt>Enviar Solicitação</span>
+          <span data-ru>Отправить Запрос</span>
+          <span data-zh>提交请求</span>
+          <span data-ja>リクエストを送信</span>
+          <span data-tr>Talebi Gönder</span>
+          <span data-nl>Verzoek Versturen</span>
           <span>→</span>
         </button>
-        <div class="form-or"><span data-ar>أو</span><span data-en>OR</span></div>
+        <div class="form-or"><span data-ar>أو</span><span data-en>OR</span><span data-fr>OU</span><span data-es>O</span><span data-de>ODER</span><span data-it>O</span><span data-pt>OU</span><span data-ru>ИЛИ</span><span data-zh>或</span><span data-ja>または</span><span data-tr>VEYA</span><span data-nl>OF</span></div>
         <a href="https://wa.me/201018189630?text=Hi%20ADVENTOUR" class="btn btn-wa" target="_blank" style="width: 100%; justify-content: center;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2-.2.3-.8.9-1 1.1-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1-1.1 2.5s1.1 3 1.3 3.2c.2.2 2.2 3.3 5.3 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3z"/></svg>
           <span data-ar>احجز عبر واتساب</span>
           <span data-en>Book via WhatsApp</span>
+          <span data-fr>Réserver via WhatsApp</span>
+          <span data-es>Reservar por WhatsApp</span>
+          <span data-de>Über WhatsApp Buchen</span>
+          <span data-it>Prenota su WhatsApp</span>
+          <span data-pt>Reservar via WhatsApp</span>
+          <span data-ru>Забронировать через WhatsApp</span>
+          <span data-zh>通过WhatsApp预订</span>
+          <span data-ja>WhatsAppで予約</span>
+          <span data-tr>WhatsApp ile Rezervasyon</span>
+          <span data-nl>Boeken via WhatsApp</span>
         </a>
       </form>
     </div>
@@ -4014,64 +4387,64 @@
     <div class="footer-col">
       <div class="footer-logo">ADVENTOUR</div>
       <p class="footer-tagline">
-        <span data-ar>كاتاماران فاخر Ø¨أربعة أدوار. رحلات وحفلات ومناسبات لا تُنسى في الغردقة، البحر الأحمر.</span>
-        <span data-en>A luxury four-deck catamaran. Unforgettable trips, parties, and events in Hurghada, Red Sea.</span>
+        <span data-ar>كاتاماران فاخر بأربعة أدوار. رحلات وحفلات ومناسبات لا تُنسى في الغردقة، البحر الأحمر.</span>
+        <span data-en>A luxury four-deck catamaran. Unforgettable trips, parties, and events in Hurghada, Red Sea.</span><span data-fr>Un catamaran de luxe à quatre ponts. Voyages, fêtes et événements inoubliables à Hurghada, mer Rouge.</span><span data-es>Un catamarán de lujo de cuatro cubiertas. Viajes, fiestas y eventos inolvidables en Hurghada, Mar Rojo.</span><span data-de>Ein luxuriöser Katamaran mit vier Decks. Unvergessliche Ausflüge, Partys und Veranstaltungen in Hurghada, Rotes Meer.</span><span data-it>Un catamarano di lusso a quattro ponti. Viaggi, feste ed eventi indimenticabili a Hurghada, Mar Rosso.</span><span data-pt>Um catamarã de luxo com quatro decks. Viagens, festas e eventos inesquecíveis em Hurghada, Mar Vermelho.</span><span data-ru>Роскошный катамаран с четырьмя палубами. Незабываемые поездки, вечеринки и мероприятия в Хургаде, Красное море.</span><span data-zh>豪华四层双体游艇，在红海胡尔加达享受难忘的旅程、派对与活动。</span><span data-ja>4デッキの豪華カタマラン。エジプト・ハルガダ、紅海で忘れられない旅、パーティー、イベントを。</span><span data-tr>Dört güverteli lüks bir katamaran. Hurghada, Kızıldeniz'de unutulmaz geziler, partiler ve etkinlikler.</span><span data-nl>Een luxe catamaran met vier dekken. Onvergetelijke tochten, feesten en evenementen in Hurghada, Rode Zee.</span>
       </p>
       <div class="footer-actions">
         <a href="#contact" class="btn btn-primary">
-          <span data-ar>احجز الرحلة</span><span data-en>Book the Trip</span>
+          <span data-ar>احجز الرحلة</span><span data-en>Book the Trip</span><span data-fr>Réserver le Voyage</span><span data-es>Reservar el Viaje</span><span data-de>Reise Buchen</span><span data-it>Prenota il Viaggio</span><span data-pt>Reservar a Viagem</span><span data-ru>Забронировать Поездку</span><span data-zh>预订行程</span><span data-ja>旅を予約する</span><span data-tr>Geziyi Rezerve Et</span><span data-nl>Boek de Tocht</span>
           <span>→</span>
         </a>
         <a href="https://wa.me/201018189630" class="btn btn-wa" target="_blank">
-          <span data-ar>واتساب مباشر</span><span data-en>WhatsApp</span>
+          <span data-ar>واتساب مباشر</span><span data-en>WhatsApp</span><span data-fr>WhatsApp</span><span data-es>WhatsApp</span><span data-de>WhatsApp</span><span data-it>WhatsApp</span><span data-pt>WhatsApp</span><span data-ru>WhatsApp</span><span data-zh>WhatsApp</span><span data-ja>WhatsApp</span><span data-tr>WhatsApp</span><span data-nl>WhatsApp</span>
         </a>
       </div>
       <div class="footer-chip-row">
-        <span class="footer-chip"><span data-ar>غروب</span><span data-en>Sunset</span></span>
-        <span class="footer-chip"><span data-ar>حفلات</span><span data-en>Parties</span></span>
-        <span class="footer-chip"><span data-ar>رحلات</span><span data-en>Cruises</span></span>
-        <span class="footer-chip"><span data-ar>زفاف</span><span data-en>Weddings</span></span>
+        <span class="footer-chip"><span data-ar>غروب</span><span data-en>Sunset</span><span data-fr>Coucher de Soleil</span><span data-es>Atardecer</span><span data-de>Sonnenuntergang</span><span data-it>Tramonto</span><span data-pt>Pôr do Sol</span><span data-ru>Закат</span><span data-zh>日落</span><span data-ja>サンセット</span><span data-tr>Gün Batımı</span><span data-nl>Zonsondergang</span></span>
+        <span class="footer-chip"><span data-ar>حفلات</span><span data-en>Parties</span><span data-fr>Fêtes</span><span data-es>Fiestas</span><span data-de>Partys</span><span data-it>Feste</span><span data-pt>Festas</span><span data-ru>Вечеринки</span><span data-zh>派对</span><span data-ja>パーティー</span><span data-tr>Partiler</span><span data-nl>Feesten</span></span>
+        <span class="footer-chip"><span data-ar>رحلات</span><span data-en>Cruises</span><span data-fr>Croisières</span><span data-es>Cruceros</span><span data-de>Kreuzfahrten</span><span data-it>Crociere</span><span data-pt>Cruzeiros</span><span data-ru>Круизы</span><span data-zh>巡游</span><span data-ja>クルーズ</span><span data-tr>Turlar</span><span data-nl>Cruises</span></span>
+        <span class="footer-chip"><span data-ar>زفاف</span><span data-en>Weddings</span><span data-fr>Mariages</span><span data-es>Bodas</span><span data-de>Hochzeiten</span><span data-it>Matrimoni</span><span data-pt>Casamentos</span><span data-ru>Свадьбы</span><span data-zh>婚礼</span><span data-ja>ウェディング</span><span data-tr>Düğünler</span><span data-nl>Bruiloften</span></span>
       </div>
     </div>
     <div class="footer-col">
-      <h5><span data-ar>// روابط</span><span data-en>// Links</span></h5>
+      <h5><span data-ar>// روابط</span><span data-en>// Links</span><span data-fr>// Liens</span><span data-es>// Enlaces</span><span data-de>// Links</span><span data-it>// Link</span><span data-pt>// Links</span><span data-ru>// Ссылки</span><span data-zh>// 链接</span><span data-ja>// リンク</span><span data-tr>// Bağlantılar</span><span data-nl>// Links</span></h5>
       <ul>
-        <li><a href="#about"><span data-ar>عن المركب</span><span data-en>About</span></a></li>
-        <li><a href="#experiences"><span data-ar>الخدمات</span><span data-en>Services</span></a></li>
-        <li><a href="#gallery"><span data-ar>المعرض</span><span data-en>Gallery</span></a></li>
-        <li><a href="#faq"><span data-ar>أسئلة</span><span data-en>FAQ</span></a></li>
+        <li><a href="#about"><span data-ar>عن المركب</span><span data-en>About</span><span data-fr>À Propos</span><span data-es>Sobre Nosotros</span><span data-de>Über Uns</span><span data-it>Chi Siamo</span><span data-pt>Sobre</span><span data-ru>О Нас</span><span data-zh>关于</span><span data-ja>概要</span><span data-tr>Hakkımızda</span><span data-nl>Over Ons</span></a></li>
+        <li><a href="#experiences"><span data-ar>الخدمات</span><span data-en>Services</span><span data-fr>Services</span><span data-es>Servicios</span><span data-de>Leistungen</span><span data-it>Servizi</span><span data-pt>Serviços</span><span data-ru>Услуги</span><span data-zh>服务</span><span data-ja>サービス</span><span data-tr>Hizmetler</span><span data-nl>Diensten</span></a></li>
+        <li><a href="#gallery"><span data-ar>المعرض</span><span data-en>Gallery</span><span data-fr>Galerie</span><span data-es>Galería</span><span data-de>Galerie</span><span data-it>Galleria</span><span data-pt>Galeria</span><span data-ru>Галерея</span><span data-zh>画廊</span><span data-ja>ギャラリー</span><span data-tr>Galeri</span><span data-nl>Galerij</span></a></li>
+        <li><a href="#faq"><span data-ar>أسئلة</span><span data-en>FAQ</span><span data-fr>FAQ</span><span data-es>Preguntas</span><span data-de>FAQ</span><span data-it>FAQ</span><span data-pt>FAQ</span><span data-ru>Вопросы</span><span data-zh>常见问题</span><span data-ja>よくある質問</span><span data-tr>SSS</span><span data-nl>FAQ</span></a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h5><span data-ar>// الخدمات</span><span data-en>// Services</span></h5>
+      <h5><span data-ar>// الخدمات</span><span data-en>// Services</span><span data-fr>// Services</span><span data-es>// Servicios</span><span data-de>// Leistungen</span><span data-it>// Servizi</span><span data-pt>// Serviços</span><span data-ru>// Услуги</span><span data-zh>// 服务</span><span data-ja>// サービス</span><span data-tr>// Hizmetler</span><span data-nl>// Diensten</span></h5>
       <ul>
-        <li><span data-ar>رحلات بحرية</span><span data-en>Sea Trips</span></li>
-        <li><span data-ar>أعياد ميلاد</span><span data-en>Birthdays</span></li>
-        <li><span data-ar>حفلات</span><span data-en>Parties</span></li>
-        <li><span data-ar>زفاف</span><span data-en>Weddings</span></li>
-        <li><span data-ar>إيجار كامل</span><span data-en>Full Charter</span></li>
+        <li><span data-ar>رحلات بحرية</span><span data-en>Sea Trips</span><span data-fr>Excursions en Mer</span><span data-es>Excursiones Marinas</span><span data-de>Seeausflüge</span><span data-it>Gite in Mare</span><span data-pt>Passeios Marítimos</span><span data-ru>Морские Прогулки</span><span data-zh>海上旅行</span><span data-ja>シートリップ</span><span data-tr>Deniz Gezileri</span><span data-nl>Zeetochten</span></li>
+        <li><span data-ar>أعياد ميلاد</span><span data-en>Birthdays</span><span data-fr>Anniversaires</span><span data-es>Cumpleaños</span><span data-de>Geburtstage</span><span data-it>Compleanni</span><span data-pt>Aniversários</span><span data-ru>Дни Рождения</span><span data-zh>生日</span><span data-ja>誕生日</span><span data-tr>Doğum Günleri</span><span data-nl>Verjaardagen</span></li>
+        <li><span data-ar>حفلات</span><span data-en>Parties</span><span data-fr>Fêtes</span><span data-es>Fiestas</span><span data-de>Partys</span><span data-it>Feste</span><span data-pt>Festas</span><span data-ru>Вечеринки</span><span data-zh>派对</span><span data-ja>パーティー</span><span data-tr>Partiler</span><span data-nl>Feesten</span></li>
+        <li><span data-ar>زفاف</span><span data-en>Weddings</span><span data-fr>Mariages</span><span data-es>Bodas</span><span data-de>Hochzeiten</span><span data-it>Matrimoni</span><span data-pt>Casamentos</span><span data-ru>Свадьбы</span><span data-zh>婚礼</span><span data-ja>ウェディング</span><span data-tr>Düğünler</span><span data-nl>Bruiloften</span></li>
+        <li><span data-ar>إيجار كامل</span><span data-en>Full Charter</span><span data-fr>Location Complète</span><span data-es>Alquiler Completo</span><span data-de>Komplettcharter</span><span data-it>Noleggio Completo</span><span data-pt>Fretamento Total</span><span data-ru>Полный Чартер</span><span data-zh>全船包租</span><span data-ja>フルチャーター</span><span data-tr>Tam Kiralama</span><span data-nl>Volledige Charter</span></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h5><span data-ar>// تواصل</span><span data-en>// Contact</span></h5>
+      <h5><span data-ar>// تواصل</span><span data-en>// Contact</span><span data-fr>// Contact</span><span data-es>// Contacto</span><span data-de>// Kontakt</span><span data-it>// Contatto</span><span data-pt>// Contato</span><span data-ru>// Контакты</span><span data-zh>// 联系</span><span data-ja>// お問い合わせ</span><span data-tr>// İletişim</span><span data-nl>// Contact</span></h5>
       <ul class="footer-contact-list">
         <li>
-          <span class="contact-label"><span data-ar>هاتف</span><span data-en>Phone</span></span>
+          <span class="contact-label"><span data-ar>هاتف</span><span data-en>Phone</span><span data-fr>Téléphone</span><span data-es>Teléfono</span><span data-de>Telefon</span><span data-it>Telefono</span><span data-pt>Telefone</span><span data-ru>Телефон</span><span data-zh>电话</span><span data-ja>電話</span><span data-tr>Telefon</span><span data-nl>Telefoon</span></span>
           <a class="contact-link" href="tel:+201018189630" dir="ltr">+20 101 818 9630</a>
         </li>
         <li>
-          <span class="contact-label"><span data-ar>بريد</span><span data-en>Email</span></span>
+          <span class="contact-label"><span data-ar>بريد</span><span data-en>Email</span><span data-fr>E-mail</span><span data-es>Correo</span><span data-de>E-Mail</span><span data-it>Email</span><span data-pt>Email</span><span data-ru>Эл. почта</span><span data-zh>邮箱</span><span data-ja>メール</span><span data-tr>E-posta</span><span data-nl>E-mail</span></span>
           <a class="contact-link" href="mailto:Managment@adventourcatamaran.com" dir="ltr">Managment@adventourcatamaran.com</a>
         </li>
         <li>
-          <span class="contact-label"><span data-ar>الموقع</span><span data-en>Location</span></span>
-          <span><span data-ar>الغردقة، مصر</span><span data-en>Hurghada, Egypt</span></span>
+          <span class="contact-label"><span data-ar>الموقع</span><span data-en>Location</span><span data-fr>Emplacement</span><span data-es>Ubicación</span><span data-de>Standort</span><span data-it>Posizione</span><span data-pt>Localização</span><span data-ru>Местоположение</span><span data-zh>位置</span><span data-ja>場所</span><span data-tr>Konum</span><span data-nl>Locatie</span></span>
+          <span><span data-ar>الغردقة، مصر</span><span data-en>Hurghada, Egypt</span><span data-fr>Hurghada, Égypte</span><span data-es>Hurghada, Egipto</span><span data-de>Hurghada, Ägypten</span><span data-it>Hurghada, Egitto</span><span data-pt>Hurghada, Egito</span><span data-ru>Хургада, Египет</span><span data-zh>胡尔加达，埃及</span><span data-ja>ハルガダ、エジプト</span><span data-tr>Hurghada, Mısır</span><span data-nl>Hurghada, Egypte</span></span>
         </li>
       </ul>
     </div>
   </div>
   <div class="footer-copy">
-    © 2026 ADVENTOUR // <span data-ar>جميع الحقوق محفوظة</span><span data-en>ALL RIGHTS RESERVED</span> // BUILT FOR 2050
+    © 2026 ADVENTOUR // <span data-ar>جميع الحقوق محفوظة</span><span data-en>ALL RIGHTS RESERVED</span><span data-fr>TOUS DROITS RÉSERVÉS</span><span data-es>TODOS LOS DERECHOS RESERVADOS</span><span data-de>ALLE RECHTE VORBEHALTEN</span><span data-it>TUTTI I DIRITTI RISERVATI</span><span data-pt>TODOS OS DIREITOS RESERVADOS</span><span data-ru>ВСЕ ПРАВА ЗАЩИЩЕНЫ</span><span data-zh>版权所有</span><span data-ja>全著作権所有</span><span data-tr>TÜM HAKLARI SAKLIDIR</span><span data-nl>ALLE RECHTEN VOORBEHOUDEN</span> // BUILT FOR 2050
   </div>
 </footer>
 
@@ -4094,7 +4467,7 @@
     <div class="cal-days" id="calDays"></div>
     <button class="cal-confirm" id="calConfirm" disabled>
       <span data-ar>تأكيد التاريخ</span>
-      <span data-en>Confirm Date</span>
+      <span data-en>Confirm Date</span><span data-fr>Confirmer la Date</span><span data-es>Confirmar Fecha</span><span data-de>Datum Bestätigen</span><span data-it>Conferma Data</span><span data-pt>Confirmar Data</span><span data-ru>Подтвердить Дату</span><span data-zh>确认日期</span><span data-ja>日付を確定</span><span data-tr>Tarihi Onayla</span><span data-nl>Datum Bevestigen</span>
     </button>
   </div>
 </div>
@@ -4146,27 +4519,48 @@
 
   // ===== Language =====
   const langToggle = document.getElementById('langToggle');
+  const langToggleFloat = document.getElementById('langToggleFloat');
   const html = document.documentElement;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = window.matchMedia('(pointer: fine)').matches;
 
-  langToggle.addEventListener('click', () => {
-    const isAr = html.getAttribute('data-lang') === 'ar';
-    if (isAr) {
-      html.setAttribute('data-lang', 'en');
-      html.setAttribute('dir', 'ltr');
-      html.setAttribute('lang', 'en');
-      langToggle.textContent = 'AR';
-    } else {
-      html.setAttribute('data-lang', 'ar');
-      html.setAttribute('dir', 'rtl');
-      html.setAttribute('lang', 'ar');
-      langToggle.textContent = 'EN';
-    }
+  const languages = ['ar', 'en', 'fr', 'es', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'tr', 'nl'];
+  const rtlLanguages = ['ar'];
+
+  // <option> elements can't use the data-XX sibling-span pattern (browsers only
+  // read an option's plain text), so translate them directly via dataset lookup.
+  const updateSelectOptions = (lang) => {
+    document.querySelectorAll('select option[data-ar]').forEach(opt => {
+      opt.textContent = opt.dataset[lang] || opt.dataset.ar;
+    });
+  };
+
+  const updateLanguage = () => {
+    const currentLang = html.getAttribute('data-lang') || 'ar';
+    const currentIndex = languages.indexOf(currentLang);
+    const nextIndex = (currentIndex + 1) % languages.length;
+    const nextLang = languages[nextIndex];
+    const isRtl = rtlLanguages.includes(nextLang);
+
+    html.setAttribute('data-lang', nextLang);
+    html.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
+    html.setAttribute('lang', nextLang);
+
+    // Update both buttons
+    langToggle.textContent = nextLang.toUpperCase();
+    langToggleFloat.textContent = nextLang.toUpperCase();
+    langToggleFloat.title = `Click to change language / اضغط لتغيير اللغة (${nextLang.toUpperCase()})`;
+
+    updateSelectOptions(nextLang);
+
     setTimeout(() => {
       if (typeof window.refreshGalleryCarousel === 'function') window.refreshGalleryCarousel();
     }, 0);
-  });
+  };
+
+  langToggle.addEventListener('click', updateLanguage);
+  langToggleFloat.addEventListener('click', updateLanguage);
+  updateSelectOptions(html.getAttribute('data-lang') || 'ar');
 
   // ===== Custom Cursor (desktop) =====
   if (window.innerWidth > 968 && finePointer && !reduceMotion) {
@@ -4249,28 +4643,76 @@
   // ===== Testimonials =====
   const testimonials = [
     {
-      ar: 'كانت تجربة لا تُوصف! احتفلت بعيد ميلادي على ADVENTOUR Ùˆكل التفاصيل كانت مثالية — المركب، الطاقم، والأجواء. ليلة لن أنساها أبداً.',
+      ar: 'كانت تجربة لا تُوصف! احتفلت بعيد ميلادي على ADVENTOUR وكل التفاصيل كانت مثالية — المركب، الطاقم، والأجواء. ليلة لن أنساها أبداً.',
       en: 'An experience beyond words! I celebrated my birthday aboard ADVENTOUR and every detail was flawless — the vessel, the crew, the atmosphere.',
+      fr: "Une expérience indescriptible ! J'ai fêté mon anniversaire à bord de l'ADVENTOUR et chaque détail était parfait — le bateau, l'équipage, l'ambiance.",
+      es: '¡Una experiencia indescriptible! Celebré mi cumpleaños a bordo del ADVENTOUR y cada detalle fue impecable — el barco, la tripulación, el ambiente.',
+      de: 'Eine unbeschreibliche Erfahrung! Ich habe meinen Geburtstag an Bord der ADVENTOUR gefeiert, und jedes Detail war makellos — das Schiff, die Crew, die Atmosphäre.',
+      it: "Un'esperienza indescrivibile! Ho festeggiato il mio compleanno a bordo di ADVENTOUR e ogni dettaglio era impeccabile — la barca, l'equipaggio, l'atmosfera.",
+      pt: 'Uma experiência indescritível! Celebrei meu aniversário a bordo do ADVENTOUR e cada detalhe foi impecável — o barco, a tripulação, a atmosfera.',
+      ru: 'Непередаваемые впечатления! Я отметила день рождения на борту ADVENTOUR, и каждая деталь была безупречна — судно, экипаж, атмосфера.',
+      zh: '难以言喻的体验！我在ADVENTOUR上庆祝生日，每个细节都堪称完美——船只、船员、氛围。',
+      ja: '言葉に尽くせない体験でした！ADVENTOURで誕生日を祝いましたが、すべてが完璧でした——船、クルー、雰囲気。',
+      tr: "Kelimelerle anlatılamayacak bir deneyim! Doğum günümü ADVENTOUR'da kutladım ve her detay kusursuzdu — tekne, mürettebat, atmosfer.",
+      nl: 'Een onbeschrijfelijke ervaring! Ik vierde mijn verjaardag aan boord van de ADVENTOUR en elk detail was perfect — het schip, de bemanning, de sfeer.',
       authorAr: 'سارة م.', authorEn: 'SARAH M.',
-      noteAr: 'عيد ميلاد على المركب • مارس 2025', noteEn: 'Birthday · March 2025'
+      authorFr: 'SARAH M.', authorEs: 'SARAH M.', authorDe: 'SARAH M.', authorIt: 'SARAH M.', authorPt: 'SARAH M.', authorRu: 'SARAH M.', authorZh: 'SARAH M.', authorJa: 'SARAH M.', authorTr: 'SARAH M.', authorNl: 'SARAH M.',
+      noteAr: 'عيد ميلاد على المركب • مارس 2025', noteEn: 'Birthday · March 2025',
+      noteFr: 'Anniversaire · Mars 2025', noteEs: 'Cumpleaños · Marzo 2025', noteDe: 'Geburtstag · März 2025', noteIt: 'Compleanno · Marzo 2025', notePt: 'Aniversário · Março 2025', noteRu: 'День рождения · Март 2025', noteZh: '生日 · 2025年3月', noteJa: '誕生日 · 2025年3月', noteTr: 'Doğum Günü · Mart 2025', noteNl: 'Verjaardag · Maart 2025'
     },
     {
       ar: 'حفلة لا تُنسى! حمام السباحة، الـ DJ، والطاقم — كل شي كان فوق التوقعات. أنصح فيها كل صديق في الغردقة.',
       en: 'An unforgettable party! The pool, the DJ, the crew — everything exceeded expectations. Highly recommended.',
+      fr: "Une fête inoubliable ! La piscine, le DJ, l'équipage — tout a dépassé nos attentes. Vivement recommandé.",
+      es: 'Una fiesta inolvidable! La piscina, el DJ, la tripulación — todo superó las expectativas. Muy recomendable.',
+      de: 'Eine unvergessliche Party! Der Pool, der DJ, die Crew — alles übertraf die Erwartungen. Sehr empfehlenswert.',
+      it: "Una festa indimenticabile! La piscina, il DJ, l'equipaggio — tutto ha superato le aspettative. Altamente consigliato.",
+      pt: 'Uma festa inesquecível! A piscina, o DJ, a tripulação — tudo superou as expectativas. Altamente recomendado.',
+      ru: 'Незабываемая вечеринка! Бассейн, диджей, экипаж — всё превзошло ожидания. Настоятельно рекомендую.',
+      zh: '难忘的派对！泳池、DJ、船员——一切都超出预期。强烈推荐。',
+      ja: '忘れられないパーティーでした！プール、DJ、クルー——すべてが期待を超えていました。強くお勧めします。',
+      tr: 'Unutulmaz bir parti! Havuz, DJ, mürettebat — her şey beklentileri aştı. Kesinlikle tavsiye ederim.',
+      nl: 'Een onvergetelijk feest! Het zwembad, de dj, de bemanning — alles overtrof de verwachtingen. Sterk aanbevolen.',
       authorAr: 'أحمد ع.', authorEn: 'AHMED A.',
-      noteAr: 'حفلة خاصة • يناير 2025', noteEn: 'Private Party · January 2025'
+      authorFr: 'AHMED A.', authorEs: 'AHMED A.', authorDe: 'AHMED A.', authorIt: 'AHMED A.', authorPt: 'AHMED A.', authorRu: 'AHMED A.', authorZh: 'AHMED A.', authorJa: 'AHMED A.', authorTr: 'AHMED A.', authorNl: 'AHMED A.',
+      noteAr: 'حفلة خاصة • يناير 2025', noteEn: 'Private Party · January 2025',
+      noteFr: 'Fête Privée · Janvier 2025', noteEs: 'Fiesta Privada · Enero 2025', noteDe: 'Private Feier · Januar 2025', noteIt: 'Festa Privata · Gennaio 2025', notePt: 'Festa Privada · Janeiro 2025', noteRu: 'Частная вечеринка · Январь 2025', noteZh: '私人派对 · 2025年1月', noteJa: 'プライベートパーティー · 2025年1月', noteTr: 'Özel Parti · Ocak 2025', noteNl: 'Privéfeest · Januari 2025'
     },
     {
       ar: 'رحلة سنوركلينغ سحرية مع العائلة. المركب فاخر، الخدمة ممتازة، والمناظر تحت الماء لا توصف.',
       en: 'A magical snorkeling trip with the family. The vessel is luxurious, service impeccable, views indescribable.',
+      fr: "Une excursion de plongée en apnée magique en famille. Le bateau est luxueux, le service impeccable, les vues indescriptibles.",
+      es: 'Una excursión mágica de esnórquel en familia. El barco es lujoso, el servicio impecable, las vistas indescriptibles.',
+      de: 'Ein magischer Schnorchelausflug mit der Familie. Das Schiff ist luxuriös, der Service tadellos, die Aussicht unbeschreiblich.',
+      it: 'Una magica gita di snorkeling in famiglia. La barca è lussuosa, il servizio impeccabile, i panorami indescrivibili.',
+      pt: 'Um passeio mágico de snorkel em família. O barco é luxuoso, o serviço impecável, as vistas indescritíveis.',
+      ru: 'Волшебная поездка на снорклинг всей семьёй. Судно роскошное, сервис безупречный, виды неописуемые.',
+      zh: '一次与家人共度的奇妙浮潜之旅。船只豪华，服务无可挑剔，景色美不胜收。',
+      ja: '家族での魔法のようなシュノーケリング旅行でした。船は豪華で、サービスは完璧、景色は言葉にできないほど美しいです。',
+      tr: 'Ailecek büyülü bir şnorkel gezisi. Tekne lüks, hizmet kusursuz, manzaralar tarifsiz.',
+      nl: 'Een magische snorkeltocht met het gezin. Het schip is luxueus, de service onberispelijk, de uitzichten onbeschrijfelijk.',
       authorAr: 'ليلى ح.', authorEn: 'LAYLA H.',
-      noteAr: 'رحلة عائلية • فبراير 2025', noteEn: 'Family Voyage · February 2025'
+      authorFr: 'LAYLA H.', authorEs: 'LAYLA H.', authorDe: 'LAYLA H.', authorIt: 'LAYLA H.', authorPt: 'LAYLA H.', authorRu: 'LAYLA H.', authorZh: 'LAYLA H.', authorJa: 'LAYLA H.', authorTr: 'LAYLA H.', authorNl: 'LAYLA H.',
+      noteAr: 'رحلة عائلية • فبراير 2025', noteEn: 'Family Voyage · February 2025',
+      noteFr: 'Voyage en Famille · Février 2025', noteEs: 'Viaje Familiar · Febrero 2025', noteDe: 'Familienreise · Februar 2025', noteIt: 'Viaggio in Famiglia · Febbraio 2025', notePt: 'Viagem em Família · Fevereiro 2025', noteRu: 'Семейное путешествие · Февраль 2025', noteZh: '家庭之旅 · 2025年2月', noteJa: 'ファミリー航海 · 2025年2月', noteTr: 'Aile Gezisi · Şubat 2025', noteNl: 'Familiereis · Februari 2025'
     },
     {
       ar: 'احتفلنا بخطوبتنا على ADVENTOUR وكان أجمل قرار اتخذناه. الإطلالة، الإنارة، والتفاصيل — كل شي مثالي.',
       en: 'We celebrated our engagement aboard ADVENTOUR — the best decision we made. Views, lighting, details — perfect.',
+      fr: "Nous avons célébré nos fiançailles à bord de l'ADVENTOUR — la meilleure décision que nous ayons prise. Vues, éclairage, détails — parfaits.",
+      es: 'Celebramos nuestro compromiso a bordo del ADVENTOUR — la mejor decisión que tomamos. Vistas, iluminación, detalles — perfectos.',
+      de: 'Wir haben unsere Verlobung an Bord der ADVENTOUR gefeiert — die beste Entscheidung, die wir getroffen haben. Aussicht, Beleuchtung, Details — perfekt.',
+      it: 'Abbiamo festeggiato il nostro fidanzamento a bordo di ADVENTOUR — la migliore decisione che abbiamo preso. Panorami, illuminazione, dettagli — perfetti.',
+      pt: 'Celebramos nosso noivado a bordo do ADVENTOUR — a melhor decisão que tomamos. Vistas, iluminação, detalhes — perfeitos.',
+      ru: 'Мы отпраздновали помолвку на борту ADVENTOUR — лучшее решение, которое мы приняли. Виды, освещение, детали — идеально.',
+      zh: '我们在ADVENTOUR上庆祝了订婚——这是我们做过的最好的决定。景色、灯光、细节——完美无缺。',
+      ja: 'ADVENTOURで婚約をお祝いしました——私たちが下した最高の決断でした。景色、照明、細部——すべて完璧です。',
+      tr: "Nişanımızı ADVENTOUR'da kutladık — verdiğimiz en iyi karardı. Manzaralar, aydınlatma, detaylar — mükemmeldi.",
+      nl: 'We vierden onze verloving aan boord van de ADVENTOUR — de beste beslissing die we ooit namen. Uitzicht, verlichting, details — perfect.',
       authorAr: 'كريم ون.', authorEn: 'KARIM & N.',
-      noteAr: 'خطوبة • مايو 2025', noteEn: 'Engagement · May 2025'
+      authorFr: 'KARIM & N.', authorEs: 'KARIM & N.', authorDe: 'KARIM & N.', authorIt: 'KARIM & N.', authorPt: 'KARIM & N.', authorRu: 'KARIM & N.', authorZh: 'KARIM & N.', authorJa: 'KARIM & N.', authorTr: 'KARIM & N.', authorNl: 'KARIM & N.',
+      noteAr: 'خطوبة • مايو 2025', noteEn: 'Engagement · May 2025',
+      noteFr: 'Fiançailles · Mai 2025', noteEs: 'Compromiso · Mayo 2025', noteDe: 'Verlobung · Mai 2025', noteIt: 'Fidanzamento · Maggio 2025', notePt: 'Noivado · Maio 2025', noteRu: 'Помолвка · Май 2025', noteZh: '订婚 · 2025年5月', noteJa: '婚約 · 2025年5月', noteTr: 'Nişan · Mayıs 2025', noteNl: 'Verloving · Mei 2025'
     }
   ];
 
@@ -4285,8 +4727,8 @@
     tText.style.opacity = 0;
     tAuthor.style.opacity = 0;
     setTimeout(() => {
-      tText.innerHTML = `<span data-ar>${testimonials[i].ar}</span><span data-en>${testimonials[i].en}</span>`;
-      tAuthor.innerHTML = `<span data-ar>${testimonials[i].authorAr}</span><span data-en>${testimonials[i].authorEn}</span><small><span data-ar>${testimonials[i].noteAr}</span><span data-en>${testimonials[i].noteEn}</span></small>`;
+      tText.innerHTML = `<span data-ar>${testimonials[i].ar}</span><span data-en>${testimonials[i].en}</span><span data-fr>${testimonials[i].fr}</span><span data-es>${testimonials[i].es}</span><span data-de>${testimonials[i].de}</span><span data-it>${testimonials[i].it}</span><span data-pt>${testimonials[i].pt}</span><span data-ru>${testimonials[i].ru}</span><span data-zh>${testimonials[i].zh}</span><span data-ja>${testimonials[i].ja}</span><span data-tr>${testimonials[i].tr}</span><span data-nl>${testimonials[i].nl}</span>`;
+      tAuthor.innerHTML = `<span data-ar>${testimonials[i].authorAr}</span><span data-en>${testimonials[i].authorEn}</span><span data-fr>${testimonials[i].authorFr}</span><span data-es>${testimonials[i].authorEs}</span><span data-de>${testimonials[i].authorDe}</span><span data-it>${testimonials[i].authorIt}</span><span data-pt>${testimonials[i].authorPt}</span><span data-ru>${testimonials[i].authorRu}</span><span data-zh>${testimonials[i].authorZh}</span><span data-ja>${testimonials[i].authorJa}</span><span data-tr>${testimonials[i].authorTr}</span><span data-nl>${testimonials[i].authorNl}</span><small><span data-ar>${testimonials[i].noteAr}</span><span data-en>${testimonials[i].noteEn}</span><span data-fr>${testimonials[i].noteFr}</span><span data-es>${testimonials[i].noteEs}</span><span data-de>${testimonials[i].noteDe}</span><span data-it>${testimonials[i].noteIt}</span><span data-pt>${testimonials[i].notePt}</span><span data-ru>${testimonials[i].noteRu}</span><span data-zh>${testimonials[i].noteZh}</span><span data-ja>${testimonials[i].noteJa}</span><span data-tr>${testimonials[i].noteTr}</span><span data-nl>${testimonials[i].noteNl}</span></small>`;
       tText.style.opacity = 1;
       tAuthor.style.opacity = 1;
     }, 300);
@@ -4485,17 +4927,21 @@
       overwrite: false
     });
 
-    // Gallery items stagger
-    gsap.from('.gallery-item', {
-      scrollTrigger: { trigger: '.gallery-grid', start: 'top 80%' },
-      scale: 0.82, duration: 0.75, stagger: 0.06, ease: 'power2.out', immediateRender: false
-    });
+    // Gallery items stagger (only if gallery exists)
+    if (document.querySelector('.gallery-grid')) {
+      gsap.from('.gallery-item', {
+        scrollTrigger: { trigger: '.gallery-grid', start: 'top 80%' },
+        scale: 0.82, duration: 0.75, stagger: 0.06, ease: 'power2.out', immediateRender: false
+      });
+    }
 
-    // Process steps
-    gsap.from('.step', {
-      scrollTrigger: { trigger: '.process-steps', start: 'top 82%' },
-      y: 55, opacity: 0, duration: 0.85, stagger: 0.14, ease: 'power3.out'
-    });
+    // Process steps (only if steps exist)
+    if (document.querySelector('.process-steps')) {
+      gsap.from('.step', {
+        scrollTrigger: { trigger: '.process-steps', start: 'top 82%' },
+        y: 55, opacity: 0, duration: 0.85, stagger: 0.14, ease: 'power3.out'
+      });
+    }
 
     // Trust stats count-up via GSAP
     document.querySelectorAll('.trust-stat-num').forEach(el => {
@@ -4512,35 +4958,45 @@
       });
     });
 
-    // Press logos stagger
-    gsap.from('.press-logo', {
-      scrollTrigger: { trigger: '.press-logos', start: 'top 85%' },
-      y: 20, duration: 0.6, stagger: 0.08, ease: 'power2.out', immediateRender: false
-    });
+    // Press logos stagger (only if exists)
+    if (document.querySelector('.press-logos')) {
+      gsap.from('.press-logo', {
+        scrollTrigger: { trigger: '.press-logos', start: 'top 85%' },
+        y: 20, duration: 0.6, stagger: 0.08, ease: 'power2.out', immediateRender: false
+      });
+    }
 
-    // About image slide in
-    gsap.from('.about-image', {
-      scrollTrigger: { trigger: '.about-grid', start: 'top 80%' },
-      x: 80, opacity: 0, duration: 1.3, ease: 'power3.out'
-    });
+    // About image slide in (only if exists)
+    if (document.querySelector('.about-grid')) {
+      gsap.from('.about-image', {
+        scrollTrigger: { trigger: '.about-grid', start: 'top 80%' },
+        x: 80, opacity: 0, duration: 1.3, ease: 'power3.out'
+      });
+    }
 
-    // Hero stats fade out on scroll
-    gsap.to('.hero-stats', {
-      scrollTrigger: { trigger: '.hero', start: 'center top', end: 'bottom top', scrub: true },
-      y: 60, opacity: 0
-    });
+    // Hero stats fade out on scroll (only if exists)
+    if (document.querySelector('.hero-stats')) {
+      gsap.to('.hero-stats', {
+        scrollTrigger: { trigger: '.hero', start: 'center top', end: 'bottom top', scrub: true },
+        y: 60, opacity: 0
+      });
+    }
 
-    // Testimonial section bg parallax
-    gsap.to('.testimonials', {
-      scrollTrigger: { trigger: '.testimonials', scrub: 1.5 },
-      backgroundPositionY: '30%'
-    });
+    // Testimonial section bg parallax (only if exists)
+    if (document.querySelector('.testimonials')) {
+      gsap.to('.testimonials', {
+        scrollTrigger: { trigger: '.testimonials', scrub: 1.5 },
+        backgroundPositionY: '30%'
+      });
+    }
 
-    // Footer reveal
-    gsap.from('.footer-grid', {
-      scrollTrigger: { trigger: 'footer', start: 'top 90%' },
-      y: 40, opacity: 0, duration: 1, ease: 'power2.out'
-    });
+    // Footer reveal (only if exists)
+    if (document.querySelector('.footer-grid')) {
+      gsap.from('.footer-grid', {
+        scrollTrigger: { trigger: 'footer', start: 'top 90%' },
+        y: 40, opacity: 0, duration: 1, ease: 'power2.out'
+      });
+    }
   });
 
   // ===== LIGHTBOX =====
@@ -4691,15 +5147,21 @@
   (function () {
     if (reduceMotion || window.innerWidth < 969 || !finePointer) return;
     const lang = () => document.documentElement.getAttribute('data-lang') || 'ar';
-    const labels = { ar: 'تمرير تلقائي', en: 'AUTO SCROLL' };
+    const labels = {
+      ar: 'تمرير تلقائي', en: 'AUTO SCROLL', fr: 'DÉFILEMENT AUTO', es: 'DESPLAZAMIENTO AUTO',
+      de: 'AUTO-SCROLL', it: 'SCORRIMENTO AUTO', pt: 'ROLAGEM AUTO', ru: 'АВТОПРОКРУТКА',
+      zh: '自动滚动', ja: 'オートスクロール', tr: 'OTOMATİK KAYDIRMA', nl: 'AUTOSCROLLEN'
+    };
 
     const btn = document.createElement('button');
     btn.className = 'auto-scroll-btn';
     btn.innerHTML = `<span class="asbulb"></span><span class="as-label">${labels[lang()]}</span>`;
     document.body.appendChild(btn);
 
-    document.getElementById('langToggle').addEventListener('click', () => {
-      setTimeout(() => { btn.querySelector('.as-label').textContent = labels[lang()]; }, 30);
+    ['langToggle', 'langToggleFloat'].forEach(id => {
+      document.getElementById(id).addEventListener('click', () => {
+        setTimeout(() => { btn.querySelector('.as-label').textContent = labels[lang()]; }, 30);
+      });
     });
 
     let active = false, raf = null, paused = false;
