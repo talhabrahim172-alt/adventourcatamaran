@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
 <title>ADVENTOUR | Luxury Catamaran in Hurghada, Red Sea</title>
 <meta name="description" content="ADVENTOUR is a luxury four-deck catamaran in Hurghada offering cruises, parties, birthdays, weddings, full charters, and Red Sea experiences.">
-<meta name="keywords" content="ADVENTOUR, Hurghada catamaran, Red Sea cruise, luxury boat, private charter, birthday party boat, wedding boat, snorkeling trip">
+<meta name="keywords" content="ADVENTOUR, Hurghada catamaran, catamaran Hurghada, Red Sea cruise, Red Sea catamaran, luxury boat Hurghada, luxury yacht Egypt, private charter Hurghada, private boat rental Red Sea, boat rental Hurghada, yacht rental Egypt, birthday party boat, birthday boat Hurghada, wedding boat, wedding on the sea Egypt, engagement boat Red Sea, snorkeling trip Hurghada, snorkeling boat Egypt, sunset cruise Hurghada, sunset boat trip Red Sea, corporate event boat, corporate party Hurghada, full boat charter Egypt, four deck catamaran, floating pool boat, boat with swimming pool Hurghada, DJ party boat Red Sea, Hurghada boat tour, Hurghada Egypt tourism, Red Sea boat trip, Egypt luxury cruise, catamaran hire Egypt, boat trip Hurghada marina, family boat trip Egypt, best boat Hurghada, catamaran cruise Egypt">
 <meta name="author" content="ADVENTOUR">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#050507">
@@ -4797,7 +4797,7 @@
     document.querySelectorAll('.section-title').forEach(el => {
       gsap.from(el, {
         scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
-        y: 70, opacity: 0, duration: 1.1, ease: 'power4.out'
+        y: 70, opacity: 0, duration: 1.1, ease: 'power4.out', immediateRender: false
       });
     });
 
@@ -4805,22 +4805,22 @@
     document.querySelectorAll('.section-tag').forEach(el => {
       gsap.from(el, {
         scrollTrigger: { trigger: el, start: 'top 90%' },
-        x: -30, opacity: 0, duration: 0.8, ease: 'power2.out'
+        x: -30, opacity: 0, duration: 0.8, ease: 'power2.out', immediateRender: false
       });
     });
 
     // Services heading and intro
     gsap.from('.experiences .section-tag', {
       scrollTrigger: { trigger: '.experiences', start: 'top 85%' },
-      x: -18, opacity: 0, duration: 0.7, ease: 'power2.out'
+      x: -18, opacity: 0, duration: 0.7, ease: 'power2.out', immediateRender: false
     });
     gsap.from('.experiences .section-title', {
       scrollTrigger: { trigger: '.experiences', start: 'top 82%' },
-      y: 28, opacity: 0, duration: 0.9, ease: 'power3.out'
+      y: 28, opacity: 0, duration: 0.9, ease: 'power3.out', immediateRender: false
     });
     gsap.from('.experiences .section-intro', {
       scrollTrigger: { trigger: '.experiences', start: 'top 78%' },
-      y: 20, opacity: 0, duration: 0.8, ease: 'power2.out'
+      y: 20, opacity: 0, duration: 0.8, ease: 'power2.out', immediateRender: false
     });
 
     // Experience cards stagger
@@ -4832,7 +4832,7 @@
     // Amenity tiles stagger
     gsap.from('.amenity', {
       scrollTrigger: { trigger: '.amenities-list', start: 'top 80%' },
-      scale: 0.88, opacity: 0, duration: 0.65, stagger: 0.07, ease: 'back.out(1.5)'
+      scale: 0.88, opacity: 0, duration: 0.65, stagger: 0.07, ease: 'back.out(1.5)', immediateRender: false
     });
     gsap.to('.amenity', {
       y: -6,
@@ -4856,7 +4856,7 @@
     if (document.querySelector('.process-steps')) {
       gsap.from('.step', {
         scrollTrigger: { trigger: '.process-steps', start: 'top 82%' },
-        y: 55, opacity: 0, duration: 0.85, stagger: 0.14, ease: 'power3.out'
+        y: 55, opacity: 0, duration: 0.85, stagger: 0.14, ease: 'power3.out', immediateRender: false
       });
     }
 
@@ -4887,7 +4887,7 @@
     if (document.querySelector('.about-grid')) {
       gsap.from('.about-image', {
         scrollTrigger: { trigger: '.about-grid', start: 'top 80%' },
-        x: 80, opacity: 0, duration: 1.3, ease: 'power3.out'
+        x: 80, opacity: 0, duration: 1.3, ease: 'power3.out', immediateRender: false
       });
     }
 
@@ -4911,7 +4911,7 @@
     if (document.querySelector('.footer-grid')) {
       gsap.from('.footer-grid', {
         scrollTrigger: { trigger: 'footer', start: 'top 90%' },
-        y: 40, opacity: 0, duration: 1, ease: 'power2.out'
+        y: 40, opacity: 0, duration: 1, ease: 'power2.out', immediateRender: false
       });
     }
   });
@@ -5199,8 +5199,11 @@
         pts[i].move(); pts[i].draw();
         for (let j = i + 1; j < pts.length; j++) {
           const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
-          const d = Math.sqrt(dx * dx + dy * dy);
-          if (d < 110) {
+          const distSq = dx * dx + dy * dy;
+          // Skip the sqrt for out-of-range pairs (the vast majority each frame) —
+          // only pairs that pass this cheap squared-distance check need the real distance.
+          if (distSq < 12100) {
+            const d = Math.sqrt(distSq);
             ctx.beginPath();
             ctx.moveTo(pts[i].x, pts[i].y);
             ctx.lineTo(pts[j].x, pts[j].y);
