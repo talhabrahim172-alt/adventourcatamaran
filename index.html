@@ -496,6 +496,56 @@
     }
   }
 
+  /* Language dropdown (shared by nav toggle + floating widget) */
+  .lang-toggle-wrap { position: relative; display: inline-flex; }
+  .lang-dropdown {
+    position: absolute;
+    list-style: none;
+    background: rgba(10, 10, 14, 0.96);
+    border: 1px solid var(--line-bright);
+    border-radius: 14px;
+    padding: 8px;
+    min-width: 190px;
+    max-height: 320px;
+    overflow-y: auto;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(212, 175, 55, 0.15);
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+    pointer-events: none;
+    transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 1000;
+  }
+  .lang-dropdown.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+  .lang-dropdown li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--white);
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+  .lang-dropdown li:hover, .lang-dropdown li.active { background: rgba(212, 175, 55, 0.15); color: var(--gold); }
+  .lang-dropdown .lang-code { color: var(--gold); font-weight: 700; font-size: 11px; width: 26px; flex-shrink: 0; }
+  .lang-dropdown li:hover .lang-code, .lang-dropdown li.active .lang-code { color: var(--gold-bright); }
+  .lang-dropdown .lang-name { color: var(--gray); font-size: 12px; }
+  .lang-dropdown li:hover .lang-name, .lang-dropdown li.active .lang-name { color: var(--white); }
+
+  /* In LTR, .nav-left (and this toggle) sits at the physical left edge of the nav bar,
+     so the dropdown must grow rightward into the viewport. The nav mirrors to the right
+     edge in RTL (flex row direction follows html[dir]), so the anchor flips too. */
+  .lang-toggle-wrap .lang-dropdown { top: calc(100% + 12px); left: 0; }
+  html[dir="rtl"] .lang-toggle-wrap .lang-dropdown { left: auto; right: 0; }
+  /* The floating widget is position:fixed and never mirrors sides in RTL (unlike the
+     nav toggle, which flips via the flex row's inherited direction), so its dropdown
+     always opens from the right regardless of language direction. */
+  #langWidgetFloat .lang-dropdown { bottom: calc(100% + 14px); right: 0; }
+
   .menu-toggle {
     display: none;
     background: transparent;
@@ -3389,7 +3439,7 @@
 
 <!-- ===== FLOATING LANGUAGE WIDGET ===== -->
 <div class="lang-widget-float" id="langWidgetFloat">
-  <button id="langToggleFloat" title="Click to change language / اضغط لتغيير اللغة"></button>
+  <button id="langToggleFloat" title="Choose language / اختر اللغة" aria-haspopup="listbox" aria-expanded="false"></button>
 </div>
 
 <!-- ===== CURSOR ===== -->
@@ -3421,7 +3471,9 @@
 <!-- ===== NAV ===== -->
 <nav id="nav">
   <div class="nav-left">
-    <button class="lang-toggle" id="langToggle">EN</button>
+    <div class="lang-toggle-wrap">
+      <button class="lang-toggle" id="langToggle" aria-haspopup="listbox" aria-expanded="false">EN</button>
+    </div>
     <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
       <div class="logo-text">ADVEN<span>TOUR</span></div>
       <small class="logo-sub"><span data-ar>الغردقة • البحر الأحمر</span><span data-en>HURGHADA · RED SEA</span><span data-fr>HURGHADA · MER ROUGE</span><span data-es>HURGHADA · MAR ROJO</span><span data-de>HURGHADA · ROTES MEER</span><span data-it>HURGHADA · MAR ROSSO</span><span data-pt>HURGHADA · MAR VERMELHO</span><span data-ru>ХУРГАДА · КРАСНОЕ МОРЕ</span><span data-zh>赫尔格达 · 红海</span><span data-ja>ハルガダ · 紅海</span><span data-tr>HURGHADA · KIRMIZI DENİZ</span><span data-nl>HURGHADA · RODE ZEE</span></small>
@@ -4448,12 +4500,18 @@
   // ===== Language =====
   const langToggle = document.getElementById('langToggle');
   const langToggleFloat = document.getElementById('langToggleFloat');
+  const langWidgetFloat = document.getElementById('langWidgetFloat');
   const html = document.documentElement;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = window.matchMedia('(pointer: fine)').matches;
 
   const languages = ['ar', 'en', 'fr', 'es', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'tr', 'nl'];
   const rtlLanguages = ['ar'];
+  const languageNames = {
+    ar: 'العربية', en: 'English', fr: 'Français', es: 'Español', de: 'Deutsch',
+    it: 'Italiano', pt: 'Português', ru: 'Русский', zh: '中文', ja: '日本語',
+    tr: 'Türkçe', nl: 'Nederlands'
+  };
 
   // <option> elements can't use the data-XX sibling-span pattern (browsers only
   // read an option's plain text), so translate them directly via dataset lookup.
@@ -4463,32 +4521,79 @@
     });
   };
 
-  const updateLanguage = () => {
-    const currentLang = html.getAttribute('data-lang') || 'ar';
-    const currentIndex = languages.indexOf(currentLang);
-    const nextIndex = (currentIndex + 1) % languages.length;
-    const nextLang = languages[nextIndex];
-    const isRtl = rtlLanguages.includes(nextLang);
+  const closeLangDropdowns = () => {
+    document.querySelectorAll('.lang-dropdown.open').forEach(d => d.classList.remove('open'));
+    document.querySelectorAll('.lang-toggle-wrap .lang-toggle, #langToggleFloat').forEach(b => b.setAttribute('aria-expanded', 'false'));
+  };
 
-    html.setAttribute('data-lang', nextLang);
+  const setLanguage = (lang) => {
+    const isRtl = rtlLanguages.includes(lang);
+
+    html.setAttribute('data-lang', lang);
     html.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
-    html.setAttribute('lang', nextLang);
+    html.setAttribute('lang', lang);
 
     // Update both buttons
-    langToggle.textContent = nextLang.toUpperCase();
-    langToggleFloat.textContent = nextLang.toUpperCase();
-    langToggleFloat.title = `Click to change language / اضغط لتغيير اللغة (${nextLang.toUpperCase()})`;
+    langToggle.textContent = lang.toUpperCase();
+    langToggleFloat.textContent = lang.toUpperCase();
+    langToggleFloat.title = `Choose language / اختر اللغة (${lang.toUpperCase()})`;
 
-    updateSelectOptions(nextLang);
+    updateSelectOptions(lang);
+    document.querySelectorAll('.lang-dropdown li').forEach(li => li.classList.toggle('active', li.dataset.lang === lang));
+    closeLangDropdowns();
 
     setTimeout(() => {
       if (typeof window.refreshGalleryCarousel === 'function') window.refreshGalleryCarousel();
     }, 0);
+
+    document.dispatchEvent(new CustomEvent('languagechange', { detail: { lang } }));
   };
 
-  langToggle.addEventListener('click', updateLanguage);
-  langToggleFloat.addEventListener('click', updateLanguage);
-  updateSelectOptions(html.getAttribute('data-lang') || 'ar');
+  const buildLangDropdown = (container, currentLang) => {
+    const ul = document.createElement('ul');
+    ul.className = 'lang-dropdown';
+    ul.setAttribute('role', 'listbox');
+    languages.forEach(lang => {
+      const li = document.createElement('li');
+      li.dataset.lang = lang;
+      li.setAttribute('role', 'option');
+      if (lang === currentLang) li.classList.add('active');
+      li.innerHTML = `<span class="lang-code">${lang.toUpperCase()}</span><span class="lang-name">${languageNames[lang]}</span>`;
+      li.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setLanguage(lang);
+      });
+      ul.appendChild(li);
+    });
+    container.appendChild(ul);
+    return ul;
+  };
+
+  const toggleLangDropdown = (dropdown, button) => {
+    const isOpen = dropdown.classList.contains('open');
+    closeLangDropdowns();
+    if (!isOpen) {
+      dropdown.classList.add('open');
+      button.setAttribute('aria-expanded', 'true');
+    }
+  };
+
+  const initialLang = html.getAttribute('data-lang') || 'ar';
+  langToggle.textContent = initialLang.toUpperCase();
+  langToggleFloat.textContent = initialLang.toUpperCase();
+  langToggleFloat.title = `Choose language / اختر اللغة (${initialLang.toUpperCase()})`;
+
+  const navLangDropdown = buildLangDropdown(document.querySelector('.lang-toggle-wrap'), initialLang);
+  const floatLangDropdown = buildLangDropdown(langWidgetFloat, initialLang);
+
+  langToggle.addEventListener('click', (e) => { e.stopPropagation(); toggleLangDropdown(navLangDropdown, langToggle); });
+  langToggleFloat.addEventListener('click', (e) => { e.stopPropagation(); toggleLangDropdown(floatLangDropdown, langToggleFloat); });
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.lang-toggle-wrap') && !e.target.closest('#langWidgetFloat')) closeLangDropdowns();
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLangDropdowns(); });
+
+  updateSelectOptions(initialLang);
 
   // ===== Custom Cursor (desktop) =====
   if (window.innerWidth > 968 && finePointer && !reduceMotion) {
@@ -5086,10 +5191,8 @@
     btn.innerHTML = `<span class="asbulb"></span><span class="as-label">${labels[lang()]}</span>`;
     document.body.appendChild(btn);
 
-    ['langToggle', 'langToggleFloat'].forEach(id => {
-      document.getElementById(id).addEventListener('click', () => {
-        setTimeout(() => { btn.querySelector('.as-label').textContent = labels[lang()]; }, 30);
-      });
+    document.addEventListener('languagechange', () => {
+      btn.querySelector('.as-label').textContent = labels[lang()];
     });
 
     let active = false, raf = null, paused = false;
