@@ -535,12 +535,21 @@
     padding-top: 100px;
     padding-bottom: 60px;
   }
+  /* Separate wrapper for the static laptop-only mirror below: .hero-bg itself
+     has its `transform` overwritten every frame by the JS mouse-parallax and
+     GSAP scroll effects, so a transform set here directly would get clobbered. */
+  .hero-bg-wrap {
+    position: absolute; inset: 0;
+    z-index: 0;
+  }
+  @media (min-width: 969px) {
+    .hero-bg-wrap { transform: scaleX(-1); }
+  }
   .hero-bg {
     position: absolute; inset: 0;
     background-image: url('https://i.ibb.co/5xR6w0JL/Wh.jpg');
     background-size: cover;
     background-position: center;
-    z-index: 0;
     filter: brightness(0.87) contrast(1.06) saturate(1.03);
     /* Movement comes from the JS mouse-parallax + GSAP scroll effects below,
        which both drive `transform` on this element — CSS keyframe animations
@@ -3477,7 +3486,7 @@
 <!-- ===== HERO ===== -->
 <section class="hero">
   <!-- Hero animated image background with video-like effects -->
-  <div class="hero-bg"></div>
+  <div class="hero-bg-wrap"><div class="hero-bg"></div></div>
   <div class="hero-overlay"></div>
   <div class="scan-beam"></div>
   <span class="hud-tl"></span><span class="hud-tr"></span>
