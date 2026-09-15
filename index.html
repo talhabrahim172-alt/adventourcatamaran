@@ -147,24 +147,6 @@
       var(--black);
   }
 
-  /* Animated grid */
-  .bg-grid {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    background-image:
-      linear-gradient(rgba(212, 175, 55, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(212, 175, 55, 0.04) 1px, transparent 1px);
-    background-size: 80px 80px;
-    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
-    animation: gridFloat 20s ease-in-out infinite;
-  }
-  @keyframes gridFloat {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(40px, 40px); }
-  }
-
   /* Noise grain */
   body::before {
     content: '';
@@ -186,35 +168,6 @@
     pointer-events: none;
     z-index: 9997;
     opacity: 0.5;
-  }
-
-  /* Custom cursor (desktop only) */
-  @media (min-width: 969px) {
-    body { cursor: none; }
-    .cursor-dot, .cursor-ring {
-      position: fixed; top: 0; left: 0;
-      pointer-events: none;
-      z-index: 10000;
-      border-radius: 50%;
-      transition: width 0.3s, height 0.3s, background 0.3s;
-    }
-    .cursor-dot {
-      width: 4px; height: 4px;
-      background: var(--gold);
-      box-shadow: 0 0 10px var(--gold);
-    }
-    .cursor-ring {
-      width: 32px; height: 32px;
-      border: 1px solid var(--gold);
-      mix-blend-mode: difference;
-    }
-    body.hover-link .cursor-ring {
-      width: 64px; height: 64px;
-      background: rgba(212, 175, 55, 0.1);
-    }
-  }
-  @media (max-width: 968px) {
-    .cursor-dot, .cursor-ring { display: none; }
   }
 
   /* ===== LOADER ===== */
@@ -1222,6 +1175,43 @@
     inset: -8px;
   }
   .exp-icon svg { width: 24px; height: 24px; }
+
+  /* Photo-style trip card (image + price) */
+  .exp-card-photo .exp-num { position: static; top: auto; right: auto; opacity: 1; }
+  .exp-card-image {
+    margin: calc(-1 * clamp(28px, 3vw, 40px)) calc(-1 * clamp(28px, 3vw, 40px)) 24px;
+    height: 190px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(0, 0, 0, 0.4));
+  }
+  .exp-card-image img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform 0.6s ease;
+  }
+  .exp-card:hover .exp-card-image img { transform: scale(1.08); }
+  .exp-card-image .exp-num {
+    position: absolute; top: 14px; right: 14px; left: auto;
+    background: rgba(5, 5, 7, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 4px 10px;
+    border-radius: 20px;
+    opacity: 1;
+  }
+  html[dir="rtl"] .exp-card-image .exp-num { right: auto; left: 14px; }
+
+  .exp-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin: -4px 0 18px;
+    font-family: 'Bodoni Moda', serif;
+    color: var(--gold);
+  }
+  html[dir="rtl"] .exp-price { font-family: 'Cairo', sans-serif; }
+  .exp-price-amount { font-size: 28px; font-weight: 600; line-height: 1; }
+  .exp-price-currency { font-size: 16px; opacity: 0.85; }
 
   .exp-card h3 {
     font-family: 'Bodoni Moda', serif;
@@ -2887,7 +2877,6 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
-    .bg-grid,
     .aurora,
     body::before,
     body::after,
@@ -2907,12 +2896,9 @@
 
   @media (max-width: 768px) {
     #particle-canvas,
-    .cursor-dot,
-    .cursor-ring,
     .auto-scroll-btn {
       display: none !important;
     }
-    .bg-grid,
     .aurora,
     body::before,
     body::after,
@@ -3408,7 +3394,6 @@
 
 <!-- BG layers -->
 <div class="bg-canvas"></div>
-<div class="bg-grid"></div>
 <canvas id="particle-canvas"></canvas>
 <div class="aurora"></div>
 <div class="scroll-progress"></div>
@@ -3441,10 +3426,6 @@
 <div class="lang-widget-float" id="langWidgetFloat">
   <button id="langToggleFloat" title="Choose language / اختر اللغة" aria-haspopup="listbox" aria-expanded="false"></button>
 </div>
-
-<!-- ===== CURSOR ===== -->
-<div class="cursor-dot"></div>
-<div class="cursor-ring"></div>
 
 <!-- ===== STICKY BAR ===== -->
 <div class="sticky-bar" id="stickyBar">
@@ -3786,11 +3767,14 @@
     </div>
 
     <div class="exp-grid">
-      <div class="exp-card reveal">
-        <span class="exp-num">// 01</span>
-        <div class="exp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 18c1.5-1 3-1 4.5 0s3 1 4.5 0 3-1 4.5 0 3 1 4.5 0"/><path d="M2 14c1.5-1 3-1 4.5 0s3 1 4.5 0 3-1 4.5 0 3 1 4.5 0"/><path d="M12 2v8M8 6h8"/></svg></div>
-        <h3><span data-ar>رحلات بحرية</span><span data-en>Sea Expeditions</span><span data-fr>Expéditions Maritimes</span><span data-es>Expediciones Marinas</span><span data-de>Meeresexpeditionen</span><span data-it>Spedizioni Marine</span><span data-pt>Expedições Marinhas</span><span data-ru>Морские Экспедиции</span><span data-zh>海上探险</span><span data-ja>海上遠征</span><span data-tr>Deniz Sefer</span><span data-nl>Zeeexpedities</span></h3>
-        <p><span data-ar>رحلات يومية إلى أجمل البقع البحرية في الغردقة — سنوركلينغ، سباحة، ووجبات طازجة.</span><span data-en>Day trips to Hurghada's pristine spots — snorkeling, swimming, fresh cuisine.</span><span data-fr>Excursions d'une journée aux plus beaux sites de Hurghada — snorkel, natation, cuisine fraîche.</span><span data-es>Excursiones de un día a los mejores lugares de Hurghada — buceo, natación, cocina fresca.</span><span data-de>Tagesausflüge zu Hurghadás schönsten Orten — Schnorcheln, Schwimmen, frische Küche.</span><span data-it>Escursioni giornaliere ai più bei posti di Hurghada — snorkel, nuoto, cucina fresca.</span><span data-pt>Excursões de um dia aos melhores lugares de Hurghada — snorkel, natação, culinária fresca.</span><span data-ru>Однодневные экскурсии к самым красивым местам Хургады — снорклинг, плавание, свежая кухня.</span><span data-zh>前往赫尔格达最美景点的一日游 — 浮潜、游泳、新鲜美食。</span><span data-ja>ハルガダの最美しいスポットへの日帰り旅行 — シュノーケリング、水泳、新鮮な料理。</span><span data-tr>Hurghada'nın en güzel yerlerine günübirlik geziler — snorkel, yüzme, taze yemek.</span><span data-nl>Dagtochten naar de mooiste plekken van Hurghada — snorkelen, zwemmen, vers eten.</span></p>
+      <div class="exp-card reveal exp-card-photo">
+        <div class="exp-card-image">
+          <img src="images/magawish-island.jpg" alt="Magawish Island" loading="lazy" onerror="this.style.display='none'">
+          <span class="exp-num">// 01</span>
+        </div>
+        <h3><span data-ar>جزيرة المجاويش</span><span data-en>Magawish Island</span><span data-fr>Île de Magawish</span><span data-es>Isla Magawish</span><span data-de>Magawish-Insel</span><span data-it>Isola di Magawish</span><span data-pt>Ilha Magawish</span><span data-ru>Остров Магавиш</span><span data-zh>马加维什岛</span><span data-ja>マガウィッシュ島</span><span data-tr>Magawish Adası</span><span data-nl>Magawish-eiland</span></h3>
+        <p><span data-ar>رحلة يوم كامل إلى جزيرة المجاويش الساحرة — شعاب مرجانية، مياه فيروزية، ورمال بيضاء ناعمة.</span><span data-en>A full-day escape to the enchanting Magawish Island — vibrant coral reefs, turquoise waters, and soft white sands.</span><span data-fr>Une escapade d'une journée vers la magnifique île de Magawish — récifs coralliens vibrants, eaux turquoise et sable blanc fin.</span><span data-es>Una escapada de día completo a la encantadora isla de Magawish — arrecifes de coral vibrantes, aguas turquesas y arena blanca suave.</span><span data-de>Ein ganztägiger Ausflug zur bezaubernden Magawish-Insel — lebendige Korallenriffe, türkisfarbenes Wasser und weicher weißer Sand.</span><span data-it>Una fuga di un'intera giornata alla incantevole isola di Magawish — vivaci barriere coralline, acque turchesi e sabbia bianca soffice.</span><span data-pt>Uma escapada de dia inteiro para a encantadora Ilha Magawish — recifes de coral vibrantes, águas turquesa e areia branca macia.</span><span data-ru>Однодневный отдых на очаровательном острове Магавиш — яркие коралловые рифы, бирюзовая вода и мягкий белый песок.</span><span data-zh>前往迷人的马加维什岛的全天游览 — 缤纷的珊瑚礁、绿松石般的海水和柔软的白沙。</span><span data-ja>魅惑的なマガウィッシュ島への終日の旅 — 鮮やかなサンゴ礁、ターコイズブルーの海、柔らかい白い砂。</span><span data-tr>Büyüleyici Magawish Adası'na tam günlük bir kaçamak — canlı mercan resifleri, turkuaz sular ve yumuşak beyaz kum.</span><span data-nl>Een hele dag uitstapje naar het betoverende Magawish-eiland — levendige koraalriffen, turquoise water en zacht wit zand.</span></p>
+        <div class="exp-price"><span class="exp-price-amount">25</span><span class="exp-price-currency">€</span></div>
         <a href="#contact" class="exp-link">
           <span><span data-ar>اطلب عرض</span><span data-en>Get Quote</span><span data-fr>Demander un Devis</span><span data-es>Solicitar Presupuesto</span><span data-de>Angebot Anfragen</span><span data-it>Richiedi Preventivo</span><span data-pt>Solicitar Orçamento</span><span data-ru>Запросить Цену</span><span data-zh>获取报价</span><span data-ja>見積もりを取得</span><span data-tr>Teklif Al</span><span data-nl>Offerte Aanvragen</span></span>
           <span class="arrow">→</span>
@@ -3859,17 +3843,6 @@
         <p style="max-width: 700px;"><span data-ar>المركب بالكامل لك ولضيوفك. أربعة أدوار، حمام سباحة، بار، DJ، وطاقم خدمة كامل — حدد المنهج، نحن ننفذ الباقي.</span><span data-en>The entire vessel — yours and your guests'. Four decks, pool, bar, DJ, full service crew — you set the vision, we deliver.</span><span data-fr>L'ensemble du navire — le vôtre et celui de vos invités. Quatre ponts, piscine, bar, DJ, équipage complet — définissez la vision, nous livrons.</span><span data-es>El barco completo — suyo y el de sus invitados. Cuatro cubiertas, piscina, bar, DJ, tripulación completa — usted establece la visión, nosotros entregamos.</span><span data-de>Das gesamte Schiff — Ihres und Ihrer Gäste. Vier Decks, Pool, Bar, DJ, vollständiges Servicebegleiter — Sie definieren die Vision, wir liefern.</span><span data-it>L'intera nave — tua e dei tuoi ospiti. Quattro ponti, piscina, bar, DJ, equipaggio completo — tu definisci la visione, noi consegniamo.</span><span data-pt>O navio inteiro — seu e de seus convidados. Quatro conveses, piscina, bar, DJ, tripulação completa — você estabelece a visão, nós entregamos.</span><span data-ru>Все судно — ваше и ваших гостей. Четыре палубы, бассейн, бар, DJ, полная служба экипажа — вы устанавливаете видение, мы доставляем.</span><span data-zh>整艘船 — 您和您的客人的。四层甲板、游泳池、酒吧、DJ、全套服务人员 — 您设定愿景，我们交付。</span><span data-ja>船全体 — あなたとあなたのゲストの。4層デッキ、プール、バー、DJ、フルサービスの乗組員 — ビジョンを設定、私たちが提供します。</span><span data-tr>Tüm gemi — sizin ve misafirlerinizin. Dört güverte, havuz, bar, DJ, tam hizmet mürettebatı — vizyonu siz belirleyin, biz sunuz.</span><span data-nl>Het hele schip — van u en uw gasten. Vier dekken, zwembad, bar, DJ, volledige servicepersoneel — u bepaalt de visie, wij leveren.</span></p>
         <a href="#contact" class="exp-link" style="max-width: 300px;">
           <span><span data-ar>تواصل للترتيب</span><span data-en>Contact to Arrange</span><span data-fr>Nous Contacter</span><span data-es>Contáctenos</span><span data-de>Kontakt Aufnehmen</span><span data-it>Contattaci</span><span data-pt>Contate-nos</span><span data-ru>Связаться с Нами</span><span data-zh>联系我们</span><span data-ja>お問い合わせ</span><span data-tr>İletişime Geçin</span><span data-nl>Neem Contact Op</span></span>
-          <span class="arrow">→</span>
-        </a>
-      </div>
-
-      <div class="exp-card reveal">
-        <span class="exp-num">// 08</span>
-        <div class="exp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 20c2-1 4-1 6 0s4 1 6 0 4-1 6 0"/><path d="M12 14c-2-3-1-7 2-9-1 3 0 6 2 7"/><path d="M12 14c1-2 0-5-2-6"/></svg></div>
-        <h3><span data-ar>جزيرة المجاويش</span><span data-en>Magawish Island</span><span data-fr>Île de Magawish</span><span data-es>Isla Magawish</span><span data-de>Magawish-Insel</span><span data-it>Isola di Magawish</span><span data-pt>Ilha Magawish</span><span data-ru>Остров Магавиш</span><span data-zh>马加维什岛</span><span data-ja>マガウィッシュ島</span><span data-tr>Magawish Adası</span><span data-nl>Magawish-eiland</span></h3>
-        <p><span data-ar>رحلة يوم كامل إلى جزيرة المجاويش الساحرة — شعاب مرجانية، مياه فيروزية، ورمال بيضاء ناعمة.</span><span data-en>A full-day escape to the enchanting Magawish Island — vibrant coral reefs, turquoise waters, and soft white sands.</span><span data-fr>Une escapade d'une journée vers la magnifique île de Magawish — récifs coralliens vibrants, eaux turquoise et sable blanc fin.</span><span data-es>Una escapada de día completo a la encantadora isla de Magawish — arrecifes de coral vibrantes, aguas turquesas y arena blanca suave.</span><span data-de>Ein ganztägiger Ausflug zur bezaubernden Magawish-Insel — lebendige Korallenriffe, türkisfarbenes Wasser und weicher weißer Sand.</span><span data-it>Una fuga di un'intera giornata alla incantevole isola di Magawish — vivaci barriere coralline, acque turchesi e sabbia bianca soffice.</span><span data-pt>Uma escapada de dia inteiro para a encantadora Ilha Magawish — recifes de coral vibrantes, águas turquesa e areia branca macia.</span><span data-ru>Однодневный отдых на очаровательном острове Магавиш — яркие коралловые рифы, бирюзовая вода и мягкий белый песок.</span><span data-zh>前往迷人的马加维什岛的全天游览 — 缤纷的珊瑚礁、绿松石般的海水和柔软的白沙。</span><span data-ja>魅惑的なマガウィッシュ島への終日の旅 — 鮮やかなサンゴ礁、ターコイズブルーの海、柔らかい白い砂。</span><span data-tr>Büyüleyici Magawish Adası'na tam günlük bir kaçamak — canlı mercan resifleri, turkuaz sular ve yumuşak beyaz kum.</span><span data-nl>Een hele dag uitstapje naar het betoverende Magawish-eiland — levendige koraalriffen, turquoise water en zacht wit zand.</span></p>
-        <a href="#contact" class="exp-link">
-          <span><span data-ar>اطلب عرض</span><span data-en>Get Quote</span><span data-fr>Demander un Devis</span><span data-es>Solicitar Presupuesto</span><span data-de>Angebot Anfragen</span><span data-it>Richiedi Preventivo</span><span data-pt>Solicitar Orçamento</span><span data-ru>Запросить Цену</span><span data-zh>获取报价</span><span data-ja>見積もりを取得</span><span data-tr>Teklif Al</span><span data-nl>Offerte Aanvragen</span></span>
           <span class="arrow">→</span>
         </a>
       </div>
@@ -4594,31 +4567,6 @@
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLangDropdowns(); });
 
   updateSelectOptions(initialLang);
-
-  // ===== Custom Cursor (desktop) =====
-  if (window.innerWidth > 968 && finePointer && !reduceMotion) {
-    const cursorDot = document.querySelector('.cursor-dot');
-    const cursorRing = document.querySelector('.cursor-ring');
-    let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX; mouseY = e.clientY;
-      cursorDot.style.transform = `translate(${mouseX - 2}px, ${mouseY - 2}px)`;
-    });
-
-    function animateRing() {
-      ringX += (mouseX - ringX) * 0.15;
-      ringY += (mouseY - ringY) * 0.15;
-      cursorRing.style.transform = `translate(${ringX - 16}px, ${ringY - 16}px)`;
-      requestAnimationFrame(animateRing);
-    }
-    animateRing();
-
-    document.querySelectorAll('a, button, .exp-card, .gallery-item, .amenity, .deck-nav li, .faq-question').forEach(el => {
-      el.addEventListener('mouseenter', () => document.body.classList.add('hover-link'));
-      el.addEventListener('mouseleave', () => document.body.classList.remove('hover-link'));
-    });
-  }
 
   // ===== Nav scroll =====
   const nav = document.getElementById('nav');
