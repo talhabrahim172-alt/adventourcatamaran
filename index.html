@@ -1227,6 +1227,15 @@
     width: 100%; height: 100%; object-fit: cover; display: block;
     transition: transform 0.6s ease;
   }
+  .exp-card-carousel { position: absolute; inset: 0; }
+  .exp-card-carousel .splide__track,
+  .exp-card-carousel .splide__list,
+  .exp-card-carousel .splide__slide { height: 100%; }
+  /* Without a definite flex-basis, .splide__slide (flex-basis: auto) and its
+     img (width: 100%) size each other circularly, which browsers resolve to
+     an arbitrary content-based width instead of "fill the track" — pin it
+     explicitly since this carousel is always one full-width slide at a time. */
+  .exp-card-carousel .splide__slide { flex: 0 0 100%; width: 100%; }
   .exp-card:hover .exp-card-image img { transform: scale(1.08); }
   .exp-card-image .exp-num {
     position: absolute; top: 14px; right: 14px; left: auto;
@@ -3807,7 +3816,17 @@
     <div class="exp-grid">
       <div class="exp-card reveal exp-card-photo">
         <div class="exp-card-image">
-          <img src="images/magawish-island.jpg" alt="Magawish Island" loading="lazy" onerror="this.style.display='none'">
+          <div id="magawishCarousel" class="exp-card-carousel splide" dir="ltr" aria-label="Magawish Island photos">
+            <div class="splide__track">
+              <ul class="splide__list">
+                <li class="splide__slide"><img src="images/magawish-island.jpg" alt="Magawish Island — beach" loading="lazy" onerror="this.style.display='none'"></li>
+                <li class="splide__slide"><img src="images/magawish-2.jpg" alt="Magawish Island — turquoise water" loading="lazy" onerror="this.style.display='none'"></li>
+                <li class="splide__slide"><img src="images/magawish-3.webp" alt="Magawish Island — shore" loading="lazy" onerror="this.style.display='none'"></li>
+                <li class="splide__slide"><img src="images/magawish-4.webp" alt="Magawish Island — sunset" loading="lazy" onerror="this.style.display='none'"></li>
+                <li class="splide__slide"><img src="images/magawish-5.jpg" alt="Magawish Island — sign" loading="lazy" onerror="this.style.display='none'"></li>
+              </ul>
+            </div>
+          </div>
           <span class="exp-num">// 01</span>
         </div>
         <h3><span data-ar>جزيرة المجاويش</span><span data-en>Magawish Island</span><span data-fr>Île de Magawish</span><span data-es>Isla Magawish</span><span data-de>Magawish-Insel</span><span data-it>Isola di Magawish</span><span data-pt>Ilha Magawish</span><span data-ru>Остров Магавиш</span><span data-zh>马加维什岛</span><span data-ja>マガウィッシュ島</span><span data-tr>Magawish Adası</span><span data-nl>Magawish-eiland</span></h3>
@@ -5505,6 +5524,40 @@
     } else {
       // no observer support — init after a short delay
       setTimeout(initSplide, 800);
+    }
+
+    // Magawish Island card: small auto-advancing photo carousel, one slide at a time
+    let magawishSplide = null;
+    function initMagawishSplide() {
+      if (!window.Splide || magawishSplide || !document.getElementById('magawishCarousel')) return;
+      magawishSplide = new Splide('#magawishCarousel', {
+        type: 'loop',
+        perPage: 1,
+        perMove: 1,
+        gap: '0',
+        direction: 'ltr',
+        autoplay: true,
+        interval: 3000,
+        speed: 700,
+        pauseOnHover: true,
+        pauseOnFocus: true,
+        arrows: false,
+        pagination: false,
+        drag: false,
+        lazyLoad: 'nearby'
+      }).mount();
+    }
+    const magawishEl = document.getElementById('magawishCarousel');
+    if (magawishEl && 'IntersectionObserver' in window) {
+      const magawishObs = new IntersectionObserver(entries => {
+        entries.forEach(ent => {
+          if (ent.isIntersecting) { initMagawishSplide(); magawishObs.disconnect(); }
+        });
+      }, { rootMargin: '300px' });
+      magawishObs.observe(magawishEl);
+      setTimeout(initMagawishSplide, 1500);
+    } else {
+      setTimeout(initMagawishSplide, 800);
     }
   });
 </script>
