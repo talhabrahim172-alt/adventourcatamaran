@@ -183,6 +183,19 @@
     overflow: hidden;
   }
   .loader.hide { opacity: 0; visibility: hidden; }
+  .loader-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://i.ibb.co/5xR6w0JL/Wh.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.5) saturate(1.15) blur(2px);
+    opacity: 0.9;
+  }
+  .loader-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(5,5,7,0.35) 0%, rgba(5,5,7,0.85) 75%);
+  }
   .loader-grid {
     position: absolute; inset: 0;
     background-image:
@@ -207,6 +220,7 @@
     margin-bottom: 24px;
     overflow: hidden;
     text-shadow: 0 0 30px var(--gold-glow);
+    direction: ltr;
   }
   .loader-text span {
     display: inline-block;
@@ -3421,6 +3435,7 @@
 
 <!-- ===== LOADER ===== -->
 <div class="loader" id="loader">
+  <div class="loader-bg"></div>
   <div class="loader-grid"></div>
   <div class="loader-scan"></div>
   <div class="loader-content">
@@ -4488,7 +4503,7 @@
       if (loaderPercent && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         loaderPercent.textContent = '100%';
       }
-      hideLoaderSoon(500);
+      hideLoaderSoon(900);
     });
 
     // Ensure images decode asynchronously to avoid blocking render
