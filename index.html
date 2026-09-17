@@ -557,33 +557,6 @@
        gain, so motion is intentionally left to those two systems only. */
     will-change: transform;
   }
-  /* The source photo is a tall portrait shot (917x1715). On a mobile-width
-     viewport `cover` crops it very little since the viewport is portrait too
-     ("perfect" per user feedback) — but on wide desktop, `cover` stretches it
-     to fill the width and then crops away everything but the vertical center
-     ~30%, hiding most of the boat. Fix: only above 1024px, show the full,
-     uncropped photo via `contain` in a foreground layer, and use this
-     existing cover-cropped layer (blurred + darkened) as an ambient backdrop
-     so the letterbox margins aren't empty. Below 1024px this rule doesn't
-     apply, so mobile is untouched.
-  */
-  @media (min-width: 1024px) {
-    .hero-bg {
-      filter: brightness(0.55) contrast(1.1) saturate(1.15) blur(36px);
-    }
-  }
-  .hero-bg-full {
-    display: none;
-    position: absolute; inset: 0;
-    background-image: url('https://i.ibb.co/5xR6w0JL/Wh.jpg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    filter: brightness(0.9) contrast(1.06) saturate(1.05);
-  }
-  @media (min-width: 1024px) {
-    .hero-bg-full { display: block; }
-  }
 
   .hero-overlay {
     position: absolute; inset: 0;
@@ -3522,7 +3495,7 @@
 <!-- ===== HERO ===== -->
 <section class="hero">
   <!-- Hero animated image background with video-like effects -->
-  <div class="hero-bg-wrap"><div class="hero-bg"></div><div class="hero-bg-full"></div></div>
+  <div class="hero-bg-wrap"><div class="hero-bg"></div></div>
   <div class="hero-overlay"></div>
   <div class="scan-beam"></div>
   <span class="hud-tl"></span><span class="hud-tr"></span>
