@@ -1829,6 +1829,116 @@
     font-size: 12px;
   }
 
+  /* ===== VESSEL SPECIFICATIONS ===== */
+  .spec-badges {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 56px;
+    margin-bottom: 56px;
+  }
+  @media (max-width: 900px) { .spec-badges { grid-template-columns: repeat(2, 1fr); } }
+  .spec-badge {
+    background: rgba(212, 175, 55, 0.05);
+    border: 1px solid var(--line-bright);
+    padding: clamp(22px, 3vw, 30px) 18px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+  }
+  .spec-badge::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transform: scaleX(0);
+    transition: transform 0.4s;
+  }
+  .spec-badge:hover { background: rgba(212,175,55,0.09); border-color: var(--gold); transform: translateY(-4px); }
+  .spec-badge:hover::before { transform: scaleX(1); }
+  .spec-badge-value {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(24px, 3vw, 34px);
+    color: var(--gold);
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px rgba(212,175,55,0.25);
+  }
+  html[dir="rtl"] .spec-badge-value { font-family: 'Cairo', sans-serif; font-weight: 800; }
+  .spec-badge-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+  html[dir="rtl"] .spec-badge-label { font-family: 'Cairo', sans-serif; letter-spacing: 0; text-transform: none; font-size: 12px; }
+
+  .spec-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+  }
+  @media (max-width: 900px) { .spec-grid { grid-template-columns: 1fr; } }
+  .spec-card {
+    background: rgba(18, 18, 26, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--line);
+    padding: clamp(24px, 3vw, 36px);
+    transition: border-color 0.4s, background 0.4s;
+  }
+  .spec-card:hover { border-color: var(--line-bright); background: rgba(212,175,55,0.03); }
+  .spec-card-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .spec-card-num {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    border: 1px solid var(--gold);
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .spec-card-title {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(18px, 2vw, 21px);
+    color: var(--white);
+    font-weight: 500;
+  }
+  html[dir="rtl"] .spec-card-title { font-family: 'Cairo', sans-serif; font-weight: 700; font-size: clamp(16px, 2vw, 19px); }
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(212,175,55,0.06);
+    font-size: 14px;
+  }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-row-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray);
+    flex-shrink: 0;
+  }
+  html[dir="rtl"] .spec-row-label { font-family: 'Cairo', sans-serif; letter-spacing: 0; text-transform: none; font-size: 13px; }
+  .spec-row-value {
+    color: var(--white);
+    font-weight: 500;
+  }
+
   @media (max-width: 900px) {
     .amenities-feature {
       grid-template-columns: 1fr;
@@ -3600,18 +3710,6 @@
         </p>
         <ul class="about-features">
           <li>
-            <span class="label"><span data-ar>الطول الإجمالي</span><span data-en>Overall Length</span><span data-fr>Longueur Totale</span><span data-es>Largo Total</span><span data-de>Gesamtlänge</span><span data-it>Lunghezza Complessiva</span><span data-pt>Comprimento Total</span><span data-ru>Общая Длина</span><span data-zh>总长</span><span data-ja>全長</span><span data-tr>Toplam Uzunluk</span><span data-nl>Totale Lengte</span></span>
-            <span class="num">40m+</span>
-          </li>
-          <li>
-            <span class="label"><span data-ar>السعة القصوى</span><span data-en>Max Capacity</span><span data-fr>Capacité Maximale</span><span data-es>Capacidad Máxima</span><span data-de>Maximale Kapazität</span><span data-it>Capacità Massima</span><span data-pt>Capacidade Máxima</span><span data-ru>Максимальная Вместимость</span><span data-zh>最大容量</span><span data-ja>最大容量</span><span data-tr>Maksimum Kapasite</span><span data-nl>Maximale Capaciteit</span></span>
-            <span class="num">150</span>
-          </li>
-          <li>
-            <span class="label"><span data-ar>عدد الأدوار</span><span data-en>Decks</span><span data-fr>Ponts</span><span data-es>Cubiertas</span><span data-de>Decks</span><span data-it>Ponti</span><span data-pt>Conveses</span><span data-ru>Палубы</span><span data-zh>甲板</span><span data-ja>デッキ</span><span data-tr>Güverteler</span><span data-nl>Dekken</span></span>
-            <span class="num">04</span>
-          </li>
-          <li>
             <span class="label"><span data-ar>الموقع</span><span data-en>Location</span><span data-fr>Localisation</span><span data-es>Ubicación</span><span data-de>Standort</span><span data-it>Posizione</span><span data-pt>Localização</span><span data-ru>Местоположение</span><span data-zh>地点</span><span data-ja>場所</span><span data-tr>Konum</span><span data-nl>Locatie</span></span>
             <span class="num"><span data-ar>الغردقة</span><span data-en>Hurghada</span><span data-fr>Hurghada</span><span data-es>Hurghada</span><span data-de>Hurghada</span><span data-it>Hurghada</span><span data-pt>Hurghada</span><span data-ru>Хургада</span><span data-zh>赫尔格达</span><span data-ja>ハルガダ</span><span data-tr>Hurghada</span><span data-nl>Hurghada</span></span>
           </li>
@@ -3631,9 +3729,150 @@
   </div>
 </section>
 
+<!-- ===== VESSEL SPECIFICATIONS ===== -->
+<section class="vessel" id="vessel">
+  <div class="section-num">// 03 — VESSEL</div>
+  <div class="container">
+    <div class="reveal" style="text-align:center;">
+      <div class="section-tag" style="margin:0 auto 24px;">
+        <span data-ar>نظرة على المركب</span>
+        <span data-en>Vessel Overview / 03</span>
+        <span data-fr>Aperçu du Navire / 03</span>
+        <span data-es>Resumen del Buque / 03</span>
+        <span data-de>Schiffsübersicht / 03</span>
+        <span data-it>Panoramica della Nave / 03</span>
+        <span data-pt>Visão Geral da Embarcação / 03</span>
+        <span data-ru>Обзор Судна / 03</span>
+        <span data-zh>船舶概览 / 03</span>
+        <span data-ja>船舶概要 / 03</span>
+        <span data-tr>Gemi Genel Bakış / 03</span>
+        <span data-nl>Scheepsoverzicht / 03</span>
+      </div>
+      <h2 class="section-title display">
+        <span data-ar>هندسة <em>بلا حدود</em></span>
+        <span data-en class="block">Engineered <em>for Excellence</em></span>
+        <span data-fr class="block">Conçu pour l'<em>Excellence</em></span>
+        <span data-es class="block">Diseñado para la <em>Excelencia</em></span>
+        <span data-de class="block">Konstruiert für <em>Exzellenz</em></span>
+        <span data-it class="block">Progettato per l'<em>Eccellenza</em></span>
+        <span data-pt class="block">Projetado para a <em>Excelência</em></span>
+        <span data-ru class="block">Создан для <em>Совершенства</em></span>
+        <span data-zh class="block">为<em>卓越</em>而生</span>
+        <span data-ja class="block"><em>卓越</em>のために設計</span>
+        <span data-tr class="block"><em>Mükemmellik</em> İçin Tasarlandı</span>
+        <span data-nl class="block">Ontworpen voor <em>Uitmuntendheid</em></span>
+      </h2>
+      <p class="section-intro" style="margin:0 auto;">
+        <span data-ar>من مرسى السويس عام 2015 إلى مياه البحر الأحمر — تعرف على المواصفات الفنية الكاملة لمركب ADVENTOUR، من الأبعاد إلى نظام الدفع.</span>
+        <span data-en>From its registry in Suez in 2015 to the waters of the Red Sea — explore the full technical specifications of ADVENTOUR, from dimensions to propulsion.</span>
+        <span data-fr>De son enregistrement à Suez en 2015 aux eaux de la mer Rouge — découvrez les spécifications techniques complètes d'ADVENTOUR, des dimensions à la propulsion.</span>
+        <span data-es>Desde su registro en Suez en 2015 hasta las aguas del Mar Rojo — descubra las especificaciones técnicas completas de ADVENTOUR, desde las dimensiones hasta la propulsión.</span>
+        <span data-de>Von der Registrierung in Suez im Jahr 2015 bis zu den Gewässern des Roten Meeres — entdecken Sie die vollständigen technischen Daten der ADVENTOUR, von den Abmessungen bis zum Antrieb.</span>
+        <span data-it>Dalla registrazione a Suez nel 2015 alle acque del Mar Rosso — scopri le specifiche tecniche complete di ADVENTOUR, dalle dimensioni alla propulsione.</span>
+        <span data-pt>Do seu registro em Suez em 2015 às águas do Mar Vermelho — conheça as especificações técnicas completas do ADVENTOUR, das dimensões à propulsão.</span>
+        <span data-ru>От регистрации в Суэце в 2015 году до вод Красного моря — ознакомьтесь с полными техническими характеристиками ADVENTOUR, от размеров до силовой установки.</span>
+        <span data-zh>从2015年在苏伊士注册到红海之上——探索ADVENTOUR从尺寸到动力系统的完整技术规格。</span>
+        <span data-ja>2015年のスエズでの登録から紅海の海へ——寸法から推進システムまで、ADVENTOURの完全な技術仕様をご紹介します。</span>
+        <span data-tr>2015 yılında Süveyş'te tescilinden Kızıldeniz sularına — ADVENTOUR'un boyutlardan tahrik sistemine kadar tüm teknik özelliklerini keşfedin.</span>
+        <span data-nl>Van de registratie in Suez in 2015 tot de wateren van de Rode Zee — ontdek de volledige technische specificaties van ADVENTOUR, van afmetingen tot voortstuwing.</span>
+      </p>
+    </div>
+
+    <div class="spec-badges reveal">
+      <div class="spec-badge">
+        <div class="spec-badge-value">40.50<span style="font-size:0.5em; opacity:0.7;"> m</span></div>
+        <div class="spec-badge-label"><span data-ar>الطول الكلي</span><span data-en>LENGTH OVERALL</span><span data-fr>LONGUEUR TOTALE</span><span data-es>ESLORA TOTAL</span><span data-de>GESAMTLÄNGE</span><span data-it>LUNGHEZZA TOTALE</span><span data-pt>COMPRIMENTO TOTAL</span><span data-ru>ОБЩАЯ ДЛИНА</span><span data-zh>总长</span><span data-ja>全長</span><span data-tr>TOPLAM UZUNLUK</span><span data-nl>TOTALE LENGTE</span></div>
+      </div>
+      <div class="spec-badge">
+        <div class="spec-badge-value">11.00<span style="font-size:0.5em; opacity:0.7;"> m</span></div>
+        <div class="spec-badge-label"><span data-ar>العرض</span><span data-en>BEAM</span><span data-fr>LARGEUR</span><span data-es>MANGA</span><span data-de>BREITE</span><span data-it>LARGHEZZA</span><span data-pt>BOCA</span><span data-ru>ШИРИНА</span><span data-zh>船宽</span><span data-ja>幅</span><span data-tr>GENİŞLİK</span><span data-nl>BREEDTE</span></div>
+      </div>
+      <div class="spec-badge">
+        <div class="spec-badge-value">2015</div>
+        <div class="spec-badge-label"><span data-ar>سنة البناء</span><span data-en>YEAR BUILT</span><span data-fr>ANNÉE</span><span data-es>AÑO</span><span data-de>BAUJAHR</span><span data-it>ANNO</span><span data-pt>ANO</span><span data-ru>ГОД ПОСТРОЙКИ</span><span data-zh>建造年份</span><span data-ja>建造年</span><span data-tr>YAPIM YILI</span><span data-nl>BOUWJAAR</span></div>
+      </div>
+      <div class="spec-badge">
+        <div class="spec-badge-value">650<span style="font-size:0.5em; opacity:0.7;">×2</span></div>
+        <div class="spec-badge-label"><span data-ar>قوة المحركات (حصان)</span><span data-en>ENGINE POWER (BHP)</span><span data-fr>PUISSANCE (BHP)</span><span data-es>POTENCIA (BHP)</span><span data-de>LEISTUNG (BHP)</span><span data-it>POTENZA (BHP)</span><span data-pt>POTÊNCIA (BHP)</span><span data-ru>МОЩНОСТЬ (Л.С.)</span><span data-zh>发动机功率 (BHP)</span><span data-ja>出力 (BHP)</span><span data-tr>MOTOR GÜCÜ (BHP)</span><span data-nl>MOTORVERMOGEN (BHP)</span></div>
+      </div>
+    </div>
+
+    <div class="spec-grid reveal">
+      <div class="spec-card">
+        <div class="spec-card-head">
+          <span class="spec-card-num">01</span>
+          <span class="spec-card-title"><span data-ar>الهوية العامة</span><span data-en>General Identity</span><span data-fr>Identité Générale</span><span data-es>Identidad General</span><span data-de>Allgemeine Identität</span><span data-it>Identità Generale</span><span data-pt>Identidade Geral</span><span data-ru>Общая Информация</span><span data-zh>基本信息</span><span data-ja>一般情報</span><span data-tr>Genel Kimlik</span><span data-nl>Algemene Identiteit</span></span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-row-label"><span data-ar>اسم المركب</span><span data-en>Vessel Name</span><span data-fr>Nom du Navire</span><span data-es>Nombre del Buque</span><span data-de>Schiffsname</span><span data-it>Nome della Nave</span><span data-pt>Nome da Embarcação</span><span data-ru>Название Судна</span><span data-zh>船名</span><span data-ja>船名</span><span data-tr>Gemi Adı</span><span data-nl>Scheepsnaam</span></span>
+          <span class="spec-row-value" dir="ltr">ADVENTOUR</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-row-label"><span data-ar>ميناء التسجيل</span><span data-en>Port of Registry</span><span data-fr>Port d'Immatriculation</span><span data-es>Puerto de Registro</span><span data-de>Registrierhafen</span><span data-it>Porto di Registrazione</span><span data-pt>Porto de Registro</span><span data-ru>Порт Регистрации</span><span data-zh>注册港</span><span data-ja>登録港</span><span data-tr>Kayıt Limanı</span><span data-nl>Registratiehaven</span></span>
+          <span class="spec-row-value"><span data-ar>السويس، مصر</span><span data-en>Suez, Egypt</span><span data-fr>Suez, Égypte</span><span data-es>Suez, Egipto</span><span data-de>Suez, Ägypten</span><span data-it>Suez, Egitto</span><span data-pt>Suez, Egito</span><span data-ru>Суэц, Египет</span><span data-zh>苏伊士，埃及</span><span data-ja>スエズ、エジプト</span><span data-tr>Süveyş, Mısır</span><span data-nl>Suez, Egypte</span></span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-row-label"><span data-ar>سنة البناء</span><span data-en>Year of Build</span><span data-fr>Année de Construction</span><span data-es>Año de Construcción</span><span data-de>Baujahr</span><span data-it>Anno di Costruzione</span><span data-pt>Ano de Construção</span><span data-ru>Год Постройки</span><span data-zh>建造年份</span><span data-ja>建造年</span><span data-tr>Yapım Yılı</span><span data-nl>Bouwjaar</span></span>
+          <span class="spec-row-value" dir="ltr">2015</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-row-label"><span data-ar>تاريخ التسجيل</span><span data-en>Registry Date</span><span data-fr>Date d'Immatriculation</span><span data-es>Fecha de Registro</span><span data-de>Registrierungsdatum</span><span data-it>Data di Registrazione</span><span data-pt>Data de Registro</span><span data-ru>Дата Регистрации</span><span data-zh>注册日期</span><span data-ja>登録日</span><span data-tr>Kayıt Tarihi</span><span data-nl>Registratiedatum</span></span>
+          <span class="spec-row-value" dir="ltr">22/11/2015</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-row-label"><span data-ar>رقم التسجيل</span><span data-en>Registry No.</span><span data-fr>N° d'Immatriculation</span><span data-es>N.º de Registro</span><span data-de>Registrier-Nr.</span><span data-it>N. di Registro</span><span data-pt>N.º de Registro</span><span data-ru>Рег. №</span><span data-zh>注册号</span><span data-ja>登録番号</span><span data-tr>Kayıt No.</span><span data-nl>Registratienr.</span></span>
+          <span class="spec-row-value" dir="ltr">1670</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-row-label"><span data-ar>الرقم الرسمي</span><span data-en>Official No.</span><span data-fr>N° Officiel</span><span data-es>N.º Oficial</span><span data-de>Amtl. Nr.</span><span data-it>N. Ufficiale</span><span data-pt>N.º Oficial</span><span data-ru>Офиц. №</span><span data-zh>官方编号</span><span data-ja>公式番号</span><span data-tr>Resmi No.</span><span data-nl>Officieel Nr.</span></span>
+          <span class="spec-row-value" dir="ltr">10768</span>
+        </div>
+      </div>
+
+      <div class="spec-card">
+        <div class="spec-card-head">
+          <span class="spec-card-num">02</span>
+          <span class="spec-card-title"><span data-ar>الأبعاد والقياسات</span><span data-en>Dimensions & Measurements</span><span data-fr>Dimensions et Mesures</span><span data-es>Dimensiones y Medidas</span><span data-de>Abmessungen & Maße</span><span data-it>Dimensioni e Misure</span><span data-pt>Dimensões e Medidas</span><span data-ru>Размеры и Измерения</span><span data-zh>尺寸与测量</span><span data-ja>寸法と測定</span><span data-tr>Boyutlar ve Ölçümler</span><span data-nl>Afmetingen & Metingen</span></span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-row-label"><span data-ar>الطول الكلي (LOA)</span><span data-en>Length Overall (LOA)</span><span data-fr>Longueur Hors Tout (LOA)</span><span data-es>Eslora Total (LOA)</span><span data-de>Gesamtlänge (LOA)</span><span data-it>Lunghezza Fuori Tutto (LOA)</span><span data-pt>Comprimento Total (LOA)</span><span data-ru>Общая Длина (LOA)</span><span data-zh>总长 (LOA)</span><span data-ja>全長 (LOA)</span><span data-tr>Tam Boy (LOA)</span><span data-nl>Lengte Overall (LOA)</span></span>
+          <span class="spec-row-value" dir="ltr">40.50 m</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-row-label"><span data-ar>العرض الرئيسي</span><span data-en>Main Breadth (Beam)</span><span data-fr>Largeur Principale</span><span data-es>Manga Principal</span><span data-de>Hauptbreite</span><span data-it>Larghezza Principale</span><span data-pt>Boca Principal</span><span data-ru>Основная Ширина</span><span data-zh>主宽度</span><span data-ja>幅</span><span data-tr>Ana Genişlik</span><span data-nl>Hoofdbreedte</span></span>
+          <span class="spec-row-value" dir="ltr">11.00 m</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-row-label"><span data-ar>طول غرفة المحركات</span><span data-en>Engine Room Length</span><span data-fr>Longueur Salle des Machines</span><span data-es>Longitud Sala de Máquinas</span><span data-de>Länge Maschinenraum</span><span data-it>Lunghezza Sala Macchine</span><span data-pt>Comprimento Casa de Máquinas</span><span data-ru>Длина Машинного Отделения</span><span data-zh>机舱长度</span><span data-ja>機関室長さ</span><span data-tr>Makine Dairesi Uzunluğu</span><span data-nl>Lengte Machinekamer</span></span>
+          <span class="spec-row-value" dir="ltr">6.40 m</span>
+        </div>
+      </div>
+
+      <div class="spec-card">
+        <div class="spec-card-head">
+          <span class="spec-card-num">03</span>
+          <span class="spec-card-title"><span data-ar>البناء والحمولة</span><span data-en>Construction & Tonnage</span><span data-fr>Construction et Tonnage</span><span data-es>Construcción y Tonelaje</span><span data-de>Bauweise & Tonnage</span><span data-it>Costruzione e Tonnellaggio</span><span data-pt>Construção e Tonelagem</span><span data-ru>Конструкция и Тоннаж</span><span data-zh>结构与吨位</span><span data-ja>構造とトン数</span><span data-tr>Yapı ve Tonaj</span><span data-nl>Constructie & Tonnage</span></span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-row-label"><span data-ar>مادة الهيكل</span><span data-en>Hull Material</span><span data-fr>Matériau de Coque</span><span data-es>Material del Casco</span><span data-de>Rumpfmaterial</span><span data-it>Materiale dello Scafo</span><span data-pt>Material do Casco</span><span data-ru>Материал Корпуса</span><span data-zh>船体材质</span><span data-ja>船体材質</span><span data-tr>Tekne Malzemesi</span><span data-nl>Rompmateriaal</span></span>
+          <span class="spec-row-value"><span data-ar>حديد / صلب</span><span data-en>Iron / Steel</span><span data-fr>Fer / Acier</span><span data-es>Hierro / Acero</span><span data-de>Eisen / Stahl</span><span data-it>Ferro / Acciaio</span><span data-pt>Ferro / Aço</span><span data-ru>Железо / Сталь</span><span data-zh>铁/钢</span><span data-ja>鉄／鋼</span><span data-tr>Demir / Çelik</span><span data-nl>IJzer / Staal</span></span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-row-label"><span data-ar>الحمولة الطنية الإجمالية</span><span data-en>Gross Registered Tonnage</span><span data-fr>Tonnage Brut Enregistré</span><span data-es>Tonelaje Bruto Registrado</span><span data-de>Bruttoraumzahl</span><span data-it>Tonnellaggio Lordo</span><span data-pt>Tonelagem Bruta Registrada</span><span data-ru>Валовая Регистровая Вместимость</span><span data-zh>总登记吨位</span><span data-ja>総トン数</span><span data-tr>Gros Tonaj</span><span data-nl>Bruto Tonnage</span></span>
+          <span class="spec-row-value" dir="ltr">639.39 TRT</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-row-label"><span data-ar>ميزات الأمان</span><span data-en>Safety Features</span><span data-fr>Sécurité</span><span data-es>Seguridad</span><span data-de>Sicherheit</span><span data-it>Sicurezza</span><span data-pt>Segurança</span><span data-ru>Безопасность</span><span data-zh>安全特性</span><span data-ja>安全機能</span><span data-tr>Güvenlik</span><span data-nl>Veiligheid</span></span>
+          <span class="spec-row-value"><span data-ar>3 حواجز مانعة لتسرب الماء</span><span data-en>3 Watertight Bulkheads</span><span data-fr>3 Cloisons Étanches</span><span data-es>3 Mamparos Estancos</span><span data-de>3 Wasserdichte Schotten</span><span data-it>3 Paratie Stagne</span><span data-pt>3 Anteparas Estanques</span><span data-ru>3 Водонепр. Переборки</span><span data-zh>3个水密隔舱</span><span data-ja>3つの水密隔壁</span><span data-tr>3 Su Geçirmez Bölme</span><span data-nl>3 Waterdichte Schotten</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== AMENITIES ===== -->
 <section class="amenities" id="amenities">
-  <div class="section-num">// 03 — AMENITIES</div>
+  <div class="section-num">// 04 — AMENITIES</div>
   <div class="container">
     <div class="reveal">
       <div class="section-tag">
@@ -3751,7 +3990,7 @@
 
 <!-- ===== EXPERIENCES ===== -->
 <section class="experiences" id="experiences">
-  <div class="section-num">// 04 — SERVICES</div>
+  <div class="section-num">// 05 — SERVICES</div>
   <div class="container">
     <div class="reveal" style="text-align: center;">
       <div class="section-tag" style="margin-left: auto; margin-right: auto;">
@@ -3884,7 +4123,7 @@
 
 <!-- ===== GALLERY ===== -->
 <section class="gallery" id="gallery">
-  <div class="section-num">// 05 — GALLERY</div>
+  <div class="section-num">// 06 — GALLERY</div>
   <div class="container">
     <div class="reveal">
       <div class="section-tag">
@@ -3937,7 +4176,7 @@
 
 <!-- ===== TESTIMONIALS ===== -->
 <section class="testimonials">
-  <div class="section-num">// 06 — REVIEWS</div>
+  <div class="section-num">// 07 — REVIEWS</div>
   <div class="container">
     <div class="reveal">
       <div class="quote-mark">"</div>
@@ -3983,7 +4222,7 @@
 
 <!-- ===== PRESS & TRUST ===== -->
 <section class="press-trust" style="padding-bottom:40px;">
-  <div class="section-num">// 07 — TRUST</div>
+  <div class="section-num">// 08 — TRUST</div>
   <div class="container">
     <div class="reveal" style="text-align:center;">
       <div class="section-tag" style="margin:0 auto 24px;">
@@ -4035,7 +4274,7 @@
 
 <!-- ===== FAQ ===== -->
 <section class="faq" id="faq">
-  <div class="section-num">// 08 — FAQ</div>
+  <div class="section-num">// 09 — FAQ</div>
   <div class="container">
     <div class="reveal" style="text-align: center;">
       <div class="section-tag" style="margin-left: auto; margin-right: auto;">
@@ -4222,7 +4461,7 @@
 
 <!-- ===== CONTACT ===== -->
 <section class="contact" id="contact">
-  <div class="section-num">// 09 — RESERVE</div>
+  <div class="section-num">// 10 — RESERVE</div>
   <div class="container">
     <div class="contact-grid">
       <div class="contact-info reveal">
@@ -4863,19 +5102,7 @@
         y: 100,
         ease: 'none'
       });
-      
-      // Secondary scale effect for depth compression
-      gsap.to(heroBg, {
-        scrollTrigger: {
-          trigger: '.hero',
-          start: 'top top',
-          end: 'bottom 30%',
-          scrub: 0.8
-        },
-        scale: 1.08,
-        ease: 'power1.inOut'
-      });
-      
+
       // Tertiary rotation for gimbal tilt effect
       gsap.to(heroBg, {
         scrollTrigger: {
@@ -5146,7 +5373,7 @@
       const r = hero.getBoundingClientRect();
       const x = (e.clientX / r.width  - 0.5);
       const y = (e.clientY / r.height - 0.5);
-      heroBg.style.transform  = `scale(1.1) translate(${x * 20}px, ${y * 14}px)`;
+      heroBg.style.transform  = `translate(${x * 20}px, ${y * 14}px)`;
       if (content) content.style.transform = `translate(${x * -10}px, ${y * -7}px)`;
       if (stats)   stats.style.transform   = `translate(${x *  14}px, ${y *  9}px)`;
     });
