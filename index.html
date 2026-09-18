@@ -2915,7 +2915,6 @@
     body::before,
     body::after,
     .loader-grid,
-    .scan-beam::after,
     .ticker-content,
     .bg-canvas,
     .hero-bg,
@@ -2936,7 +2935,6 @@
     .aurora,
     body::before,
     body::after,
-    .scan-beam::after,
     .loader-grid {
       animation: none !important;
     }
@@ -3000,17 +2998,6 @@
     margin-bottom: 20px;
   }
   @keyframes fadeIn { to { opacity: 0.6; } }
-
-  /* Scan beam for sections */
-  .scan-beam {
-    position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden;
-  }
-  .scan-beam::after {
-    content: ''; position: absolute; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, transparent, rgba(0,217,255,0.12), transparent);
-    animation: scanDown 8s linear infinite; top: 0;
-  }
-  @keyframes scanDown { 0% { top: -3px; } 100% { top: 100%; } }
 
   /* Glitch on logo */
   @keyframes glitchFlash {
@@ -3512,7 +3499,6 @@
   <!-- Hero animated image background with video-like effects -->
   <div class="hero-bg-wrap"><div class="hero-bg"></div></div>
   <div class="hero-overlay"></div>
-  <div class="scan-beam"></div>
   <div class="section-num">// 01 — HOME</div>
   <span class="hud-tl"></span><span class="hud-tr"></span>
   <span class="hud-bl"></span><span class="hud-br"></span>
