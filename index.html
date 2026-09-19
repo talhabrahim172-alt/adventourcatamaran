@@ -3077,7 +3077,7 @@
 
   /* HUD live coords */
   .hud-coords {
-    position: fixed; bottom: 24px; left: 24px; z-index: 50;
+    position: fixed; bottom: 50px; left: 24px; z-index: 50;
     font-family: 'JetBrains Mono', monospace; font-size: 9px;
     color: var(--teal); opacity: 0.45; letter-spacing: 0.18em;
     pointer-events: none; line-height: 1.9;
@@ -5557,8 +5557,10 @@
       const t = Date.now();
       const lat = (27.2156 + Math.sin(t * 0.00008) * 0.0002).toFixed(4);
       const lon = (33.8376 + Math.cos(t * 0.00008) * 0.0002).toFixed(4);
-      const utc = new Date().toISOString().slice(11, 19);
-      el.innerHTML = `LAT N${lat}°<br>LON E${lon}°<br>ALT SEA-LVL<br>${utc} UTC`;
+      const localTime = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Africa/Cairo', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+      }).format(new Date());
+      el.innerHTML = `LAT N${lat}°<br>LON E${lon}°<br>ALT SEA-LVL<br>${localTime} EGY`;
     }
     tick();
     setInterval(tick, 1000);
