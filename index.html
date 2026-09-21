@@ -1021,6 +1021,36 @@
   }
   html[dir="rtl"] .about-features .num { font-family: 'Cairo', sans-serif; font-weight: 700; }
 
+  .location-mini-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid var(--line-bright);
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .location-mini-card svg {
+    width: 14px; height: 14px;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .location-mini-card span {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    color: var(--gold) !important;
+    text-align: left !important;
+  }
+  html[dir="rtl"] .location-mini-card span { font-family: 'Cairo', sans-serif !important; font-size: 13px !important; text-align: right !important; }
+  .location-mini-card:hover {
+    background: rgba(212, 175, 55, 0.18);
+    border-color: var(--gold);
+    transform: translateY(-2px);
+  }
+
   .about-image {
     position: relative;
     aspect-ratio: 3/4;
@@ -3711,7 +3741,10 @@
         <ul class="about-features">
           <li>
             <span class="label"><span data-ar>الموقع</span><span data-en>Location</span><span data-fr>Localisation</span><span data-es>Ubicación</span><span data-de>Standort</span><span data-it>Posizione</span><span data-pt>Localização</span><span data-ru>Местоположение</span><span data-zh>地点</span><span data-ja>場所</span><span data-tr>Konum</span><span data-nl>Locatie</span></span>
-            <span class="num"><span data-ar>الغردقة</span><span data-en>Hurghada</span><span data-fr>Hurghada</span><span data-es>Hurghada</span><span data-de>Hurghada</span><span data-it>Hurghada</span><span data-pt>Hurghada</span><span data-ru>Хургада</span><span data-zh>赫尔格达</span><span data-ja>ハルガダ</span><span data-tr>Hurghada</span><span data-nl>Hurghada</span></span>
+            <a class="location-mini-card" href="https://www.google.com/maps?q=27.223697,33.842964" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              <span data-ar>الغردقة</span><span data-en>Hurghada</span><span data-fr>Hurghada</span><span data-es>Hurghada</span><span data-de>Hurghada</span><span data-it>Hurghada</span><span data-pt>Hurghada</span><span data-ru>Хургада</span><span data-zh>赫尔格达</span><span data-ja>ハルガダ</span><span data-tr>Hurghada</span><span data-nl>Hurghada</span>
+            </a>
           </li>
         </ul>
       </div>
@@ -3723,7 +3756,10 @@
         <video autoplay muted loop playsinline preload="metadata" aria-label="ADVENTOUR video">
           <source src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/adventour-tour.mp4" type="video/mp4" />
         </video>
-        
+        <a class="about-image-tag" href="https://www.google.com/maps?q=27.223697,33.842964" target="_blank" rel="noopener" style="text-decoration:none; cursor:pointer;">
+          <div class="label-mono"><span data-ar>الموقع الدقيق</span><span data-en>EXACT LOCATION</span><span data-fr>EMPLACEMENT EXACT</span><span data-es>UBICACIÓN EXACTA</span><span data-de>GENAUER STANDORT</span><span data-it>POSIZIONE ESATTA</span><span data-pt>LOCALIZAÇÃO EXATA</span><span data-ru>ТОЧНОЕ МЕСТОПОЛОЖЕНИЕ</span><span data-zh>精确位置</span><span data-ja>正確な場所</span><span data-tr>KESİN KONUM</span><span data-nl>EXACTE LOCATIE</span></div>
+          <div class="label-main"><span data-ar>مارينا الغردقة</span><span data-en>Hurghada Marina</span><span data-fr>Marina d'Hurghada</span><span data-es>Marina de Hurghada</span><span data-de>Hurghada Marina</span><span data-it>Marina di Hurghada</span><span data-pt>Marina de Hurghada</span><span data-ru>Марина Хургады</span><span data-zh>赫尔格达码头</span><span data-ja>ハルガダ・マリーナ</span><span data-tr>Hurghada Marina</span><span data-nl>Hurghada Marina</span></div>
+        </a>
       </div>
     </div>
   </div>
@@ -4659,7 +4695,7 @@
         </li>
         <li>
           <span class="contact-label"><span data-ar>الموقع</span><span data-en>Location</span><span data-fr>Emplacement</span><span data-es>Ubicación</span><span data-de>Standort</span><span data-it>Posizione</span><span data-pt>Localização</span><span data-ru>Местоположение</span><span data-zh>位置</span><span data-ja>場所</span><span data-tr>Konum</span><span data-nl>Locatie</span></span>
-          <span><span data-ar>الغردقة، مصر</span><span data-en>Hurghada, Egypt</span><span data-fr>Hurghada, Égypte</span><span data-es>Hurghada, Egipto</span><span data-de>Hurghada, Ägypten</span><span data-it>Hurghada, Egitto</span><span data-pt>Hurghada, Egito</span><span data-ru>Хургада, Египет</span><span data-zh>胡尔加达，埃及</span><span data-ja>ハルガダ、エジプト</span><span data-tr>Hurghada, Mısır</span><span data-nl>Hurghada, Egypte</span></span>
+          <a class="contact-link" href="https://www.google.com/maps?q=27.223697,33.842964" target="_blank" rel="noopener"><span data-ar>مارينا الغردقة (الموقع الدقيق)</span><span data-en>Hurghada Marina (Exact Location)</span><span data-fr>Marina d'Hurghada (Emplacement Exact)</span><span data-es>Marina de Hurghada (Ubicación Exacta)</span><span data-de>Hurghada Marina (Genauer Standort)</span><span data-it>Marina di Hurghada (Posizione Esatta)</span><span data-pt>Marina de Hurghada (Localização Exata)</span><span data-ru>Марина Хургады (Точное Местоположение)</span><span data-zh>赫尔格达码头（精确位置）</span><span data-ja>ハルガダ・マリーナ（正確な位置）</span><span data-tr>Hurghada Marina (Kesin Konum)</span><span data-nl>Hurghada Marina (Exacte Locatie)</span></a>
         </li>
       </ul>
     </div>
