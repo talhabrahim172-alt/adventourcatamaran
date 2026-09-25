@@ -1240,10 +1240,12 @@
     overflow: hidden;
     background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(0, 0, 0, 0.4));
   }
-  .exp-card-image img {
+  .exp-card-image img,
+  .exp-card-image video {
     width: 100%; height: 100%; object-fit: cover; display: block;
     transition: transform 0.6s ease;
   }
+  .exp-card-image-video { height: 340px; }
   .exp-card-carousel { position: absolute; inset: 0; }
   .exp-card-carousel .splide__track,
   .exp-card-carousel .splide__list,
@@ -1253,7 +1255,8 @@
      an arbitrary content-based width instead of "fill the track" — pin it
      explicitly since this carousel is always one full-width slide at a time. */
   .exp-card-carousel .splide__slide { flex: 0 0 100%; width: 100%; }
-  .exp-card:hover .exp-card-image img { transform: scale(1.08); }
+  .exp-card:hover .exp-card-image img,
+  .exp-card:hover .exp-card-image video { transform: scale(1.08); }
   .exp-card-image .exp-num {
     position: absolute; top: 14px; right: 14px; left: auto;
     background: rgba(5, 5, 7, 0.6);
@@ -4095,8 +4098,13 @@
         </a>
       </div>
 
-      <div class="exp-card reveal">
-        <span class="exp-num">// 03</span>
+      <div class="exp-card reveal exp-card-photo">
+        <div class="exp-card-image exp-card-image-video">
+          <video autoplay muted loop playsinline preload="metadata" aria-label="Private party video">
+            <source src="https://raw.githubusercontent.com/talhabrahim172-alt/adventourcatamaran/main/party.mp4" type="video/mp4" />
+          </video>
+          <span class="exp-num">// 03</span>
+        </div>
         <div class="exp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
         <h3><span data-ar>حفلات خاصة</span><span data-en>Private Parties</span><span data-fr>Soirées Privées</span><span data-es>Fiestas Privadas</span><span data-de>Private Feste</span><span data-it>Feste Private</span><span data-pt>Festas Privadas</span><span data-ru>Частные Вечеринки</span><span data-zh>私人派对</span><span data-ja>プライベートパーティー</span><span data-tr>Özel Partiler</span><span data-nl>Privéfeesten</span></h3>
         <p><span data-ar>حفلات على السطح مع حمام السباحة، DJ عالمي، وكل تفاصيل ليلة أسطورية.</span><span data-en>Rooftop parties with pool, world-class DJ — every detail for a legendary night.</span><span data-fr>Fêtes sur le toit avec piscine, DJ de classe mondiale — chaque détail pour une soirée légendaire.</span><span data-es>Fiestas en la azotea con piscina, DJ de clase mundial — cada detalle para una noche legendaria.</span><span data-de>Dachpartys mit Pool, DJ auf Weltklasse-Niveau — jedes Detail für eine legendäre Nacht.</span><span data-it>Feste sul tetto con piscina, DJ di classe mondiale — ogni dettaglio per una notte leggendaria.</span><span data-pt>Festas na cobertura com piscina, DJ de classe mundial — cada detalhe para uma noite lendária.</span><span data-ru>Вечеринки на крыше с бассейном, DJ мирового класса — каждая деталь для легендарной ночи.</span><span data-zh>屋顶派对，配有游泳池、世界级 DJ — 传奇之夜的每一个细节。</span><span data-ja>プールを備えた屋上パーティー、ワールドクラスの DJ — 伝説的な夜のすべての詳細。</span><span data-tr>Havuzlu çatı partileri, dünya standartlarında DJ — efsanevi bir gece için her ayrıntı.</span><span data-nl>Dakterrasse feesten met zwembad, wereldklasse DJ — elk detail voor een legendarische nacht.</span></p>
